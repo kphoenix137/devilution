@@ -1,0 +1,2 @@
+Confirmed Identical to 1.09b:
+NewPlrAnim()
