@@ -43,7 +43,7 @@ void SyncOpObject(int pnum, int cmd, int i);
 void BreakObject(int pnum, int oi);
 void SyncBreakObj(int pnum, int oi);
 void SyncObjectAnim(int o);
-void GetObjectStr(int i);
+void GetObjectStr(int i, char infostr[50]);
 #ifdef HELLFIRE
 void OperateNakrulLever();
 void SyncNakrulRoom();

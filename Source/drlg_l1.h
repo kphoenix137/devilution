@@ -19,7 +19,7 @@ extern int UberDiabloMonsterIndex;
 void DRLG_Init_Globals();
 void LoadL1Dungeon(const char *sFileName, int vx, int vy);
 void LoadPreL1Dungeon(const char *sFileName, int vx, int vy);
-void CreateL5Dungeon(DWORD rseed, int entry);
+std::optional<uint32_t> CreateL5Dungeon(DWORD rseed, int entry, DungeonMode mode);
 #ifdef HELLFIRE
 void drlg_l1_set_crypt_room(int rx1, int ry1);
 void drlg_l1_set_corner_room(int rx1, int ry1);

@@ -226,9 +226,9 @@ typedef struct PlayerStruct {
 	int _pSBkSpell;
 	char _pSBkSplType;
 	char _pSplLvl[64];
-	unsigned __int64 _pMemSpells;  // Bitmask of learned spells
-	unsigned __int64 _pAblSpells;  // Bitmask of abilities
-	unsigned __int64 _pScrlSpells; // Bitmask of spells avalible via scrolls
+	uint64_t _pMemSpells;  // Bitmask of learned spells
+	uint64_t _pAblSpells;  // Bitmask of abilities
+	uint64_t _pScrlSpells; // Bitmask of spells avalible via scrolls
 	UCHAR _pSpellFlags;
 	int _pSplHotKey[4];
 	char _pSplTHotKey[4];
@@ -326,7 +326,7 @@ typedef struct PlayerStruct {
 	int _pIBonusToHit;
 	int _pIBonusAC;
 	int _pIBonusDamMod;
-	unsigned __int64 _pISpells; // Bitmask of staff spell
+	uint64_t _pISpells; // Bitmask of staff spell
 	int _pIFlags;
 	int _pIGetHit;
 	char _pISplLvlAdd;
@@ -1297,7 +1297,7 @@ typedef struct DeadStruct {
 // TPDEF PTR FCN VOID PLAYSND
 
 typedef struct _gamedata {
-	int dwSeed;
+	uint32_t dwSeed;
 	BYTE bDiff;
 } _gamedata;
 
@@ -1484,7 +1484,7 @@ typedef struct PkPlayerStruct {
 	int pManaBase;
 	int pMaxManaBase;
 	char pSplLvl[37]; // Should be MAX_SPELLS but set to 37 to make save games compatible
-	unsigned __int64 pMemSpells;
+	uint64_t pMemSpells;
 	PkItemStruct InvBody[NUM_INVLOC];
 	PkItemStruct InvList[NUM_INV_GRID_ELEM];
 	char InvGrid[NUM_INV_GRID_ELEM];
@@ -1516,9 +1516,9 @@ typedef struct PkPlayerStruct {
 //////////////////////////////////////////////////
 
 typedef struct PATHNODE {
-	char f;
-	char h;
-	char g;
+	int f;
+	int h;
+	int g;
 	int x;
 	int y;
 	struct PATHNODE *Parent;

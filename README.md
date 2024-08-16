@@ -1,126 +1,112 @@
-[![Build Status](https://circleci.com/gh/diasurgical/devilution.svg?style=svg)](https://circleci.com/gh/diasurgical/devilution)
-[![Build Status](https://www.travis-ci.com/diasurgical/devilution.svg?branch=master)](https://www.travis-ci.com/diasurgical/devilution)
-[![Build status](https://ci.appveyor.com/api/projects/status/ce9wnf46gqqk6prp?svg=true)](https://ci.appveyor.com/project/AJenbo/devilution)
-[![Downloads](https://img.shields.io/github/downloads/diasurgical/devilution/total.svg)](https://github.com/diasurgical/devilution/releases)
-[![github stars](https://img.shields.io/github/stars/diasurgical/devilution.svg)](https://github.com/diasurgical/devilution/stargazers)
+# Diablo MapGen
 
-![Discord Channel](https://avatars3.githubusercontent.com/u/1965106?s=16&v=4) [Discord Chat Channel](https://discord.gg/YQKCAYQ)
+Diablo MapGen is a tool designed to analyze maps generated in the game Diablo I to identify optimal seed candidates for speedrunning. By analyzing various characteristics of the game maps, such as layout, item distribution, and quest placement, Diablo MapGen assists speedrunners in identifying promising seeds to achieve faster completion times.
 
-# Devilution
-Diablo devolved - magic behind the 1996 computer game
+<p align="center">
+<img width="512" height="512" src="https://github.com/Matthew-petroff/diablo-mapgen/assets/204594/180bae58-1682-4a51-89b8-f718c0b0d41f">
+</p>
 
-**Note**, Devilution requires an original copy of `diabdat.mpq`. None of the Diablo 1 game assets are provided by this project. To get a legitimate copy of the game assets, please refer to the [GoG release of Diablo 1](https://www.gog.com/game/diablo).
+## Features
 
-# Introduction
-While most titles from Blizzard receive years of love and support, Diablo stayed in the shadows. Abandoned in favor of a sequel, it remained full of bugs and unfinished potential. The game was last patched in 2001 before being discontinued altogether, a problem I wanted to fix. I played Diablo extensively as a teenager, but as time passed it became difficult to run the game on newer hardware. The lack of many improvements made in Diablo II also laid it to rest. At first the game appeared to be a lost cause, but thankfully a little oversight in 1997 made it not so.
+- Analyzes Diablo I maps to identify optimal seed candidates.
+- Considers factors such as map layout, item distribution, and quest placement.
+- Designed to assist speedrunners in achieving faster completion times.
 
-Diablo's development team moved on to Diablo II while passing the source code down to **Synergistic Software** for Hellfire. Less known however is that it was also given to **Climax Studios** to create a PlayStation port. Now Sony has long been known for letting things slide; _especially_ in Japan. Anything from leaking prototypes to entire game source codes and Diablo was no exception. Symbolic information was accidentally left on the Japanese port. Normally used for debugging, a symbol file contains a map of everything generated during compile time. This includes file names, functions, structures, variables, and more! To top it all off a special build is hidden on the PC release in `DIABDAT.MPQ -> D1221A.MPQ -> DIABLO.EXE`! This build contains debug tools and assert strings further giving away code information.
+## Building the Project
 
-After months of piecing these mistakes together, Devilution was born. I present to you a reconstructed form of Diablo's original source code! Once more shall the heroes of Sanctuary return to the depths below!
+Diablo MapGen is a CMake-based project, making it easy to build on various platforms. Follow these general steps to build the project on your specific system.
 
-# Purpose
-Having the source code makes Diablo much easier to update and maintain. For years mod-makers had to rely on tedious code editing and memory injection. A few even went further and reversed most or all of the game. The problem is that they rarely shared their work. Usually being a one-person job, they move on with their lives due to the amount of time required or lack of interest. This brings us back to square one having to do countless hours of work all over again. Devilution aims to fix this by finally making the source code open to the community.
+### CLI
 
-In order to ensure that everything is preserved, Devilution keeps everything as it was originally designed. This goes as far as bugs and badly written code in the original game. With that it serves as a base for developers to work with making it much easier than before to update, fix, and port the game to other platforms.
+As long as you have CMake and a C++ compiler installed you should be able to build using a process similar to
 
-As a side goal Devilution tries to document the unused and cut content from the final game. Development of Diablo was rushed near the end--many ideas were scrapped and multiplayer was quickly hacked in. By examining the source, we can see various quirks of planned development.
+```
+mkdir build
+cd build
+cmake ..
+make
+```
 
-# Compiling
-Diablo was developed on Windows 95 using Visual C++ 4.20 and later 5.10 and 6 for newer patches. Devilution aims to be compatible with both the original and modern tools, but will adhere to standards used for the original compiler.
+### GUI
 
-### Building with Visual C++ 6
-- Open the project workspace `Diablo.dsw`, choose `Debug` or `Release`, and then `Build Diablo.exe`.
+If you use a IDE that support CMake it should be as simple as opening the project or the CMakeList.txt and then pressing the build button in the IDE.
 
-To build a binary with functions compiled as close as possible to the original, use [Visual C++ 6](https://winworldpc.com/product/visual-c/6x) with Service Pack 5 and the [Processor Pack](https://download.microsoft.com/download/vb60ent/update/6/w9x2kxp/en-us/vcpp5.exe) (**important for proper code generation!**) You will also need [Visual C++ 5](https://winworldpc.com/product/visual-c/5x) with [Service Pack 3](http://www.mediafire.com/file/jw4j4sd5dnzze4p/VS97SP3.zip), since the original binary was linked with the older linker from that. Sadly, you cannot use the old linker right out of VC6, so you'll need to link manually or via the `MakefileVC` in the project root.
+### Required files
 
-### Building with Visual Studio 2010-2017
-- Open the project solution `Diablo.sln`, choose `Debug` or `Release`, and then `Build Solution`.
+To run the tool you must extract and place the `levels` folder from the diabdat.mpq, that comes with Diablo, and place it next to the tool. The file names should be in lower case, to ensure this you can use the list file from [here](https://raw.githubusercontent.com/diasurgical/devilutionx-mpq-tools/main/data/diabdat-listfile.txt).
 
-Make sure to disable Data Execution Prevention. `Storm.dll` uses dynamic compilation to improve rendering performance but fails to mark the resulting memory page as executable, leading to a protection fault when trying to draw.
-- Configuration options -> Linker -> Advanced -> Data Execution Prevention (DEP).
-- Set this value to: No (/NXCOMPAT: NO).
+## Usage Examples
 
-You will also need the following dependencies installed if you are using Visual Studio 2017.
-Make sure to enable these when installing (or modify your installation):
-- Requires "Windows 8.1 SDK" (Target Platform)
-- Requires "Visual C++ MFC for x86 and x64" (For afxres.h)
-- Requires "Windows Universal CRT SDK" (For ctype.h)
+As an example, you can run the following command to scan for seeds where Naj's Puzzler can be found on level 9, within a range of seeds that can be produced on all versions of Windows:
 
-### Building with MinGW
-- Execute `make MINGW32=1` for **MinGW32** or `make` for **MinGW64**. Optionally add `debug` to build with debug features.
+```bash
+./diablo-mapgen --scanner item --target 9 --targetStr "Naj's Puzzler" --start 315532800 --count 1864050846
+```
 
-To compile with MinGW64 on different platforms, refer to the respective documentation: [Linux](docs/INSTALL_linux.md) | [Windows](docs/INSTALL_windows.md) | [Mac](docs/INSTALL_mac.md).
+### Options
 
-[Debug Build Features](docs/debug.md)
-| [Compatibility Matrix](docs/compatibility_matrix.md)
-| [Troubleshooting](docs/troubleshooting.md)
+- `--ascii`: Print ASCII version of levels.
+- `--export`: Export levels as .dun files.
+- `--scanner <type>`: How to analyze levels. Available options:
+  - `none`: No analysis (default).
+  - `warp`: Find seeds with a warp on level 15.
+  - `path`: Estimate the time to complete the levels, skip seeds that take longer then number of secound specified by `--target` (default 420).
+  - `stairs`: Look for stairs with a very short distance between them.
+  - `pattern`: Search for levels specified by `--target` (default blank) based on tile patterns and print out there level seed.
+  - `gameseed`: Search for GameSeeds that generates the LevelSeed given by `--target` (default 9:3916317768).
+  - `item`: Search for items on the level specified by `--target` (default [Scan Every Dlvl]), using item name string specified by `--targetStr` (default "Naj's Puzzler").
+- `--start <offset>`: The seed to start from.
+- `--count <number_of_seeds>`: The number of seeds to process.
+- `--seeds <file>`: A file to read seeds from rather then using a sequental range.
+- `--target <value>`: A target value to set for the scanner (level, time, or seed).
+- `--mp`: Runs game logic in multiplayer mode.
+- `--quiet`: Do not print progress messages.
+- `--verbose`: Print out details about seeds.
 
-# Installing
-Once compiled, the Devilution binary will serve as a replacement for `Diablo.exe`. The following files from the original game patched to 1.09(b) need to be present: `DIABDAT.MPQ`, `DiabloUI.dll`, `SmackW32.dll`, `Standard.snp`, and `Storm.dll`. If `COPYPROT` was defined when compiling, the Diablo CD will also be required.
+### Seed Filtering Strategy
 
-Additionally, Strange Bytes' [DirectDraw patch](http://www.strangebytes.com/index.php/projects/1-diablo-1-windows-7-vista-patch) is recommended to help fix compatibility issues and run the game in windowed mode.
+To efficiently analyze seeds start by using the `warp`, or `puzzler` options to quickly filter out seeds based on their criteria. Save the filtered results using the `>` operator to a file for use with the next analyzer. For example:
 
-# Multiplayer
-Devilution is functional over both GoG's Battle.net server and IPX using an ipx-wrapper. Additionally if `Standard.snp` from StarCraft 1.16.1 is used, local UDP play also becomes available. There are programs like ZeroTier to connect UDP globally.
+```
+./diablo-mapgen --scanner warp --start 315532800 --count 1864050846 > filtered_seeds.txt
+```
 
-# Contributing
-[Guidelines](docs/CONTRIBUTING.md)
+Feed the saved seeds to the next analyzer using the --seeds option to further refine the selection. For example:
 
-# Modding
-Below are a few examples of some simple improvements made to the game. It is planned in the future to create tools for designing dungeons and graphics.
+```
+./diablo-mapgen --scanner path --seeds filtered_seeds.txt > narrowed_seeds.txt
+```
 
-<details><summary>Example 1: Monster lifebar and item highlighting</summary>
+## Parallel Execution
 
-![Monster lifebar+items](https://github.com/diasurgical/scalpel/blob/master/screens/mod1.png)
-</details>
-<details><summary>Example 2: New Diablo 2-like trade screen</summary>
+For parallel execution to analyze maps more efficiently, use the `parallel_mapgen.sh` script provided in this repository. This script allows you to run multiple instances of the Diablo MapGen tool concurrently, leveraging the available CPU threads on your system.
 
-![New trade screen](https://github.com/diasurgical/scalpel/blob/master/screens/mod2.png)
-</details>
+To run the parallel scanner with 4 threads and analyze Diablo I maps using the pattern scanner, use the following command:
 
-# F.A.Q.
-<details><summary>Click to reveal</summary>
+```
+./parallel_mapgen.sh --scanner pattern --count 4294967295
+```
 
-> Wow, does this mean I can download and play Diablo for free now?
+This command splits up the seed range between processes concurrently. You can adjust the number of threads with --threads.
 
-No, you'll need access to the data from the original game. If you don't have an original CD then you can [buy Diablo from GoG.com](https://www.gog.com/game/diablo). Alternatively you can also use `spawn.mpq` from the [http://ftp.blizzard.com/pub/demos/diablosw.exe](shareware) version and compile the with the SPAWN flag defined.
-> Cool, so I fired your mod up, but there's no 1080p or new features?
+### Options
 
-Devilution aims to keep the original code unaltered, for documentation purposes.
-> So will you ever add cross-platform support or new features in the future?
+- `--scanner <type>`: How to analyze levels (default pattern).
+- `--target <value>`: A target value to set for the scanner (level, time, or seed).
+- `--start <offset>`: The seed to start from.
+- `--count <number_of_seeds>`: The number of seeds to process.
+- `--threads <number_of_processes>`: The number of concurrent processes (default is one less then CPU threads)
 
-Yes! This has been done as a side project, please see [DevilutionX](https://github.com/diasurgical/devilutionX).
-> What about Hellfire?
+## Terminology
 
-Hellfire was a bit of a flop on the developer's part. Support may come in the future once the base game is finished.
-> I think that's about all, but is Devilution even legal?
+These terms clarify the different types of seeds used in Diablo MapGen and provide a clearer understanding of their roles in the game:
 
-That's a tricky question. Under the DMCA, reverse-engineering has exceptions for the purpose of documentation and interoperability. Devilution provides the necessary documentation needed to achieve the latter. However, it falls into an entirely gray area. The real question is whether or not Blizzard deems it necessary to take action.
-</details>
+- **Game Seed:** The time() value set on game creation. It serves as the initial seed for generating dungeon seeds and determines the overall characteristics of a game session.
+- **Dungeon Seed:** The floor-specific seed saved to the seed table. This seed determines the placement of monsters and items within each floor of the dungeon. The dungeon seed is derived from the game seed at the beginning of the game session.
+- **Level Seed:** This is the value that generates the specific layout of tiles for a given level in the dungeon. The level seed is derived by starting with the dungeon seed and then letting the RNG advance each time the level generator does not produce a valid level.
 
-# Credits
-- Reverse engineered by GalaXyHaXz in 2018
-- [sanctuary](https://github.com/sanctuary) - extensively documenting Diablo's game engine
-- [BWAPI Team](https://github.com/bwapi) - providing library API to work with Storm
-- [Ladislav Zezula](https://github.com/ladislav-zezula) - reversing PKWARE library, further documenting Storm
-- [fearedbliss](https://github.com/fearedbliss) - being awe-inspiring
-- Diablodin - providing additional info about the PSX release
-- Climax Studios & Sony - secretly helping with their undercover QA :P
-- Blizzard North - wait, this was a typo!
-- Depression - reason to waste four months of my life doing this ;)
+## Additional tools
 
-And a special thanks to all the support and people who work on this project to make it possible! <3
+`seed_table` shows what dungeon seeds correspond to a given game seed and when that game occurred (as game seeds are a unix timestamp representing the UTC date/time), or show what game seeds lead to a given dungeon seed. This allows expanding an ideal dungeon seed into a complete dungeon table to evaluate the overall run.
 
-# Changelog
-[From the beginning until release](docs/CHANGELOG.md)
-
-# Legal
-Devilution is made publicly available and released under the Sustainable Use License (see [LICENSE](LICENSE.md))
-
-The source code in this repository is for non-commerical use only. If you use the source code you may not charge others for access to it or any derivative work thereof.
-
-Battle.net(R) - Copyright (C) 1996 Blizzard Entertainment, Inc. All rights reserved. Battle.net and Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries.
-
-Diablo(R) - Copyright (C) 1996 Blizzard Entertainment, Inc. All rights reserved. Diablo and Blizzard Entertainment are trademarks or registered trademarks of Blizzard Entertainment, Inc. in the U.S. and/or other countries.
-
-Devilution and any of its' maintainers are in no way associated with or endorsed by Blizzard Entertainment(R).
+`sort_candidates` is mainly intended for analysis, if you have a list of dungeon seeds and you want to find out which ones occurred in games started near a certain point of time you can use this tool to sort by proximity to a unix timestamp.
