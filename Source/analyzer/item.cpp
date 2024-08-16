@@ -137,7 +137,7 @@ bool LocateItem()
 		int ii = itemactive[i];
 		ItemStruct &searchItem = item[ii];
 
-		if (strcmp(*Config.targetStr, searchItem._iIName) == 0) {
+		if (Config.targetStr.compare(searchItem._iIName)) {
 			POI = { searchItem._ix, searchItem._iy };
 			return true;
 		}
