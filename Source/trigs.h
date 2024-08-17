@@ -18,6 +18,7 @@ void InitL1Triggers();
 void InitL2Triggers();
 void InitL3Triggers();
 void InitL4Triggers();
+void InitL4PentagramTriggers();
 void InitSKingTriggers();
 void InitSChambTriggers();
 void InitPWaterTriggers();

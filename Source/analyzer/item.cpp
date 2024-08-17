@@ -122,7 +122,7 @@ static void DropAllItems()
 
 bool ScannerItem::skipLevel(int level)
 {
-	if (level == 0)
+	if (*Config.target == 0 && level >= 0 && level <= 16)
 		return false;
 	return level != *Config.target;
 }
@@ -137,7 +137,7 @@ bool LocateItem()
 		int ii = itemactive[i];
 		ItemStruct &searchItem = item[ii];
 
-		if (Config.targetStr.compare(searchItem._iIName)) {
+		if (Config.targetStr.compare(searchItem._iIName) == 0) {
 			POI = { searchItem._ix, searchItem._iy };
 			return true;
 		}

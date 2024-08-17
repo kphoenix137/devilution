@@ -237,6 +237,17 @@ void InitL4Triggers()
 				trigs[numtrigs]._tmsg = WM_DIABNEXTLVL;
 				numtrigs++;
 			}
+		}
+	}
+	trigflag = FALSE;
+}
+
+void InitL4PentagramTriggers()
+{
+	int i, j;
+
+	for (j = 0; j < MAXDUNY; j++) {
+		for (i = 0; i < MAXDUNX; i++) {
 			if (dPiece[i][j] == 336 || dPiece[i][j] == 370) {
 				trigs[numtrigs]._tx = i;
 				trigs[numtrigs]._ty = j;
@@ -245,7 +256,6 @@ void InitL4Triggers()
 			}
 		}
 	}
-	trigflag = FALSE;
 }
 
 void InitSKingTriggers()

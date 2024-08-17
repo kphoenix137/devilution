@@ -1301,9 +1301,9 @@ BYTE *lpSetPiece4;
 void DRLG_PreLoadDiabQuads()
 {
 	lpSetPiece1 = LoadFileInMem("Levels\\L4Data\\diab1.DUN", NULL);
-	lpSetPiece2 = LoadFileInMem("Levels\\L4Data\\diab2b.DUN", NULL);
-	lpSetPiece3 = LoadFileInMem("Levels\\L4Data\\diab3b.DUN", NULL);
-	lpSetPiece4 = LoadFileInMem("Levels\\L4Data\\diab4b.DUN", NULL);
+	lpSetPiece2 = LoadFileInMem("Levels\\L4Data\\diab2a.DUN", NULL);
+	lpSetPiece3 = LoadFileInMem("Levels\\L4Data\\diab3a.DUN", NULL);
+	lpSetPiece4 = LoadFileInMem("Levels\\L4Data\\diab4a.DUN", NULL);
 }
 
 void DRLG_FreeDiabQuads()

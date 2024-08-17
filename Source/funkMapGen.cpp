@@ -120,7 +120,11 @@ void InitTriggers()
 		InitL3Triggers();
 	else if (leveltype == DTYPE_HELL)
 		InitL4Triggers();
+	if (currlevel == 16)
+		numtrigs--;
 	Freeupstairs();
+	if (currlevel == 16)
+		numtrigs++;
 }
 
 void FindStairCordinates()
@@ -146,6 +150,8 @@ void FindStairCordinates()
 
 void CreateDungeonContent()
 {
+	if (currlevel == 16)
+		numtrigs--;
 	InitDungeonMonsters();
 
 	InitThemes();
@@ -160,6 +166,9 @@ void CreateDungeonContent()
 
 	InitItems();
 	CreateThemeRooms();
+
+	if (currlevel == 16)
+		numtrigs++;
 }
 
 std::optional<uint32_t> CreateDungeon(DungeonMode mode)
@@ -180,6 +189,9 @@ std::optional<uint32_t> CreateDungeon(DungeonMode mode)
 
 		if (mode != DungeonMode::NoContent && mode != DungeonMode::BreakOnFailureOrNoContent)
 			CreateDungeonContent();
+
+		if (leveltype == DTYPE_HELL)
+			InitL4PentagramTriggers();
 
 		if (currlevel == 15) {
 			// Locate Lazarus warp point
