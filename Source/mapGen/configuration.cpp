@@ -109,6 +109,8 @@ Configuration Configuration::ParseArguments(int argc, char **argv)
 			gbMaxPlayers = MAX_PLRS;
 		} else if (arg == "--verbose") {
 			config.verbose = true;
+		} else if (arg == "--probability") {
+			config.probability = true;
 		} else {
 			std::cerr << "Unknown argument: " << arg << std::endl;
 			exit(255);

@@ -293,6 +293,26 @@ void InitDungeonMonsters()
 	GetLevelMTypes();
 }
 
+void outputItemRarity()
+{
+	int totalItems = 0;
+
+	// Calculate total items across all tallies
+	for (const auto &entry : itemCounts) {
+		totalItems += entry.second;
+	}
+
+	// Output CSV header
+	std::cout << "Item Name,Count,Rarity" << std::endl;
+
+	// Output each item with its rarity score
+	for (const auto &entry : itemCounts) {
+		double rarity = static_cast<double>(entry.second) / totalItems; // Lower rarity means rarer item
+		auto [itemName, prefix, suffix, uid] = entry.first;
+		std::cout << itemName << "," << entry.second << "," << rarity << std::endl;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	Config = Configuration::ParseArguments(argc, argv);
@@ -324,6 +344,12 @@ int main(int argc, char **argv)
 				printAsciiLevel();
 			if (Config.exportLevels)
 				ExportDun(seed);
+		}
+	}
+
+	if (Config.probability) {
+		for (const auto &entry : itemCounts) {
+			std::cout << entry.first << ": " << entry.second << std::endl;
 		}
 	}
 

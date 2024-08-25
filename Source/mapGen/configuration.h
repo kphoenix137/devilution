@@ -18,5 +18,6 @@ struct Configuration {
 	bool exportLevels = false;
 	std::optional<uint32_t> target = std::nullopt;
 	std::string targetStr = "Naj's Puzzler";
+	bool probability = false;
 	bool verbose = false;
 };

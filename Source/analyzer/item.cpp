@@ -6,6 +6,9 @@
 #include "../monster.h"
 #include "../objects.h"
 
+// Modify the itemCounts to use a tuple with base item included as the key
+std::map<std::tuple<std::string, int, int, int>, int> itemCounts; // (BaseItem, Prefix, Suffix, UID) -> Count
+
 static void CreateItemsFromObject(int oid)
 {
 	switch (object[oid]._otype) {
@@ -127,6 +130,14 @@ bool ScannerItem::skipLevel(int level)
 	return level != *Config.target;
 }
 
+static void TallyItem(ItemStruct &searchItem)
+{
+	if (strcmp(searchItem._iIName.c_str(), "Gold") != 0) {
+		auto key = std::make_tuple(searchItem._iBaseItem, searchItem._iPrePower, searchItem._iSufPower, searchItem._iUid);
+		itemCounts[key]++;
+	}
+}
+
 bool LocateItem()
 {
 	DropAllItems();
@@ -137,9 +148,13 @@ bool LocateItem()
 		int ii = itemactive[i];
 		ItemStruct &searchItem = item[ii];
 
-		if (Config.targetStr.compare(searchItem._iIName) == 0) {
-			POI = { searchItem._ix, searchItem._iy };
-			return true;
+		if (Config.probability) {
+			TallyItem(searchItem); // Tally the item with its new structure
+		} else {
+			if (Config.targetStr.compare(searchItem._iIName) == 0) {
+				POI = { searchItem._ix, searchItem._iy };
+				return true;
+			}
 		}
 	}
 
