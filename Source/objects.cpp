@@ -4270,7 +4270,7 @@ void OperateShrine(int pnum, int i, int sType)
 		InitDiabloMsg(EMSG_SHRINE_MURPHYS);
 		BOOL broke = FALSE;
 		for (int j = 0; j < NUM_INVLOC; j++) {
-			ItemStruct *item = &Players[myplr].InvBody[j];
+			Item *item = &Players[myplr].InvBody[j];
 			if (item->_itype != ITYPE_NONE && random_(0, 3) == 0) {
 				if (item->_iDurability != DUR_INDESTRUCTIBLE) {
 					if (item->_iDurability) {

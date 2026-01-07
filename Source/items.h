@@ -10,7 +10,7 @@ extern int itemactive[MAXITEMS];
 extern BOOL uitemflag;
 extern int itemavail[MAXITEMS];
 extern ItemGetRecordStruct itemrecord[MAXITEMS];
-extern ItemStruct item[MAXITEMS + 1];
+extern Item GroundItems[MAXITEMS + 1];
 #ifdef HELLFIRE
 extern CornerStoneStruct CornerStone;
 #endif
@@ -38,10 +38,10 @@ void CalcPlrItemVals(int p, BOOL Loadgfx);
 void CalcPlrScrolls(int p);
 void CalcPlrStaff(int p);
 void CalcPlrInv(int p, BOOL Loadgfx);
-void SetPlrHandItem(ItemStruct *h, int idata);
-void GetPlrHandSeed(ItemStruct *h);
-void GetGoldSeed(int pnum, ItemStruct *h);
-void SetPlrHandGoldCurs(ItemStruct *h);
+void SetPlrHandItem(Item *h, int idata);
+void GetPlrHandSeed(Item *h);
+void GetGoldSeed(int pnum, Item *h);
+void SetPlrHandGoldCurs(Item *h);
 void CreatePlrItems(int p);
 BOOL ItemSpaceOk(int i, int j);
 void GetSuperItemLoc(int x, int y, int &xx, int &yy);
@@ -82,12 +82,12 @@ void DoRecharge(int pnum, int cii);
 #ifdef HELLFIRE
 void DoOil(int pnum, int cii);
 #endif
-void PrintItemPower(char plidx, ItemStruct *x);
+void PrintItemPower(char plidx, Item *x);
 void DrawUniqueInfo();
-void PrintItemDetails(ItemStruct *x);
-void PrintItemDur(ItemStruct *x);
+void PrintItemDetails(Item *x);
+void PrintItemDur(Item *x);
 void UseItem(int p, int Mid, int spl);
-BOOL StoreStatOk(ItemStruct *h);
+BOOL StoreStatOk(Item *h);
 void SpawnSmith(int lvl);
 #ifdef HELLFIRE
 void SpawnPremium(int pnum);

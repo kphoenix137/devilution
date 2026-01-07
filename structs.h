@@ -96,7 +96,7 @@ typedef struct ItemGetRecordStruct {
 	unsigned int dwTimestamp;
 } ItemGetRecordStruct;
 
-typedef struct ItemStruct {
+typedef struct Item {
 	int _iSeed;
 	WORD _iCreateInfo;
 	int _itype;
@@ -172,7 +172,7 @@ typedef struct ItemStruct {
 #ifdef HELLFIRE
 	int _iDamAcFlags;
 #endif
-} ItemStruct;
+} Item;
 
 //////////////////////////////////////////////////
 // player
@@ -313,12 +313,12 @@ typedef struct Player {
 	unsigned char *_pBAnim[8]; // Block animations
 	int _pBFrames;
 	int _pBWidth;
-	ItemStruct InvBody[NUM_INVLOC];
-	ItemStruct InvList[NUM_INV_GRID_ELEM];
+	Item InvBody[NUM_INVLOC];
+	Item InvList[NUM_INV_GRID_ELEM];
 	int _pNumInv;
 	char InvGrid[NUM_INV_GRID_ELEM];
-	ItemStruct SpdList[MAXBELTITEMS];
-	ItemStruct HoldItem;
+	Item SpdList[MAXBELTITEMS];
+	Item HoldItem;
 	int _pIMinDam;
 	int _pIMaxDam;
 	int _pIAC;
@@ -1067,7 +1067,7 @@ typedef struct CornerStoneStruct {
 	int x;
 	int y;
 	BOOL activated;
-	ItemStruct item;
+	Item item;
 } CornerStoneStruct;
 #endif
 

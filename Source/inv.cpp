@@ -996,9 +996,9 @@ BOOL WeaponAutoPlace(int pnum)
 	return FALSE;
 }
 
-int SwapItem(ItemStruct *a, ItemStruct *b)
+int SwapItem(Item *a, Item *b)
 {
-	ItemStruct h;
+	Item h;
 
 	h = *a;
 	*a = *b;
@@ -1013,7 +1013,7 @@ void CheckInvPaste(int pnum, int mx, int my)
 	int i, j, xx, yy, ii;
 	BOOL done, done2h;
 	int il, cn, it, iv, ig, gt;
-	ItemStruct tempitem;
+	Item tempitem;
 
 	SetICursor(Players[pnum].HoldItem._iCurs + CURSOR_FIRSTITEM);
 	i = mx + (icursW >> 1);
@@ -1464,7 +1464,7 @@ void CheckInvSwap(int pnum, BYTE bLoc, int idx, WORD wCI, int seed, BOOL bId)
 	RecreateItem(MAXITEMS, idx, wCI, seed, 0);
 
 	p = &Players[pnum];
-	p->HoldItem = item[MAXITEMS];
+	p->HoldItem = GroundItems[MAXITEMS];
 
 	if (bId) {
 		p->HoldItem._iIdentified = TRUE;
@@ -1705,8 +1705,8 @@ void RemoveInvItem(int pnum, int iv)
  */
 BOOL inv_diablo_to_hellfire(int pnum)
 {
-	ItemStruct tmp;
-	ItemStruct *item;
+	Item tmp;
+	Item *item;
 	int i, old_item_cnt, new_item_index;
 
 	if (Players[pnum]._pgfxnum != 0) {
@@ -1963,7 +1963,7 @@ void CheckQuestItem(int pnum)
 	if (Players[pnum].HoldItem.IDidx == IDI_NOTE1 || Players[pnum].HoldItem.IDidx == IDI_NOTE2 || Players[pnum].HoldItem.IDidx == IDI_NOTE3) {
 		int mask, idx, item_num;
 		int n1, n2, n3;
-		ItemStruct tmp;
+		Item tmp;
 		mask = 0;
 		idx = Players[pnum].HoldItem.IDidx;
 		if (PlrHasItem(pnum, IDI_NOTE1, n1) || idx == IDI_NOTE1)
@@ -2034,14 +2034,14 @@ void InvGetItem(int pnum, int ii)
 		dropGoldValue = 0;
 	}
 
-	if (dItem[item[ii]._ix][item[ii]._iy] != 0) {
+	if (dItem[GroundItems[ii]._ix][GroundItems[ii]._iy] != 0) {
 		if (myplr == pnum && pcurs >= CURSOR_FIRSTITEM)
 			NetSendCmdPItem(TRUE, CMD_SYNCPUTITEM, Players[myplr]._px, Players[myplr]._py);
 #ifdef HELLFIRE
 		if (item[ii]._iUid != 0)
 #endif
-			item[ii]._iCreateInfo &= ~CF_PREGEN;
-		Players[pnum].HoldItem = item[ii];
+			GroundItems[ii]._iCreateInfo &= ~CF_PREGEN;
+		Players[pnum].HoldItem = GroundItems[ii];
 		CheckQuestItem(pnum);
 		CheckBookLevel(pnum);
 		CheckItemStats(pnum);
@@ -2050,7 +2050,7 @@ void InvGetItem(int pnum, int ii)
 		if (Players[pnum].HoldItem._itype == ITYPE_GOLD && GoldAutoPlace(pnum))
 			cursor_updated = TRUE;
 #endif
-		dItem[item[ii]._ix][item[ii]._iy] = 0;
+		dItem[GroundItems[ii]._ix][GroundItems[ii]._iy] = 0;
 #ifdef HELLFIRE
 		if (currlevel == 21 && item[ii]._ix == CornerStone.x && item[ii]._iy == CornerStone.y) {
 			CornerStone.item.IDidx = -1;
@@ -2092,15 +2092,15 @@ void AutoGetItem(int pnum, int ii)
 	}
 
 	if (ii != MAXITEMS) {
-		if (dItem[item[ii]._ix][item[ii]._iy] == 0)
+		if (dItem[GroundItems[ii]._ix][GroundItems[ii]._iy] == 0)
 			return;
 	}
 
 #ifdef HELLFIRE
 	if (item[ii]._iUid != 0)
 #endif
-		item[ii]._iCreateInfo &= ~CF_PREGEN;
-	Players[pnum].HoldItem = item[ii]; /// BUGFIX: overwrites cursor item, allowing for belt dupe bug
+		GroundItems[ii]._iCreateInfo &= ~CF_PREGEN;
+	Players[pnum].HoldItem = GroundItems[ii]; /// BUGFIX: overwrites cursor item, allowing for belt dupe bug
 	CheckQuestItem(pnum);
 	CheckBookLevel(pnum);
 	CheckItemStats(pnum);
@@ -2196,7 +2196,7 @@ void AutoGetItem(int pnum, int ii)
 		}
 	}
 	if (done) {
-		dItem[item[ii]._ix][item[ii]._iy] = 0;
+		dItem[GroundItems[ii]._ix][GroundItems[ii]._iy] = 0;
 #ifdef HELLFIRE
 		if (currlevel == 21 && item[ii]._ix == CornerStone.x && item[ii]._iy == CornerStone.y) {
 			CornerStone.item.IDidx = -1;
@@ -2240,9 +2240,9 @@ void AutoGetItem(int pnum, int ii)
 #endif
 			}
 		}
-		Players[pnum].HoldItem = item[ii];
+		Players[pnum].HoldItem = GroundItems[ii];
 		RespawnItem(ii, TRUE);
-		NetSendCmdPItem(TRUE, CMD_RESPAWNITEM, item[ii]._ix, item[ii]._iy);
+		NetSendCmdPItem(TRUE, CMD_RESPAWNITEM, GroundItems[ii]._ix, GroundItems[ii]._iy);
 		Players[pnum].HoldItem._itype = ITYPE_NONE;
 #ifdef HELLFIRE
 		NewCursor(CURSOR_HAND);
@@ -2260,7 +2260,7 @@ int FindGetItem(int idx, WORD ci, int iseed)
 
 	while (1) {
 		ii = itemactive[i];
-		if (item[ii].IDidx == idx && item[ii]._iSeed == iseed && item[ii]._iCreateInfo == ci)
+		if (GroundItems[ii].IDidx == idx && GroundItems[ii]._iSeed == iseed && GroundItems[ii]._iCreateInfo == ci)
 			break;
 
 		i++;
@@ -2278,9 +2278,9 @@ void SyncGetItem(int x, int y, int idx, WORD ci, int iseed)
 
 	if (dItem[x][y]) {
 		ii = dItem[x][y] - 1;
-		if (item[ii].IDidx == idx
-		    && item[ii]._iSeed == iseed
-		    && item[ii]._iCreateInfo == ci) {
+		if (GroundItems[ii].IDidx == idx
+		    && GroundItems[ii]._iSeed == iseed
+		    && GroundItems[ii]._iCreateInfo == ci) {
 			FindGetItem(idx, ci, iseed);
 		} else {
 			ii = FindGetItem(idx, ci, iseed);
@@ -2290,7 +2290,7 @@ void SyncGetItem(int x, int y, int idx, WORD ci, int iseed)
 	}
 
 	if (ii != -1) {
-		dItem[item[ii]._ix][item[ii]._iy] = 0;
+		dItem[GroundItems[ii]._ix][GroundItems[ii]._iy] = 0;
 #ifdef HELLFIRE
 		if (currlevel == 21 && item[ii]._ix == CornerStone.x && item[ii]._iy == CornerStone.y) {
 			CornerStone.item.IDidx = -1;
@@ -2478,9 +2478,9 @@ int InvPutItem(int pnum, int x, int y)
 	dItem[x][y] = ii + 1;
 	itemavail[0] = itemavail[MAXITEMS - (numitems + 1)];
 	itemactive[numitems] = ii;
-	item[ii] = Players[pnum].HoldItem;
-	item[ii]._ix = x;
-	item[ii]._iy = y;
+	GroundItems[ii] = Players[pnum].HoldItem;
+	GroundItems[ii]._ix = x;
+	GroundItems[ii]._iy = y;
 	RespawnItem(ii, TRUE);
 	numitems++;
 #ifdef HELLFIRE
@@ -2564,11 +2564,11 @@ int SyncPutItem(int pnum, int x, int y, int idx, WORD icreateinfo, int iseed, in
 	} else {
 		RecreateItem(ii, idx, icreateinfo, iseed, ivalue);
 		if (Id)
-			item[ii]._iIdentified = TRUE;
-		item[ii]._iDurability = dur;
-		item[ii]._iMaxDur = mdur;
-		item[ii]._iCharges = ch;
-		item[ii]._iMaxCharges = mch;
+			GroundItems[ii]._iIdentified = TRUE;
+		GroundItems[ii]._iDurability = dur;
+		GroundItems[ii]._iMaxDur = mdur;
+		GroundItems[ii]._iCharges = ch;
+		GroundItems[ii]._iMaxCharges = mch;
 #ifdef HELLFIRE
 		item[ii]._iPLToHit = to_hit;
 		item[ii]._iMaxDam = max_dam;
@@ -2579,8 +2579,8 @@ int SyncPutItem(int pnum, int x, int y, int idx, WORD icreateinfo, int iseed, in
 #endif
 	}
 
-	item[ii]._ix = x;
-	item[ii]._iy = y;
+	GroundItems[ii]._ix = x;
+	GroundItems[ii]._iy = y;
 	RespawnItem(ii, TRUE);
 	numitems++;
 #ifdef HELLFIRE
@@ -2597,7 +2597,7 @@ int SyncPutItem(int pnum, int x, int y, int idx, WORD icreateinfo, int iseed, in
 char CheckInvHLight()
 {
 	int r, ii, nGold;
-	ItemStruct *pi;
+	Item *pi;
 	Player *p;
 	char rv;
 
@@ -2797,7 +2797,7 @@ void StartGoldDrop()
 BOOL UseInvItem(int pnum, int cii)
 {
 	int c, idata;
-	ItemStruct *Item;
+	Item *Item;
 	BOOL speedlist;
 
 	if (Players[pnum]._pInvincible && Players[pnum]._pHitPoints == 0 && pnum == myplr)

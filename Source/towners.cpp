@@ -768,7 +768,7 @@ void ProcessTowners()
 	}
 }
 
-ItemStruct *PlrHasItem(int pnum, int item, int &i)
+Item *PlrHasItem(int pnum, int item, int &i)
 {
 	for (i = 0; i < Players[pnum]._pNumInv; i++) {
 		if (Players[pnum].InvList[i].IDidx == item)
@@ -789,7 +789,7 @@ void TownerTalk(int first, int t)
 void TalkToTowner(int p, int t)
 {
 	int i, dx, dy, rv1, rv2, rv3;
-	ItemStruct *Item;
+	Item *Item;
 #ifdef HELLFIRE
 	int qt, t2;
 #endif

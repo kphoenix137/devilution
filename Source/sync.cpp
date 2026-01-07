@@ -93,7 +93,7 @@ static BOOL sync_monster_active2(TSyncMonster *p)
 static void SyncPlrInv(TSyncHeader *pHdr)
 {
 	int ii;
-	ItemStruct *pItem;
+	Item *pItem;
 
 	if (numitems > 0) {
 		if (sgnSyncItem >= numitems) {
@@ -101,29 +101,29 @@ static void SyncPlrInv(TSyncHeader *pHdr)
 		}
 		ii = itemactive[sgnSyncItem++];
 		pHdr->bItemI = ii;
-		pHdr->bItemX = item[ii]._ix;
-		pHdr->bItemY = item[ii]._iy;
-		pHdr->wItemIndx = item[ii].IDidx;
-		if (item[ii].IDidx == IDI_EAR) {
-			pHdr->wItemCI = (item[ii]._iName[7] << 8) | item[ii]._iName[8];
-			pHdr->dwItemSeed = (item[ii]._iName[9] << 24) | (item[ii]._iName[10] << 16) | (item[ii]._iName[11] << 8) | item[ii]._iName[12];
-			pHdr->bItemId = item[ii]._iName[13];
-			pHdr->bItemDur = item[ii]._iName[14];
-			pHdr->bItemMDur = item[ii]._iName[15];
-			pHdr->bItemCh = item[ii]._iName[16];
-			pHdr->bItemMCh = item[ii]._iName[17];
-			pHdr->wItemVal = (item[ii]._iName[18] << 8) | ((item[ii]._iCurs - ICURS_EAR_SORCEROR) << 6) | item[ii]._ivalue;
-			pHdr->dwItemBuff = (item[ii]._iName[19] << 24) | (item[ii]._iName[20] << 16) | (item[ii]._iName[21] << 8) | item[ii]._iName[22];
+		pHdr->bItemX = GroundItems[ii]._ix;
+		pHdr->bItemY = GroundItems[ii]._iy;
+		pHdr->wItemIndx = GroundItems[ii].IDidx;
+		if (GroundItems[ii].IDidx == IDI_EAR) {
+			pHdr->wItemCI = (GroundItems[ii]._iName[7] << 8) | GroundItems[ii]._iName[8];
+			pHdr->dwItemSeed = (GroundItems[ii]._iName[9] << 24) | (GroundItems[ii]._iName[10] << 16) | (GroundItems[ii]._iName[11] << 8) | GroundItems[ii]._iName[12];
+			pHdr->bItemId = GroundItems[ii]._iName[13];
+			pHdr->bItemDur = GroundItems[ii]._iName[14];
+			pHdr->bItemMDur = GroundItems[ii]._iName[15];
+			pHdr->bItemCh = GroundItems[ii]._iName[16];
+			pHdr->bItemMCh = GroundItems[ii]._iName[17];
+			pHdr->wItemVal = (GroundItems[ii]._iName[18] << 8) | ((GroundItems[ii]._iCurs - ICURS_EAR_SORCEROR) << 6) | GroundItems[ii]._ivalue;
+			pHdr->dwItemBuff = (GroundItems[ii]._iName[19] << 24) | (GroundItems[ii]._iName[20] << 16) | (GroundItems[ii]._iName[21] << 8) | GroundItems[ii]._iName[22];
 		} else {
-			pHdr->wItemCI = item[ii]._iCreateInfo;
-			pHdr->dwItemSeed = item[ii]._iSeed;
-			pHdr->bItemId = item[ii]._iIdentified;
-			pHdr->bItemDur = item[ii]._iDurability;
-			pHdr->bItemMDur = item[ii]._iMaxDur;
-			pHdr->bItemCh = item[ii]._iCharges;
-			pHdr->bItemMCh = item[ii]._iMaxCharges;
-			if (item[ii].IDidx == IDI_GOLD) {
-				pHdr->wItemVal = item[ii]._ivalue;
+			pHdr->wItemCI = GroundItems[ii]._iCreateInfo;
+			pHdr->dwItemSeed = GroundItems[ii]._iSeed;
+			pHdr->bItemId = GroundItems[ii]._iIdentified;
+			pHdr->bItemDur = GroundItems[ii]._iDurability;
+			pHdr->bItemMDur = GroundItems[ii]._iMaxDur;
+			pHdr->bItemCh = GroundItems[ii]._iCharges;
+			pHdr->bItemMCh = GroundItems[ii]._iMaxCharges;
+			if (GroundItems[ii].IDidx == IDI_GOLD) {
+				pHdr->wItemVal = GroundItems[ii]._ivalue;
 			}
 		}
 	} else {

@@ -10,7 +10,7 @@
 static
 #endif
     void
-    PackItem(PkItemStruct *id, ItemStruct *is)
+    PackItem(PkItemStruct *id, Item *is)
 {
 	if (is->_itype == ITYPE_NONE) {
 		id->idx = 0xFFFF;
@@ -48,7 +48,7 @@ void PackPlayer(PkPlayerStruct *pPack, int pnum, BOOL manashield)
 {
 	Player *pPlayer;
 	int i;
-	ItemStruct *pi;
+	Item *pi;
 	PkItemStruct *pki;
 
 	memset(pPack, 0, sizeof(*pPack));
@@ -135,10 +135,10 @@ void PackPlayer(PkPlayerStruct *pPack, int pnum, BOOL manashield)
 }
 
 /**
- * Expand a PkItemStruct into an ItemStruct
+ * Expand a PkItemStruct into an Item
  *
  * Note: last slot of item[MAXITEMS+1] used as temporary buffer
- * find real name reference below, possibly [sizeof(item[])/sizeof(ItemStruct)]
+ * find real name reference below, possibly [sizeof(item[])/sizeof(Item)]
  * @param is The source packed item
  * @param id The destination item
  */
@@ -146,7 +146,7 @@ void PackPlayer(PkPlayerStruct *pPack, int pnum, BOOL manashield)
 static
 #endif
     void
-    UnPackItem(PkItemStruct *is, ItemStruct *id)
+    UnPackItem(PkItemStruct *is, Item *id)
 {
 	if (is->idx == 0xFFFF) {
 		id->_itype = ITYPE_NONE;
@@ -165,14 +165,14 @@ static
 			    is->dwBuff);
 		} else {
 			RecreateItem(MAXITEMS, is->idx, is->iCreateInfo, is->iSeed, is->wValue);
-			item[MAXITEMS]._iMagical = is->bId >> 1;
-			item[MAXITEMS]._iIdentified = is->bId & 1;
-			item[MAXITEMS]._iDurability = is->bDur;
-			item[MAXITEMS]._iMaxDur = is->bMDur;
-			item[MAXITEMS]._iCharges = is->bCh;
-			item[MAXITEMS]._iMaxCharges = is->bMCh;
+			GroundItems[MAXITEMS]._iMagical = is->bId >> 1;
+			GroundItems[MAXITEMS]._iIdentified = is->bId & 1;
+			GroundItems[MAXITEMS]._iDurability = is->bDur;
+			GroundItems[MAXITEMS]._iMaxDur = is->bMDur;
+			GroundItems[MAXITEMS]._iCharges = is->bCh;
+			GroundItems[MAXITEMS]._iMaxCharges = is->bMCh;
 		}
-		*id = item[MAXITEMS];
+		*id = GroundItems[MAXITEMS];
 	}
 }
 
@@ -198,7 +198,7 @@ void UnPackPlayer(PkPlayerStruct *pPack, int pnum, BOOL killok)
 {
 	Player *pPlayer;
 	int i;
-	ItemStruct *pi;
+	Item *pi;
 	PkItemStruct *pki;
 
 	pPlayer = &Players[pnum];

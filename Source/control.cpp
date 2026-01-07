@@ -2292,7 +2292,7 @@ void ReleaseChrBtns()
 	}
 }
 
-static int DrawDurIcon4Item(ItemStruct *pItem, int x, int c)
+static int DrawDurIcon4Item(Item *pItem, int x, int c)
 {
 	if (pItem->_itype == ITYPE_NONE)
 		return x;

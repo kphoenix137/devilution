@@ -947,7 +947,7 @@ static void scrollrt_draw_clipped_dungeon(BYTE *pBuff, int sx, int sy, int dx, i
 	int px, py, nCel, nMon, negMon, p;
 	char bFlag, bDead, bObj, bItem, bPlr, bArch, bMap, negPlr, dd;
 	DeadStruct *pDeadGuy;
-	ItemStruct *pItem;
+	Item *pItem;
 	Player *pPlayer;
 	MonsterStruct *pMonster;
 	BYTE *pCelBuff;
@@ -1003,7 +1003,7 @@ static void scrollrt_draw_clipped_dungeon(BYTE *pBuff, int sx, int sy, int dx, i
 	}
 	if (bItem != 0) {
 		do {
-			pItem = &item[bItem - 1];
+			pItem = &GroundItems[bItem - 1];
 			if (!pItem->_iPostDraw) {
 				/// ASSERT: assert((unsigned char)bItem <= MAXITEMS);
 #ifdef HELLFIRE
@@ -1141,7 +1141,7 @@ static void scrollrt_draw_clipped_dungeon(BYTE *pBuff, int sx, int sy, int dx, i
 	}
 	if (bItem != 0) {
 		do {
-			pItem = &item[bItem - 1];
+			pItem = &GroundItems[bItem - 1];
 			if (pItem->_iPostDraw) {
 				/// ASSERT: assert((unsigned char)bItem <= MAXITEMS);
 #ifdef HELLFIRE
@@ -1442,7 +1442,7 @@ static void scrollrt_draw_clipped_dungeon_2(BYTE *pBuff, int sx, int sy, int row
 	int px, py, nCel, nMon, negMon, p;
 	char bFlag, bDead, bObj, bItem, bPlr, bArch, bMap, negPlr, dd;
 	DeadStruct *pDeadGuy;
-	ItemStruct *pItem;
+	Item *pItem;
 	Player *pPlayer;
 	MonsterStruct *pMonster;
 	BYTE *pCelBuff;
@@ -1498,7 +1498,7 @@ static void scrollrt_draw_clipped_dungeon_2(BYTE *pBuff, int sx, int sy, int row
 	}
 	if (bItem != 0) {
 		do {
-			pItem = &item[bItem - 1];
+			pItem = &GroundItems[bItem - 1];
 			if (!pItem->_iPostDraw) {
 				/// ASSERT: assert((unsigned char)bItem <= MAXITEMS);
 #ifdef HELLFIRE
@@ -1644,7 +1644,7 @@ static void scrollrt_draw_clipped_dungeon_2(BYTE *pBuff, int sx, int sy, int row
 	}
 	if (bItem != 0) {
 		do {
-			pItem = &item[bItem - 1];
+			pItem = &GroundItems[bItem - 1];
 			if (pItem->_iPostDraw) {
 				/// ASSERT: assert((unsigned char)bItem <= MAXITEMS);
 #ifdef HELLFIRE
@@ -1878,7 +1878,7 @@ static void scrollrt_draw_dungeon(BYTE *pBuff, int sx, int sy, int row, int CelC
 	int px, py, nCel, nMon, negMon, p;
 	char bFlag, bDead, bObj, bItem, bPlr, bArch, bMap, negPlr, dd;
 	DeadStruct *pDeadGuy;
-	ItemStruct *pItem;
+	Item *pItem;
 	Player *pPlayer;
 	MonsterStruct *pMonster;
 	BYTE *pCelBuff;
@@ -1935,7 +1935,7 @@ static void scrollrt_draw_dungeon(BYTE *pBuff, int sx, int sy, int row, int CelC
 	}
 	if (bItem != 0) {
 		do {
-			pItem = &item[bItem - 1];
+			pItem = &GroundItems[bItem - 1];
 			if (!pItem->_iPostDraw) {
 				/// ASSERT: assert((unsigned char)bItem <= MAXITEMS);
 #ifdef HELLFIRE
@@ -2078,7 +2078,7 @@ static void scrollrt_draw_dungeon(BYTE *pBuff, int sx, int sy, int row, int CelC
 	}
 	if (bItem != 0) {
 		do {
-			pItem = &item[bItem - 1];
+			pItem = &GroundItems[bItem - 1];
 			if (pItem->_iPostDraw) {
 				/// ASSERT: assert((unsigned char)bItem <= MAXITEMS);
 #ifdef HELLFIRE

@@ -8,9 +8,9 @@
 int stextup;
 int storenumh;
 int stextlhold;
-ItemStruct boyitem;
+Item boyitem;
 int stextshold;
-ItemStruct premiumitem[SMITH_PREMIUM_ITEMS];
+Item premiumitem[SMITH_PREMIUM_ITEMS];
 BYTE *pSTextBoxCels;
 int premiumlevel;
 int talker;
@@ -19,13 +19,13 @@ char stextsize;
 
 int stextsmax;
 int InStoreFlag; /** current frame # for the pentagram selector */
-ItemStruct storehold[48];
+Item storehold[48];
 int gossipstart;
-ItemStruct witchitem[WITCH_ITEMS];
+Item witchitem[WITCH_ITEMS];
 BOOL stextscrl;
 int numpremium;
-ItemStruct healitem[20];
-ItemStruct golditem;
+Item healitem[20];
+Item golditem;
 char storehidx[48];
 BYTE *pSTextSlidCels;
 int stextvhold;
@@ -35,7 +35,7 @@ int gossipend;
 BYTE *pSPentSpn2Cels;
 int stextsval;
 int boylevel;
-ItemStruct smithitem[SMITH_ITEMS];
+Item smithitem[SMITH_ITEMS];
 int stextdown;
 char stextscrlubtn;
 char stextflag;
@@ -333,7 +333,7 @@ void AddSText(int x, int y, BOOL j, const char *str, char clr, BOOL sel)
 	stext[y]._ssel = sel;
 }
 
-static void PrintStoreItem(ItemStruct *x, int l, char iclr)
+static void PrintStoreItem(Item *x, int l, char iclr)
 {
 	char sstr[128];
 	char str, dex;
@@ -621,7 +621,7 @@ BOOL S_StartSPBuy()
 BOOL SmithSellOk(int i)
 {
 #ifdef HELLFIRE
-	ItemStruct *pI;
+	Item *pI;
 
 	if (i >= 0) {
 		pI = &Players[myplr].InvList[i];
@@ -795,9 +795,9 @@ BOOL SmithRepairOk(int i)
 	return TRUE;
 }
 
-static void AddStoreHoldRepair(ItemStruct *itm, int i)
+static void AddStoreHoldRepair(Item *itm, int i)
 {
-	ItemStruct *item;
+	Item *item;
 	int v;
 
 	item = &storehold[storenumh];
@@ -957,7 +957,7 @@ void S_StartWBuy()
 BOOL WitchSellOk(int i)
 {
 	BOOL rv;
-	ItemStruct *pI;
+	Item *pI;
 
 	rv = FALSE;
 
@@ -1077,7 +1077,7 @@ BOOL WitchRechargeOk(int i)
 	return rv;
 }
 
-void AddStoreHoldRecharge(ItemStruct itm, int i)
+void AddStoreHoldRecharge(Item itm, int i)
 {
 	storehold[storenumh] = itm;
 	storehold[storenumh]._ivalue += spelldata[itm._iSpell].sStaffCost;
@@ -1366,7 +1366,7 @@ void S_StartStory()
 	AddSLine(5);
 }
 
-BOOL IdItemOk(ItemStruct *i)
+BOOL IdItemOk(Item *i)
 {
 	if (i->_itype == ITYPE_NONE) {
 		return FALSE;
@@ -1377,7 +1377,7 @@ BOOL IdItemOk(ItemStruct *i)
 	return !i->_iIdentified;
 }
 
-void AddStoreHoldId(ItemStruct itm, int i)
+void AddStoreHoldId(Item itm, int i)
 {
 	storehold[storenumh] = itm;
 	storehold[storenumh]._ivalue = 100;

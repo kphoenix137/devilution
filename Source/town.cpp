@@ -441,11 +441,11 @@ void town_draw_clipped_town(BYTE *pBuff, int sx, int sy, int dx, int dy, int efl
 
 	if (dItem[sx][sy] != 0) {
 		bv = dItem[sx][sy] - 1;
-		px = dx - item[bv]._iAnimWidth2;
+		px = dx - GroundItems[bv]._iAnimWidth2;
 		if (bv == pcursitem) {
-			CelBlitOutlineSafe(181, px, dy, item[bv]._iAnimData, item[bv]._iAnimFrame, item[bv]._iAnimWidth, 0, 8);
+			CelBlitOutlineSafe(181, px, dy, GroundItems[bv]._iAnimData, GroundItems[bv]._iAnimFrame, GroundItems[bv]._iAnimWidth, 0, 8);
 		}
-		CelClippedDrawSafe(px, dy, item[bv]._iAnimData, item[bv]._iAnimFrame, item[bv]._iAnimWidth, 0, 8);
+		CelClippedDrawSafe(px, dy, GroundItems[bv]._iAnimData, GroundItems[bv]._iAnimFrame, GroundItems[bv]._iAnimWidth, 0, 8);
 	}
 	if (dFlags[sx][sy] & BFLAG_MONSTLR) {
 		mi = -(dMonster[sx][sy - 1] + 1);
@@ -655,11 +655,11 @@ void town_draw_clipped_town_2(BYTE *pBuff, int sx, int sy, int row, int CelSkip,
 
 	if (dItem[sx][sy] != 0) {
 		bv = dItem[sx][sy] - 1;
-		px = dx - item[bv]._iAnimWidth2;
+		px = dx - GroundItems[bv]._iAnimWidth2;
 		if (bv == pcursitem) {
-			CelBlitOutlineSafe(181, px, dy, item[bv]._iAnimData, item[bv]._iAnimFrame, item[bv]._iAnimWidth, CelSkip, 8);
+			CelBlitOutlineSafe(181, px, dy, GroundItems[bv]._iAnimData, GroundItems[bv]._iAnimFrame, GroundItems[bv]._iAnimWidth, CelSkip, 8);
 		}
-		CelClippedDrawSafe(px, dy, item[bv]._iAnimData, item[bv]._iAnimFrame, item[bv]._iAnimWidth, CelSkip, 8);
+		CelClippedDrawSafe(px, dy, GroundItems[bv]._iAnimData, GroundItems[bv]._iAnimFrame, GroundItems[bv]._iAnimWidth, CelSkip, 8);
 	}
 	if (dFlags[sx][sy] & BFLAG_MONSTLR) {
 		mi = -(dMonster[sx][sy - 1] + 1);
@@ -877,12 +877,12 @@ void town_draw_town_all(BYTE *pBuff, int x, int y, int row, int CelCap, int sx, 
 
 	if (dItem[x][y] != 0) {
 		bv = dItem[x][y] - 1;
-		px = sx - item[bv]._iAnimWidth2;
+		px = sx - GroundItems[bv]._iAnimWidth2;
 		if (bv == pcursitem) {
-			CelBlitOutline(181, px, sy, item[bv]._iAnimData, item[bv]._iAnimFrame, item[bv]._iAnimWidth, 0, CelCap);
+			CelBlitOutline(181, px, sy, GroundItems[bv]._iAnimData, GroundItems[bv]._iAnimFrame, GroundItems[bv]._iAnimWidth, 0, CelCap);
 		}
 		/// ASSERT: assert(item[bv]._iAnimData);
-		CelClippedDraw(px, sy, item[bv]._iAnimData, item[bv]._iAnimFrame, item[bv]._iAnimWidth, 0, CelCap);
+		CelClippedDraw(px, sy, GroundItems[bv]._iAnimData, GroundItems[bv]._iAnimFrame, GroundItems[bv]._iAnimWidth, 0, CelCap);
 	}
 	if (dFlags[x][y] & BFLAG_MONSTLR) {
 		mi = -(dMonster[x][y - 1] + 1);

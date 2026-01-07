@@ -67,8 +67,8 @@ static void LoadObject(int i)
 
 static void LoadItem(int i)
 {
-	memcpy(&item[i], tbuff, sizeof(*item));
-	tbuff += sizeof(*item);
+	memcpy(&GroundItems[i], tbuff, sizeof(*GroundItems));
+	tbuff += sizeof(*GroundItems);
 	GetItemFrm(i);
 }
 
@@ -347,8 +347,8 @@ static void SaveObject(int i)
 
 static void SaveItem(int i)
 {
-	memcpy(tbuff, &item[i], sizeof(*item));
-	tbuff += sizeof(*item);
+	memcpy(tbuff, &GroundItems[i], sizeof(*GroundItems));
+	tbuff += sizeof(*GroundItems);
 }
 
 static void SavePremium(int i)

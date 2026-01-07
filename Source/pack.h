@@ -9,8 +9,8 @@
 void UnPackPlayer(PkPlayerStruct *pPack, int pnum, BOOL killok);
 #ifdef HELLFIRE
 void PackPlayer(PkPlayerStruct *pPack, int pnum);
-void PackItem(PkItemStruct *id, ItemStruct *is);
-void UnPackItem(PkItemStruct *is, ItemStruct *id);
+void PackItem(PkItemStruct *id, Item *is);
+void UnPackItem(PkItemStruct *is, Item *id);
 #else
 void PackPlayer(PkPlayerStruct *pPack, int pnum, BOOL manashield);
 #endif

@@ -619,7 +619,7 @@ void CheckCursMove()
 	if (pcursplr == -1 && pcursobj == -1 && pcursmonst == -1) {
 		if (!flipflag && dItem[mx + 1][my] > 0) {
 			bv = dItem[mx + 1][my] - 1;
-			if (item[bv]._iSelFlag >= 2) {
+			if (GroundItems[bv]._iSelFlag >= 2) {
 				cursmx = mx + 1;
 				cursmy = my;
 				pcursitem = bv;
@@ -627,7 +627,7 @@ void CheckCursMove()
 		}
 		if (flipflag && dItem[mx][my + 1] > 0) {
 			bv = dItem[mx][my + 1] - 1;
-			if (item[bv]._iSelFlag >= 2) {
+			if (GroundItems[bv]._iSelFlag >= 2) {
 				cursmx = mx;
 				cursmy = my + 1;
 				pcursitem = bv;
@@ -635,7 +635,7 @@ void CheckCursMove()
 		}
 		if (dItem[mx][my] > 0) {
 			bv = dItem[mx][my] - 1;
-			if (item[bv]._iSelFlag == 1 || item[bv]._iSelFlag == 3) {
+			if (GroundItems[bv]._iSelFlag == 1 || GroundItems[bv]._iSelFlag == 3) {
 				cursmx = mx;
 				cursmy = my;
 				pcursitem = bv;
@@ -643,7 +643,7 @@ void CheckCursMove()
 		}
 		if (dItem[mx + 1][my + 1] > 0) {
 			bv = dItem[mx + 1][my + 1] - 1;
-			if (item[bv]._iSelFlag >= 2) {
+			if (GroundItems[bv]._iSelFlag >= 2) {
 				cursmx = mx + 1;
 				cursmy = my + 1;
 				pcursitem = bv;

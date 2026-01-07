@@ -441,63 +441,63 @@ void InitPlrGFXMem(int pnum)
 		app_fatal("InitPlrGFXMem: illegal player %d", pnum);
 	}
 
-	if (!(plr_gfx_flag & 0x1)) { //STAND
+	if (!(plr_gfx_flag & 0x1)) { // STAND
 		plr_gfx_flag |= 0x1;
 		if (GetPlrGFXSize("ST") > GetPlrGFXSize("AS")) {
-			plr_sframe_size = GetPlrGFXSize("ST"); //TOWN
+			plr_sframe_size = GetPlrGFXSize("ST"); // TOWN
 		} else {
-			plr_sframe_size = GetPlrGFXSize("AS"); //DUNGEON
+			plr_sframe_size = GetPlrGFXSize("AS"); // DUNGEON
 		}
 	}
 	Players[pnum]._pNData = DiabloAllocPtr(plr_sframe_size);
 
-	if (!(plr_gfx_flag & 0x2)) { //WALK
+	if (!(plr_gfx_flag & 0x2)) { // WALK
 		plr_gfx_flag |= 0x2;
 		if (GetPlrGFXSize("WL") > GetPlrGFXSize("AW")) {
-			plr_wframe_size = GetPlrGFXSize("WL"); //TOWN
+			plr_wframe_size = GetPlrGFXSize("WL"); // TOWN
 		} else {
-			plr_wframe_size = GetPlrGFXSize("AW"); //DUNGEON
+			plr_wframe_size = GetPlrGFXSize("AW"); // DUNGEON
 		}
 	}
 	Players[pnum]._pWData = DiabloAllocPtr(plr_wframe_size);
 
-	if (!(plr_gfx_flag & 0x4)) { //ATTACK
+	if (!(plr_gfx_flag & 0x4)) { // ATTACK
 		plr_gfx_flag |= 0x4;
 		plr_aframe_size = GetPlrGFXSize("AT");
 	}
 	Players[pnum]._pAData = DiabloAllocPtr(plr_aframe_size);
 
-	if (!(plr_gfx_flag & 0x8)) { //HIT
+	if (!(plr_gfx_flag & 0x8)) { // HIT
 		plr_gfx_flag |= 0x8;
 		plr_hframe_size = GetPlrGFXSize("HT");
 	}
 	Players[pnum]._pHData = DiabloAllocPtr(plr_hframe_size);
 
-	if (!(plr_gfx_flag & 0x10)) { //LIGHTNING
+	if (!(plr_gfx_flag & 0x10)) { // LIGHTNING
 		plr_gfx_flag |= 0x10;
 		plr_lframe_size = GetPlrGFXSize("LM");
 	}
 	Players[pnum]._pLData = DiabloAllocPtr(plr_lframe_size);
 
-	if (!(plr_gfx_flag & 0x20)) { //FIRE
+	if (!(plr_gfx_flag & 0x20)) { // FIRE
 		plr_gfx_flag |= 0x20;
 		plr_fframe_size = GetPlrGFXSize("FM");
 	}
 	Players[pnum]._pFData = DiabloAllocPtr(plr_fframe_size);
 
-	if (!(plr_gfx_flag & 0x40)) { //MAGIC
+	if (!(plr_gfx_flag & 0x40)) { // MAGIC
 		plr_gfx_flag |= 0x40;
 		plr_qframe_size = GetPlrGFXSize("QM");
 	}
 	Players[pnum]._pTData = DiabloAllocPtr(plr_qframe_size);
 
-	if (!(plr_gfx_flag & 0x80)) { //DEATH
+	if (!(plr_gfx_flag & 0x80)) { // DEATH
 		plr_gfx_flag |= 0x80;
 		plr_dframe_size = GetPlrGFXSize("DT");
 	}
 	Players[pnum]._pDData = DiabloAllocPtr(plr_dframe_size);
 
-	if (!(plr_gfx_bflag & 0x1)) { //BLOCK
+	if (!(plr_gfx_bflag & 0x1)) { // BLOCK
 		plr_gfx_bflag |= 0x1;
 		plr_bframe_size = GetPlrGFXSize("BL");
 	}
@@ -967,10 +967,6 @@ void NextPlrLevel(int pnum)
 
 	Players[pnum]._pLevel++;
 	Players[pnum]._pMaxLvl++;
-
-#ifdef HELLFIRE
-	CalcPlrInv(pnum, TRUE);
-#endif
 
 	if (CalcStatDiff(pnum) < 5) {
 		Players[pnum]._pStatPts = CalcStatDiff(pnum);
@@ -1927,31 +1923,14 @@ void StartPlrHit(int pnum, int dam, BOOL forcehit)
 
 	if (Players[pnum]._pClass == PC_WARRIOR) {
 		PlaySfxLoc(PS_WARR69, Players[pnum]._px, Players[pnum]._py);
-#ifndef SPAWN
 	} else if (Players[pnum]._pClass == PC_ROGUE) {
 		PlaySfxLoc(PS_ROGUE69, Players[pnum]._px, Players[pnum]._py);
 	} else if (Players[pnum]._pClass == PC_SORCERER) {
 		PlaySfxLoc(PS_MAGE69, Players[pnum]._px, Players[pnum]._py);
-#endif
-#ifdef HELLFIRE
-	} else if (Players[pnum]._pClass == PC_MONK) {
-		PlaySfxLoc(PS_MONK69, Players[pnum]._px, Players[pnum]._py);
-	} else if (Players[pnum]._pClass == PC_BARD) {
-		PlaySfxLoc(PS_ROGUE69, Players[pnum]._px, Players[pnum]._py);
-	} else if (Players[pnum]._pClass == PC_BARBARIAN) {
-		PlaySfxLoc(PS_WARR69, Players[pnum]._px, Players[pnum]._py);
-#endif
 	}
 
 	drawhpflag = TRUE;
-#ifdef HELLFIRE
-	if (Players[pnum]._pClass == PC_BARBARIAN) {
-		if (dam >> 6 < Players[pnum]._pLevel + Players[pnum]._pLevel / 4 && !forcehit) {
-			return;
-		}
-	} else
-#endif
-	    if (dam >> 6 < Players[pnum]._pLevel && !forcehit) {
+	if (dam >> 6 < Players[pnum]._pLevel && !forcehit) {
 		return;
 	}
 
@@ -1970,7 +1949,7 @@ void StartPlrHit(int pnum, int dam, BOOL forcehit)
 	SetPlayerOld(pnum);
 }
 
-void RespawnDeadItem(ItemStruct *itm, int x, int y)
+void RespawnDeadItem(Item *itm, int x, int y)
 {
 	int ii;
 
@@ -1987,15 +1966,15 @@ void RespawnDeadItem(ItemStruct *itm, int x, int y)
 	dItem[x][y] = ii + 1;
 	itemavail[0] = itemavail[MAXITEMS - numitems - 1];
 	itemactive[numitems] = ii;
-	item[ii] = *itm;
-	item[ii]._ix = x;
-	item[ii]._iy = y;
+	GroundItems[ii] = *itm;
+	GroundItems[ii]._ix = x;
+	GroundItems[ii]._iy = y;
 	RespawnItem(ii, TRUE);
 	numitems++;
 	itm->_itype = ITYPE_NONE;
 }
 
-static void PlrDeadItem(int pnum, ItemStruct *itm, int xx, int yy)
+static void PlrDeadItem(int pnum, Item *itm, int xx, int yy)
 {
 	int x, y;
 	int i, j, k;
@@ -2037,8 +2016,8 @@ void StartPlayerKill(int pnum, int earflag)
 	BOOL diablolevel;
 	int i, pdd;
 	Player *p;
-	ItemStruct ear;
-	ItemStruct *pi;
+	Item ear;
+	Item *pi;
 
 	p = &Players[pnum];
 	if (p->_pHitPoints <= 0 && p->_pmode == PM_DEATH) {
@@ -2282,7 +2261,7 @@ void DropHalfPlayersGold(int pnum)
 #ifdef HELLFIRE
 void StripTopGold(int pnum)
 {
-	ItemStruct tmpItem;
+	Item tmpItem;
 	int i, val;
 
 	if ((DWORD)pnum >= MAX_PLRS) {
@@ -3428,7 +3407,7 @@ BOOL PM_DoBlock(int pnum)
 static void ArmorDur(int pnum)
 {
 	int a;
-	ItemStruct *pi;
+	Item *pi;
 	Player *p;
 
 	if (pnum != myplr) {
@@ -3829,19 +3808,19 @@ void CheckNewPath(int pnum)
 		case ACTION_PICKUPITEM:
 			if (pnum == myplr) {
 				i = Players[pnum].destParam1;
-				x = abs(Players[pnum]._px - item[i]._ix);
-				y = abs(Players[pnum]._py - item[i]._iy);
-				if (x <= 1 && y <= 1 && pcurs == CURSOR_HAND && !item[i]._iRequest) {
+				x = abs(Players[pnum]._px - GroundItems[i]._ix);
+				y = abs(Players[pnum]._py - GroundItems[i]._iy);
+				if (x <= 1 && y <= 1 && pcurs == CURSOR_HAND && !GroundItems[i]._iRequest) {
 					NetSendCmdGItem(TRUE, CMD_REQUESTGITEM, myplr, myplr, i);
-					item[i]._iRequest = TRUE;
+					GroundItems[i]._iRequest = TRUE;
 				}
 			}
 			break;
 		case ACTION_PICKUPAITEM:
 			if (pnum == myplr) {
 				i = Players[pnum].destParam1;
-				x = abs(Players[pnum]._px - item[i]._ix);
-				y = abs(Players[pnum]._py - item[i]._iy);
+				x = abs(Players[pnum]._px - GroundItems[i]._ix);
+				y = abs(Players[pnum]._py - GroundItems[i]._iy);
 				if (x <= 1 && y <= 1 && pcurs == CURSOR_HAND) {
 					NetSendCmdGItem(TRUE, CMD_REQUESTAGITEM, myplr, myplr, i);
 				}
@@ -4381,7 +4360,7 @@ void CheckPlrSpell()
 		} else if (pcursplr != -1) {
 			sl = GetSpellLevel(myplr, Players[myplr]._pRSpell);
 			NetSendCmdParam3(TRUE, CMD_SPELLPID, pcursplr, Players[myplr]._pRSpell, sl);
-		} else { //145
+		} else { // 145
 			sl = GetSpellLevel(myplr, Players[myplr]._pRSpell);
 			NetSendCmdLocParam2(TRUE, CMD_SPELLXY, cursmx, cursmy, Players[myplr]._pRSpell, sl);
 		}

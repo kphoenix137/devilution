@@ -6,19 +6,19 @@
 #ifndef __STORES_H__
 #define __STORES_H__
 
-extern ItemStruct boyitem;
-extern ItemStruct premiumitem[SMITH_PREMIUM_ITEMS];
+extern Item boyitem;
+extern Item premiumitem[SMITH_PREMIUM_ITEMS];
 extern BYTE *pSTextBoxCels;
 extern int premiumlevel;
 extern int talker;
-extern ItemStruct witchitem[WITCH_ITEMS];
+extern Item witchitem[WITCH_ITEMS];
 extern int numpremium;
-extern ItemStruct healitem[20];
-extern ItemStruct golditem;
+extern Item healitem[20];
+extern Item golditem;
 extern BYTE *pSTextSlidCels;
 extern BYTE *pSPentSpn2Cels;
 extern int boylevel;
-extern ItemStruct smithitem[SMITH_ITEMS];
+extern Item smithitem[SMITH_ITEMS];
 extern int stextdown;
 extern char stextflag;
 
