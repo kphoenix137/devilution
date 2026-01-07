@@ -181,7 +181,7 @@ BOOL __stdcall mainmenu_select_hero_dialog(
 	if (multi) {
 #ifndef HELLFIRE
 		if (mode == 'BNET')
-			*multi = hero_is_created || !plr[myplr].pBattleNet;
+			*multi = hero_is_created || !Players[myplr].pBattleNet;
 		else
 			*multi = hero_is_created;
 #endif

@@ -104,14 +104,14 @@ void GiveGoldCheat()
 	int i, ni;
 
 	for (i = 0; i < NUM_INV_GRID_ELEM; i++) {
-		if (plr[myplr].InvGrid[i] == 0) {
-			ni = plr[myplr]._pNumInv++;
-			SetPlrHandItem(&plr[myplr].InvList[ni], IDI_GOLD);
-			GetPlrHandSeed(&plr[myplr].InvList[ni]);
-			plr[myplr].InvList[ni]._ivalue = GOLD_MAX_LIMIT;
-			plr[myplr].InvList[ni]._iCurs = ICURS_GOLD_LARGE;
-			plr[myplr]._pGold += GOLD_MAX_LIMIT;
-			plr[myplr].InvGrid[i] = plr[myplr]._pNumInv;
+		if (Players[myplr].InvGrid[i] == 0) {
+			ni = Players[myplr]._pNumInv++;
+			SetPlrHandItem(&Players[myplr].InvList[ni], IDI_GOLD);
+			GetPlrHandSeed(&Players[myplr].InvList[ni]);
+			Players[myplr].InvList[ni]._ivalue = GOLD_MAX_LIMIT;
+			Players[myplr].InvList[ni]._iCurs = ICURS_GOLD_LARGE;
+			Players[myplr]._pGold += GOLD_MAX_LIMIT;
+			Players[myplr].InvGrid[i] = Players[myplr]._pNumInv;
 		}
 	}
 }
@@ -141,17 +141,17 @@ void TakeGoldCheat()
 	char ig;
 
 	for (i = 0; i < NUM_INV_GRID_ELEM; i++) {
-		ig = plr[myplr].InvGrid[i];
-		if (ig > 0 && plr[myplr].InvList[ig - 1]._itype == ITYPE_GOLD)
+		ig = Players[myplr].InvGrid[i];
+		if (ig > 0 && Players[myplr].InvList[ig - 1]._itype == ITYPE_GOLD)
 			RemoveInvItem(myplr, ig - 1);
 	}
 
 	for (i = 0; i < MAXBELTITEMS; i++) {
-		if (plr[myplr].SpdList[i]._itype == ITYPE_GOLD)
-			plr[myplr].SpdList[i]._itype = ITYPE_NONE;
+		if (Players[myplr].SpdList[i]._itype == ITYPE_GOLD)
+			Players[myplr].SpdList[i]._itype = ITYPE_NONE;
 	}
 
-	plr[myplr]._pGold = 0;
+	Players[myplr]._pGold = 0;
 }
 
 void MaxSpellsCheat()
@@ -160,16 +160,16 @@ void MaxSpellsCheat()
 
 	for (i = 1; i < MAX_SPELLS; i++) {
 		if (spelldata[i].sBookLvl != -1) {
-			plr[myplr]._pMemSpells |= SPELLBIT(i);
-			plr[myplr]._pSplLvl[i] = 10;
+			Players[myplr]._pMemSpells |= SPELLBIT(i);
+			Players[myplr]._pSplLvl[i] = 10;
 		}
 	}
 }
 
 void SetSpellLevelCheat(char spl, int spllvl)
 {
-	plr[myplr]._pMemSpells |= SPELLBIT(spl);
-	plr[myplr]._pSplLvl[spl] = spllvl;
+	Players[myplr]._pMemSpells |= SPELLBIT(spl);
+	Players[myplr]._pSplLvl[spl] = spllvl;
 }
 
 void SetAllSpellsCheat()
@@ -205,19 +205,19 @@ void PrintDebugPlayer(BOOL bNextPlayer)
 	if (bNextPlayer)
 		dbgplr = ((BYTE)dbgplr + 1) & 3;
 
-	sprintf(dstr, "Plr %i : Active = %i", dbgplr, plr[dbgplr].plractive);
+	sprintf(dstr, "Plr %i : Active = %i", dbgplr, Players[dbgplr].plractive);
 	NetSendCmdString(1 << myplr, dstr);
 
-	if (plr[dbgplr].plractive) {
-		sprintf(dstr, "  Plr %i is %s", dbgplr, plr[dbgplr]._pName);
+	if (Players[dbgplr].plractive) {
+		sprintf(dstr, "  Plr %i is %s", dbgplr, Players[dbgplr]._pName);
 		NetSendCmdString(1 << myplr, dstr);
-		sprintf(dstr, "  Lvl = %i : Change = %i", plr[dbgplr].plrlevel, plr[dbgplr]._pLvlChanging);
+		sprintf(dstr, "  Lvl = %i : Change = %i", Players[dbgplr].plrlevel, Players[dbgplr]._pLvlChanging);
 		NetSendCmdString(1 << myplr, dstr);
-		sprintf(dstr, "  x = %i, y = %i : tx = %i, ty = %i", plr[dbgplr]._px, plr[dbgplr]._py, plr[dbgplr]._ptargx, plr[dbgplr]._ptargy);
+		sprintf(dstr, "  x = %i, y = %i : tx = %i, ty = %i", Players[dbgplr]._px, Players[dbgplr]._py, Players[dbgplr]._ptargx, Players[dbgplr]._ptargy);
 		NetSendCmdString(1 << myplr, dstr);
-		sprintf(dstr, "  mode = %i : daction = %i : walk[0] = %i", plr[dbgplr]._pmode, plr[dbgplr].destAction, plr[dbgplr].walkpath[0]);
+		sprintf(dstr, "  mode = %i : daction = %i : walk[0] = %i", Players[dbgplr]._pmode, Players[dbgplr].destAction, Players[dbgplr].walkpath[0]);
 		NetSendCmdString(1 << myplr, dstr);
-		sprintf(dstr, "  inv = %i : hp = %i", plr[dbgplr]._pInvincible, plr[dbgplr]._pHitPoints);
+		sprintf(dstr, "  inv = %i : hp = %i", Players[dbgplr]._pInvincible, Players[dbgplr]._pHitPoints);
 		NetSendCmdString(1 << myplr, dstr);
 	}
 }

@@ -657,8 +657,8 @@ void ClrAllMonsters()
 		Monst->_mDelFlag = FALSE;
 		Monst->_menemy = random_(89, gbActivePlayers);
 		// BUGFIX: `Monst->_menemy` may be referencing a player who already left the game, thus reading garbage data from `plr[Monst->_menemy]._pfutx`.
-		Monst->_menemyx = plr[Monst->_menemy]._pfutx;
-		Monst->_menemyy = plr[Monst->_menemy]._pfuty;
+		Monst->_menemyx = Players[Monst->_menemy]._pfutx;
+		Monst->_menemyy = Players[Monst->_menemy]._pfuty;
 	}
 }
 
@@ -1405,34 +1405,34 @@ void M_Enemy(int i)
 #endif
 	    !(Monst->_mFlags & MFLAG_GOLEM)) {
 		for (pnum = 0; pnum < MAX_PLRS; pnum++) {
-			if (!plr[pnum].plractive || currlevel != plr[pnum].plrlevel || plr[pnum]._pLvlChanging
+			if (!Players[pnum].plractive || currlevel != Players[pnum].plrlevel || Players[pnum]._pLvlChanging
 #ifdef HELLFIRE
-			    || ((plr[pnum]._pHitPoints >> 6) == 0)
+			    || ((Players[pnum]._pHitPoints >> 6) == 0)
 #else
-			    || (plr[pnum]._pHitPoints == 0 && gbMaxPlayers != 1)
+			    || (Players[pnum]._pHitPoints == 0 && gbMaxPlayers != 1)
 #endif
 			)
 				continue;
 #ifdef HELLFIRE
-			sameroom = (dTransVal[Monst->_mx][Monst->_my] == dTransVal[plr[pnum]._px][plr[pnum]._py]);
+			sameroom = (dTransVal[Monst->_mx][Monst->_my] == dTransVal[Players[pnum]._px][Players[pnum]._py]);
 #else
-			if (dTransVal[Monst->_mx][Monst->_my] == dTransVal[plr[pnum]._px][plr[pnum]._py])
+			if (dTransVal[Monst->_mx][Monst->_my] == dTransVal[Players[pnum]._px][Players[pnum]._py])
 				sameroom = TRUE;
 			else
 				sameroom = FALSE;
 #endif
-			if (abs(Monst->_mx - plr[pnum]._px) > abs(Monst->_my - plr[pnum]._py))
-				dist = Monst->_mx - plr[pnum]._px;
+			if (abs(Monst->_mx - Players[pnum]._px) > abs(Monst->_my - Players[pnum]._py))
+				dist = Monst->_mx - Players[pnum]._px;
 			else
-				dist = Monst->_my - plr[pnum]._py;
+				dist = Monst->_my - Players[pnum]._py;
 			dist = abs(dist);
 			if ((sameroom && !bestsameroom)
 			    || ((sameroom || !bestsameroom) && dist < best_dist)
 			    || (_menemy == -1)) {
 				Monst->_mFlags &= ~MFLAG_TARGETS_MONSTER;
 				_menemy = pnum;
-				enemyx = plr[pnum]._pfutx;
-				enemyy = plr[pnum]._pfuty;
+				enemyx = Players[pnum]._pfutx;
+				enemyy = Players[pnum]._pfuty;
 				best_dist = dist;
 				bestsameroom = sameroom;
 			}
@@ -1826,8 +1826,8 @@ void M_StartHit(int i, int pnum, int dam)
 	if (monster[i].MType->mtype >= MT_SNEAK && monster[i].MType->mtype <= MT_ILLWEAV || dam >> 6 >= monster[i].mLevel + 3) {
 		if (pnum >= 0) {
 			monster[i]._menemy = pnum;
-			monster[i]._menemyx = plr[pnum]._pfutx;
-			monster[i]._menemyy = plr[pnum]._pfuty;
+			monster[i]._menemyx = Players[pnum]._pfutx;
+			monster[i]._menemyy = Players[pnum]._pfuty;
 			monster[i]._mFlags &= ~MFLAG_TARGETS_MONSTER;
 			monster[i]._mdir = M_GetDir(i);
 		}
@@ -2616,10 +2616,10 @@ void M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 		M_TryM2MHit(i, pnum, Hit, MinDam, MaxDam);
 		return;
 	}
-	if (plr[pnum]._pHitPoints >> 6 <= 0 || plr[pnum]._pInvincible || plr[pnum]._pSpellFlags & 1)
+	if (Players[pnum]._pHitPoints >> 6 <= 0 || Players[pnum]._pInvincible || Players[pnum]._pSpellFlags & 1)
 		return;
-	dx = abs(monster[i]._mx - plr[pnum]._px);
-	dy = abs(monster[i]._my - plr[pnum]._py);
+	dx = abs(monster[i]._mx - Players[pnum]._px);
+	dy = abs(monster[i]._my - Players[pnum]._py);
 	if (dx >= 2 || dy >= 2)
 		return;
 
@@ -2628,18 +2628,18 @@ void M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 	if (debug_mode_dollar_sign || debug_mode_key_inverted_v)
 		hper = 1000;
 #endif
-	ac = plr[pnum]._pIBonusAC + plr[pnum]._pIAC;
+	ac = Players[pnum]._pIBonusAC + Players[pnum]._pIAC;
 #ifdef HELLFIRE
-	if (plr[pnum].pDamAcFlags & ISPLHF_ACDEMON && monster[i].MData->mMonstClass == MC_DEMON)
+	if (Players[pnum].pDamAcFlags & ISPLHF_ACDEMON && monster[i].MData->mMonstClass == MC_DEMON)
 		ac += 40;
-	if (plr[pnum].pDamAcFlags & ISPLHF_ACUNDEAD && monster[i].MData->mMonstClass == MC_UNDEAD)
+	if (Players[pnum].pDamAcFlags & ISPLHF_ACUNDEAD && monster[i].MData->mMonstClass == MC_UNDEAD)
 		ac += 20;
 #endif
 	hit = Hit
-	    + 2 * (monster[i].mLevel - plr[pnum]._pLevel)
+	    + 2 * (monster[i].mLevel - Players[pnum]._pLevel)
 	    + 30
 	    - ac
-	    - plr[pnum]._pDexterity / 5;
+	    - Players[pnum]._pDexterity / 5;
 	if (hit < 15)
 		hit = 15;
 	if (currlevel == 14 && hit < 20)
@@ -2648,15 +2648,15 @@ void M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 		hit = 25;
 	if (currlevel == 16 && hit < 30)
 		hit = 30;
-	if ((plr[pnum]._pmode == PM_STAND || plr[pnum]._pmode == PM_ATTACK) && plr[pnum]._pBlockFlag) {
+	if ((Players[pnum]._pmode == PM_STAND || Players[pnum]._pmode == PM_ATTACK) && Players[pnum]._pBlockFlag) {
 		blkper = random_(98, 100);
 	} else {
 		blkper = 100;
 	}
-	blk = plr[pnum]._pDexterity
-	    + plr[pnum]._pBaseToBlk
+	blk = Players[pnum]._pDexterity
+	    + Players[pnum]._pBaseToBlk
 	    - (monster[i].mLevel << 1)
-	    + (plr[pnum]._pLevel << 1);
+	    + (Players[pnum]._pLevel << 1);
 	if (blk < 0)
 		blk = 0;
 	if (blk > 100)
@@ -2664,13 +2664,13 @@ void M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 	if (hper >= hit)
 		return;
 	if (blkper < blk) {
-		dir = GetDirection(plr[pnum]._px, plr[pnum]._py, monster[i]._mx, monster[i]._my);
+		dir = GetDirection(Players[pnum]._px, Players[pnum]._py, monster[i]._mx, monster[i]._my);
 		StartPlrBlock(pnum, dir);
 #ifdef HELLFIRE
-		if (pnum == myplr && plr[pnum].wReflections > 0) {
-			plr[pnum].wReflections--;
+		if (pnum == myplr && Players[pnum].wReflections > 0) {
+			Players[pnum].wReflections--;
 			dam = random_(99, (MaxDam - MinDam + 1) << 6) + (MinDam << 6);
-			dam += plr[pnum]._pIGetHit << 6;
+			dam += Players[pnum]._pIGetHit << 6;
 			if (dam < 64)
 				dam = 64;
 			mdam = dam * (0.01 * (random_(100, 10) + 20));
@@ -2698,34 +2698,34 @@ void M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 			else
 				ms_num = misnum;
 		}
-		if (plr[pnum]._pMaxHP > 64) {
+		if (Players[pnum]._pMaxHP > 64) {
 #ifndef HELLFIRE
-			if (plr[pnum]._pMaxHPBase > 64)
+			if (Players[pnum]._pMaxHPBase > 64)
 #endif
 			{
-				plr[pnum]._pMaxHP -= 64;
-				if (plr[pnum]._pHitPoints > plr[pnum]._pMaxHP) {
-					plr[pnum]._pHitPoints = plr[pnum]._pMaxHP;
+				Players[pnum]._pMaxHP -= 64;
+				if (Players[pnum]._pHitPoints > Players[pnum]._pMaxHP) {
+					Players[pnum]._pHitPoints = Players[pnum]._pMaxHP;
 					if (cur_ms_num >= 0)
-						missile[cur_ms_num]._miVar1 = plr[pnum]._pHitPoints;
+						missile[cur_ms_num]._miVar1 = Players[pnum]._pHitPoints;
 				}
-				plr[pnum]._pMaxHPBase -= 64;
-				if (plr[pnum]._pHPBase > plr[pnum]._pMaxHPBase) {
-					plr[pnum]._pHPBase = plr[pnum]._pMaxHPBase;
+				Players[pnum]._pMaxHPBase -= 64;
+				if (Players[pnum]._pHPBase > Players[pnum]._pMaxHPBase) {
+					Players[pnum]._pHPBase = Players[pnum]._pMaxHPBase;
 					if (cur_ms_num >= 0)
-						missile[cur_ms_num]._miVar2 = plr[pnum]._pHPBase;
+						missile[cur_ms_num]._miVar2 = Players[pnum]._pHPBase;
 				}
 			}
 		}
 	}
 	dam = (MinDam << 6) + random_(99, (MaxDam - MinDam + 1) << 6);
-	dam += (plr[pnum]._pIGetHit << 6);
+	dam += (Players[pnum]._pIGetHit << 6);
 	if (dam < 64)
 		dam = 64;
 	if (pnum == myplr) {
 #ifdef HELLFIRE
-		if (plr[pnum].wReflections > 0) {
-			plr[pnum].wReflections--;
+		if (Players[pnum].wReflections > 0) {
+			Players[pnum].wReflections--;
 			mdam = dam * (0.01 * (random_(100, 10) + 20));
 			monster[i]._mhitpoints -= mdam;
 			dam -= mdam;
@@ -2737,10 +2737,10 @@ void M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 				M_StartHit(i, pnum, mdam);
 		}
 #endif
-		plr[pnum]._pHitPoints -= dam;
-		plr[pnum]._pHPBase -= dam;
+		Players[pnum]._pHitPoints -= dam;
+		Players[pnum]._pHPBase -= dam;
 	}
-	if (plr[pnum]._pIFlags & ISPL_THORNS) {
+	if (Players[pnum]._pIFlags & ISPL_THORNS) {
 		mdam = (random_(99, 3) + 1) << 6;
 		monster[i]._mhitpoints -= mdam;
 		if (monster[i]._mhitpoints >> 6 <= 0)
@@ -2750,11 +2750,11 @@ void M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 	}
 	if (!(monster[i]._mFlags & MFLAG_NOLIFESTEAL) && monster[i].MType->mtype == MT_SKING && gbMaxPlayers != 1)
 		monster[i]._mhitpoints += dam;
-	if (plr[pnum]._pHitPoints > plr[pnum]._pMaxHP) {
-		plr[pnum]._pHitPoints = plr[pnum]._pMaxHP;
-		plr[pnum]._pHPBase = plr[pnum]._pMaxHPBase;
+	if (Players[pnum]._pHitPoints > Players[pnum]._pMaxHP) {
+		Players[pnum]._pHitPoints = Players[pnum]._pMaxHP;
+		Players[pnum]._pHPBase = Players[pnum]._pMaxHPBase;
 	}
-	if (plr[pnum]._pHitPoints >> 6 <= 0) {
+	if (Players[pnum]._pHitPoints >> 6 <= 0) {
 		SyncPlrKill(pnum, 0);
 #ifdef HELLFIRE
 		M_StartStand(i, monster[i]._mdir);
@@ -2763,14 +2763,14 @@ void M_TryH2HHit(int i, int pnum, int Hit, int MinDam, int MaxDam)
 	}
 	StartPlrHit(pnum, dam, FALSE);
 	if (monster[i]._mFlags & MFLAG_KNOCKBACK) {
-		if (plr[pnum]._pmode != PM_GOTHIT)
+		if (Players[pnum]._pmode != PM_GOTHIT)
 			StartPlrHit(pnum, 0, TRUE);
-		newx = plr[pnum]._px + offset_x[monster[i]._mdir];
-		newy = plr[pnum]._py + offset_y[monster[i]._mdir];
+		newx = Players[pnum]._px + offset_x[monster[i]._mdir];
+		newy = Players[pnum]._py + offset_y[monster[i]._mdir];
 		if (PosOkPlayer(pnum, newx, newy)) {
-			plr[pnum]._px = newx;
-			plr[pnum]._py = newy;
-			FixPlayerLocation(pnum, plr[pnum]._pdir);
+			Players[pnum]._px = newx;
+			Players[pnum]._py = newy;
+			FixPlayerLocation(pnum, Players[pnum]._pdir);
 			FixPlrWalkTags(pnum);
 			dPlayer[newx][newy] = pnum + 1;
 			SetPlayerOld(pnum);
@@ -3243,15 +3243,15 @@ void DoEnding()
 
 #ifndef SPAWN
 #ifdef HELLFIRE
-	if (plr[myplr]._pClass == PC_WARRIOR || plr[myplr]._pClass == PC_BARBARIAN) {
+	if (Players[myplr]._pClass == PC_WARRIOR || Players[myplr]._pClass == PC_BARBARIAN) {
 #else
-	if (plr[myplr]._pClass == PC_WARRIOR) {
+	if (Players[myplr]._pClass == PC_WARRIOR) {
 #endif
 		play_movie("gendata\\DiabVic2.smk", FALSE);
-	} else if (plr[myplr]._pClass == PC_SORCERER) {
+	} else if (Players[myplr]._pClass == PC_SORCERER) {
 		play_movie("gendata\\DiabVic1.smk", FALSE);
 #ifdef HELLFIRE
-	} else if (plr[myplr]._pClass == PC_MONK) {
+	} else if (Players[myplr]._pClass == PC_MONK) {
 		play_movie("gendata\\DiabVic1.smk", FALSE);
 #endif
 	} else {
@@ -3286,20 +3286,20 @@ void PrepDoEnding()
 	deathflag = FALSE;
 	cineflag = TRUE;
 
-	killLevel = &plr[myplr].pDiabloKillLevel;
+	killLevel = &Players[myplr].pDiabloKillLevel;
 	newKillLevel = gnDifficulty + 1;
 	if (*killLevel > newKillLevel)
 		newKillLevel = *killLevel;
-	plr[myplr].pDiabloKillLevel = newKillLevel;
+	Players[myplr].pDiabloKillLevel = newKillLevel;
 
 	for (i = 0; i < MAX_PLRS; i++) {
-		plr[i]._pmode = PM_QUIT;
-		plr[i]._pInvincible = TRUE;
+		Players[i]._pmode = PM_QUIT;
+		Players[i]._pInvincible = TRUE;
 		if (gbMaxPlayers > 1) {
-			if (plr[i]._pHitPoints >> 6 == 0)
-				plr[i]._pHitPoints = 64;
-			if (plr[i]._pMana >> 6 == 0)
-				plr[i]._pMana = 64;
+			if (Players[i]._pHitPoints >> 6 == 0)
+				Players[i]._pHitPoints = 64;
+			if (Players[i]._pMana >> 6 == 0)
+				Players[i]._pMana = 64;
 		}
 	}
 }
@@ -4061,7 +4061,7 @@ void MAI_Sneak(int i)
 			if (Monst->_mgoal == MGOAL_RETREAT) {
 				if (Monst->_mFlags & MFLAG_TARGETS_MONSTER)
 #endif
-					md = GetDirection(Monst->_mx, Monst->_my, plr[Monst->_menemy]._pownerx, plr[Monst->_menemy]._pownery);
+					md = GetDirection(Monst->_mx, Monst->_my, Players[Monst->_menemy]._pownerx, Players[Monst->_menemy]._pownery);
 				md = opposite[md];
 				if (Monst->MType->mtype == MT_UNSEEN) {
 					if (random_(112, 2) != 0)
@@ -4840,7 +4840,7 @@ void MAI_Golum(int i)
 	if (monster[i]._pathcount > 8)
 		monster[i]._pathcount = 5;
 
-	ok = M_CallWalk(i, plr[i]._pdir);
+	ok = M_CallWalk(i, Players[i]._pdir);
 	if (ok)
 		return;
 
@@ -5328,7 +5328,7 @@ void MAI_Lazurus(int i)
 	md = M_GetDir(i);
 	if (dFlags[mx][my] & BFLAG_VISIBLE) {
 		if (gbMaxPlayers == 1) {
-			if (Monst->mtalkmsg == TEXT_VILE13 && Monst->_mgoal == MGOAL_INQUIRING && plr[myplr]._px == 35 && plr[myplr]._py == 46) {
+			if (Monst->mtalkmsg == TEXT_VILE13 && Monst->_mgoal == MGOAL_INQUIRING && Players[myplr]._px == 35 && Players[myplr]._py == 46) {
 				PlayInGameMovie("gendata\\fprst3.smk");
 				Monst->_mmode = MM_TALK;
 				quests[Q_BETRAYER]._qvar1 = 5;
@@ -5583,12 +5583,12 @@ void ProcessMonsters()
 				app_fatal("Illegal enemy player %d for monster \"%s\"", _menemy, Monst->mName);
 #endif
 			}
-			Monst->_menemyx = plr[Monst->_menemy]._pfutx;
-			Monst->_menemyy = plr[Monst->_menemy]._pfuty;
+			Monst->_menemyx = Players[Monst->_menemy]._pfutx;
+			Monst->_menemyy = Players[Monst->_menemy]._pfuty;
 			if (dFlags[mx][my] & BFLAG_VISIBLE) {
 				Monst->_msquelch = UCHAR_MAX;
-				Monst->_lastx = plr[Monst->_menemy]._pfutx;
-				Monst->_lasty = plr[Monst->_menemy]._pfuty;
+				Monst->_lastx = Players[Monst->_menemy]._pfutx;
+				Monst->_lasty = Players[Monst->_menemy]._pfuty;
 			} else if (Monst->_msquelch != 0 && Monst->_mAi != MT_DIABLO) { /// BUGFIX: change '_mAi' to 'MType->mtype'
 				Monst->_msquelch--;
 			}
@@ -6191,14 +6191,14 @@ void MissToMonst(int i, int x, int y)
 			if (Monst->MType->mtype != MT_GLOOM && (Monst->MType->mtype < MT_INCIN || Monst->MType->mtype > MT_HELLBURN)) {
 				M_TryH2HHit(m, dPlayer[oldx][oldy] - 1, 500, Monst->mMinDamage2, Monst->mMaxDamage2);
 				if (pnum == dPlayer[oldx][oldy] - 1 && (Monst->MType->mtype < MT_NSNAKE || Monst->MType->mtype > MT_GSNAKE)) {
-					if (plr[pnum]._pmode != PM_GOTHIT && plr[pnum]._pmode != PM_DEATH)
+					if (Players[pnum]._pmode != PM_GOTHIT && Players[pnum]._pmode != PM_DEATH)
 						StartPlrHit(pnum, 0, TRUE);
 					newx = oldx + offset_x[Monst->_mdir];
 					newy = oldy + offset_y[Monst->_mdir];
 					if (PosOkPlayer(pnum, newx, newy)) {
-						plr[pnum]._px = newx;
-						plr[pnum]._py = newy;
-						FixPlayerLocation(pnum, plr[pnum]._pdir);
+						Players[pnum]._px = newx;
+						Players[pnum]._py = newy;
+						FixPlayerLocation(pnum, Players[pnum]._pdir);
 						FixPlrWalkTags(pnum);
 						dPlayer[newx][newy] = pnum + 1;
 						SetPlayerOld(pnum);
@@ -6618,10 +6618,10 @@ void SpawnGolum(int i, int x, int y, int mi)
 	monster[i]._moldx = x;
 	monster[i]._moldy = y;
 	monster[i]._pathcount = 0;
-	monster[i]._mmaxhp = 2 * (320 * missile[mi]._mispllvl + plr[i]._pMaxMana / 3);
+	monster[i]._mmaxhp = 2 * (320 * missile[mi]._mispllvl + Players[i]._pMaxMana / 3);
 	monster[i]._mhitpoints = monster[i]._mmaxhp;
 	monster[i].mArmorClass = 25;
-	monster[i].mHit = 5 * (missile[mi]._mispllvl + 8) + 2 * plr[i]._pLevel;
+	monster[i].mHit = 5 * (missile[mi]._mispllvl + 8) + 2 * Players[i]._pLevel;
 	monster[i].mMinDamage = 2 * (missile[mi]._mispllvl + 4);
 	monster[i].mMaxDamage = 2 * (missile[mi]._mispllvl + 8);
 	monster[i]._mFlags |= MFLAG_GOLEM;
@@ -6695,8 +6695,8 @@ void decode_enemy(int m, int enemy)
 	if (enemy < MAX_PLRS) {
 		monster[m]._mFlags &= ~MFLAG_TARGETS_MONSTER;
 		monster[m]._menemy = enemy;
-		monster[m]._menemyx = plr[enemy]._pfutx;
-		monster[m]._menemyy = plr[enemy]._pfuty;
+		monster[m]._menemyx = Players[enemy]._pfutx;
+		monster[m]._menemyy = Players[enemy]._pfuty;
 	} else {
 		monster[m]._mFlags |= MFLAG_TARGETS_MONSTER;
 		enemy -= MAX_PLRS;

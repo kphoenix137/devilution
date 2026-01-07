@@ -61,9 +61,9 @@ void SendPlrMsg(int pnum, const char *pszStr)
 	plr_msg_slot = (plr_msg_slot + 1) & (PMSG_COUNT - 1);
 	pMsg->player = pnum;
 	pMsg->time = GetTickCount();
-	strlen(plr[pnum]._pName); /* these are used in debug */
+	strlen(Players[pnum]._pName); /* these are used in debug */
 	strlen(pszStr);
-	sprintf(pMsg->str, "%s (lvl %d): %s", plr[pnum]._pName, plr[pnum]._pLevel, pszStr);
+	sprintf(pMsg->str, "%s (lvl %d): %s", Players[pnum]._pName, Players[pnum]._pLevel, pszStr);
 }
 
 void ClearPlrMsg()

@@ -220,7 +220,7 @@ static void diablo_parse_flags(char *args)
 				args++;
 			}
 			currlevel = i;
-			plr[0].plrlevel = i;
+			Players[0].plrlevel = i;
 			break;
 		case 'm':
 			monstdebug = TRUE;
@@ -740,12 +740,12 @@ static BOOL LeftMouseCmd(BOOL bShift)
 		if (pcursitem == -1 && pcursmonst == -1 && pcursplr == -1)
 			return TRUE;
 	} else {
-		bNear = abs(plr[myplr]._px - cursmx) < 2 && abs(plr[myplr]._py - cursmy) < 2;
+		bNear = abs(Players[myplr]._px - cursmx) < 2 && abs(Players[myplr]._py - cursmy) < 2;
 		if (pcursitem != -1 && pcurs == CURSOR_HAND && !bShift) {
 			NetSendCmdLocParam1(TRUE, invflag ? CMD_GOTOGETITEM : CMD_GOTOAGETITEM, cursmx, cursmy, pcursitem);
 		} else if (pcursobj != -1 && (!bShift || bNear && object[pcursobj]._oBreak == 1)) {
 			NetSendCmdLocParam1(TRUE, pcurs == CURSOR_DISARM ? CMD_DISARMXY : CMD_OPOBJXY, cursmx, cursmy, pcursobj);
-		} else if (plr[myplr]._pwtype == WT_RANGED) {
+		} else if (Players[myplr]._pwtype == WT_RANGED) {
 			if (bShift) {
 				NetSendCmdLoc(TRUE, CMD_RATTACKXY, cursmx, cursmy);
 			} else if (pcursmonst != -1) {
@@ -834,11 +834,11 @@ static BOOL TryIconCurs()
 #endif
 	if (pcurs == CURSOR_TELEPORT) {
 		if (pcursmonst != -1)
-			NetSendCmdParam3(TRUE, CMD_TSPELLID, pcursmonst, plr[myplr]._pTSpell, GetSpellLevel(myplr, plr[myplr]._pTSpell));
+			NetSendCmdParam3(TRUE, CMD_TSPELLID, pcursmonst, Players[myplr]._pTSpell, GetSpellLevel(myplr, Players[myplr]._pTSpell));
 		else if (pcursplr != -1)
-			NetSendCmdParam3(TRUE, CMD_TSPELLPID, pcursplr, plr[myplr]._pTSpell, GetSpellLevel(myplr, plr[myplr]._pTSpell));
+			NetSendCmdParam3(TRUE, CMD_TSPELLPID, pcursplr, Players[myplr]._pTSpell, GetSpellLevel(myplr, Players[myplr]._pTSpell));
 		else
-			NetSendCmdLocParam2(TRUE, CMD_TSPELLXY, cursmx, cursmy, plr[myplr]._pTSpell, GetSpellLevel(myplr, plr[myplr]._pTSpell));
+			NetSendCmdLocParam2(TRUE, CMD_TSPELLXY, cursmx, cursmy, Players[myplr]._pTSpell, GetSpellLevel(myplr, Players[myplr]._pTSpell));
 		NewCursor(CURSOR_HAND);
 		return TRUE;
 	}
@@ -905,7 +905,7 @@ static BOOL LeftMouseDown(int wParam)
 					NewCursor(CURSOR_HAND);
 				}
 			} else {
-				if (plr[myplr]._pStatPts != 0 && !spselflag)
+				if (Players[myplr]._pStatPts != 0 && !spselflag)
 					CheckLvlBtn();
 				if (!lvlbtndown)
 					return LeftMouseCmd(wParam == MK_SHIFT + MK_LBUTTON);
@@ -938,7 +938,7 @@ static void LeftMouseUp()
 
 static void RightMouseDown()
 {
-	if (!gmenu_is_active() && sgnTimeoutCurs == CURSOR_NONE && PauseMode != 2 && !plr[myplr]._pInvincible) {
+	if (!gmenu_is_active() && sgnTimeoutCurs == CURSOR_NONE && PauseMode != 2 && !Players[myplr]._pInvincible) {
 		if (doomflag) {
 			doom_close();
 		} else if (stextflag == STORE_NONE) {
@@ -1389,43 +1389,43 @@ static void PressChar(WPARAM vkey)
 		return;
 	case '!':
 	case '1':
-		if (plr[myplr].SpdList[0]._itype != ITYPE_NONE && plr[myplr].SpdList[0]._itype != ITYPE_GOLD) {
+		if (Players[myplr].SpdList[0]._itype != ITYPE_NONE && Players[myplr].SpdList[0]._itype != ITYPE_GOLD) {
 			UseInvItem(myplr, INVITEM_BELT_FIRST);
 		}
 		return;
 	case '@':
 	case '2':
-		if (plr[myplr].SpdList[1]._itype != ITYPE_NONE && plr[myplr].SpdList[1]._itype != ITYPE_GOLD) {
+		if (Players[myplr].SpdList[1]._itype != ITYPE_NONE && Players[myplr].SpdList[1]._itype != ITYPE_GOLD) {
 			UseInvItem(myplr, INVITEM_BELT_FIRST + 1);
 		}
 		return;
 	case '#':
 	case '3':
-		if (plr[myplr].SpdList[2]._itype != ITYPE_NONE && plr[myplr].SpdList[2]._itype != ITYPE_GOLD) {
+		if (Players[myplr].SpdList[2]._itype != ITYPE_NONE && Players[myplr].SpdList[2]._itype != ITYPE_GOLD) {
 			UseInvItem(myplr, INVITEM_BELT_FIRST + 2);
 		}
 		return;
 	case '$':
 	case '4':
-		if (plr[myplr].SpdList[3]._itype != ITYPE_NONE && plr[myplr].SpdList[3]._itype != ITYPE_GOLD) {
+		if (Players[myplr].SpdList[3]._itype != ITYPE_NONE && Players[myplr].SpdList[3]._itype != ITYPE_GOLD) {
 			UseInvItem(myplr, INVITEM_BELT_FIRST + 3);
 		}
 		return;
 	case '%':
 	case '5':
-		if (plr[myplr].SpdList[4]._itype != ITYPE_NONE && plr[myplr].SpdList[4]._itype != ITYPE_GOLD) {
+		if (Players[myplr].SpdList[4]._itype != ITYPE_NONE && Players[myplr].SpdList[4]._itype != ITYPE_GOLD) {
 			UseInvItem(myplr, INVITEM_BELT_FIRST + 4);
 		}
 		return;
 	case '^':
 	case '6':
-		if (plr[myplr].SpdList[5]._itype != ITYPE_NONE && plr[myplr].SpdList[5]._itype != ITYPE_GOLD) {
+		if (Players[myplr].SpdList[5]._itype != ITYPE_NONE && Players[myplr].SpdList[5]._itype != ITYPE_GOLD) {
 			UseInvItem(myplr, INVITEM_BELT_FIRST + 5);
 		}
 		return;
 	case '&':
 	case '7':
-		if (plr[myplr].SpdList[6]._itype != ITYPE_NONE && plr[myplr].SpdList[6]._itype != ITYPE_GOLD) {
+		if (Players[myplr].SpdList[6]._itype != ITYPE_NONE && Players[myplr].SpdList[6]._itype != ITYPE_GOLD) {
 			UseInvItem(myplr, INVITEM_BELT_FIRST + 6);
 		}
 		return;
@@ -1437,7 +1437,7 @@ static void PressChar(WPARAM vkey)
 			return;
 		}
 #endif
-		if (plr[myplr].SpdList[7]._itype != ITYPE_NONE && plr[myplr].SpdList[7]._itype != ITYPE_GOLD) {
+		if (Players[myplr].SpdList[7]._itype != ITYPE_NONE && Players[myplr].SpdList[7]._itype != ITYPE_GOLD) {
 			UseInvItem(myplr, INVITEM_BELT_FIRST + 7);
 		}
 		return;
@@ -1449,14 +1449,14 @@ static void PressChar(WPARAM vkey)
 				arrowdebug = 0;
 			}
 			if (arrowdebug == 0) {
-				plr[myplr]._pIFlags &= ~ISPL_FIRE_ARROWS;
-				plr[myplr]._pIFlags &= ~ISPL_LIGHT_ARROWS;
+				Players[myplr]._pIFlags &= ~ISPL_FIRE_ARROWS;
+				Players[myplr]._pIFlags &= ~ISPL_LIGHT_ARROWS;
 			}
 			if (arrowdebug == 1) {
-				plr[myplr]._pIFlags |= ISPL_FIRE_ARROWS;
+				Players[myplr]._pIFlags |= ISPL_FIRE_ARROWS;
 			}
 			if (arrowdebug == 2) {
-				plr[myplr]._pIFlags |= ISPL_LIGHT_ARROWS;
+				Players[myplr]._pIFlags |= ISPL_LIGHT_ARROWS;
 			}
 			arrowdebug++;
 		}
@@ -1479,7 +1479,7 @@ static void PressChar(WPARAM vkey)
 	case 'a':
 		if (debug_mode_key_inverted_v) {
 			spelldata[SPL_TELEPORT].sTownSpell = 1;
-			plr[myplr]._pSplLvl[plr[myplr]._pSpell]++;
+			Players[myplr]._pSplLvl[Players[myplr]._pSpell]++;
 		}
 		return;
 	case 'D':
@@ -1490,7 +1490,7 @@ static void PressChar(WPARAM vkey)
 		return;
 	case 'e':
 		if (debug_mode_key_d) {
-			sprintf(tempstr, "EFlag = %i", plr[myplr]._peflag);
+			sprintf(tempstr, "EFlag = %i", Players[myplr]._peflag);
 			NetSendCmdString(1 << myplr, tempstr);
 		}
 		return;
@@ -1518,7 +1518,7 @@ static void PressChar(WPARAM vkey)
 	case 'T':
 	case 't':
 		if (debug_mode_key_inverted_v) {
-			sprintf(tempstr, "PX = %i  PY = %i", plr[myplr]._px, plr[myplr]._py);
+			sprintf(tempstr, "PX = %i  PY = %i", Players[myplr]._px, Players[myplr]._py);
 			NetSendCmdString(1 << myplr, tempstr);
 			// BUGFIX: out-of-bounds access to dungeon; should be `dPiece[cursmx][cursmy]`, was `dungeon[cursmx][cursmy]`.
 			sprintf(tempstr, "CX = %i  CY = %i  DP = %i", cursmx, cursmy, dungeon[cursmx][cursmy]);
@@ -1893,7 +1893,7 @@ void LoadGameLevel(BOOL firstflag, int lvldir)
 		IncProgress();
 
 		for (i = 0; i < MAX_PLRS; i++) {
-			if (plr[i].plractive && currlevel == plr[i].plrlevel) {
+			if (Players[i].plractive && currlevel == Players[i].plrlevel) {
 				InitPlayerGFX(i);
 				if (lvldir != ENTRY_LOAD)
 					InitPlayer(i, firstflag);
@@ -1906,14 +1906,14 @@ void LoadGameLevel(BOOL firstflag, int lvldir)
 
 		visited = FALSE;
 		for (i = 0; i < gbMaxPlayers; i++) {
-			if (plr[i].plractive)
-				visited = visited || plr[i]._pLvlVisited[currlevel];
+			if (Players[i].plractive)
+				visited = visited || Players[i]._pLvlVisited[currlevel];
 		}
 
 		SetRndSeed(glSeedTbl[currlevel]);
 
 		if (leveltype != DTYPE_TOWN) {
-			if (firstflag || lvldir == ENTRY_LOAD || !plr[myplr]._pLvlVisited[currlevel] || gbMaxPlayers != 1) {
+			if (firstflag || lvldir == ENTRY_LOAD || !Players[myplr]._pLvlVisited[currlevel] || gbMaxPlayers != 1) {
 				HoldThemeRooms();
 				glMid1Seed[currlevel] = GetRndSeed();
 				InitMonsters();
@@ -1953,7 +1953,7 @@ void LoadGameLevel(BOOL firstflag, int lvldir)
 			InitMissiles();
 			IncProgress();
 
-			if (!firstflag && lvldir != ENTRY_LOAD && plr[myplr]._pLvlVisited[currlevel] && gbMaxPlayers == 1)
+			if (!firstflag && lvldir != ENTRY_LOAD && Players[myplr]._pLvlVisited[currlevel] && gbMaxPlayers == 1)
 				LoadLevel();
 			if (gbMaxPlayers != 1)
 				DeltaLoadLevel();
@@ -1988,7 +1988,7 @@ void LoadGameLevel(BOOL firstflag, int lvldir)
 			GetPortalLvlPos();
 
 		for (i = 0; i < MAX_PLRS; i++) {
-			if (plr[i].plractive && currlevel == plr[i].plrlevel) {
+			if (Players[i].plractive && currlevel == Players[i].plrlevel) {
 				InitPlayerGFX(i);
 				if (lvldir != ENTRY_LOAD)
 					InitPlayer(i, firstflag);
@@ -1998,7 +1998,7 @@ void LoadGameLevel(BOOL firstflag, int lvldir)
 		InitMultiView();
 		IncProgress();
 
-		if (firstflag || lvldir == ENTRY_LOAD || !plr[myplr]._pSLvlVisited[setlvlnum]) {
+		if (firstflag || lvldir == ENTRY_LOAD || !Players[myplr]._pSLvlVisited[setlvlnum]) {
 			InitItems();
 			SavePreLighting();
 		} else {
@@ -2013,14 +2013,14 @@ void LoadGameLevel(BOOL firstflag, int lvldir)
 	SyncPortals();
 
 	for (i = 0; i < MAX_PLRS; i++) {
-		if (plr[i].plractive && plr[i].plrlevel == currlevel && (!plr[i]._pLvlChanging || i == myplr)) {
-			if (plr[i]._pHitPoints > 0) {
+		if (Players[i].plractive && Players[i].plrlevel == currlevel && (!Players[i]._pLvlChanging || i == myplr)) {
+			if (Players[i]._pHitPoints > 0) {
 				if (gbMaxPlayers == 1)
-					dPlayer[plr[i]._px][plr[i]._py] = i + 1;
+					dPlayer[Players[i]._px][Players[i]._py] = i + 1;
 				else
 					SyncInitPlrPos(i);
 			} else {
-				dFlags[plr[i]._px][plr[i]._py] |= BFLAG_DEAD_PLAYER;
+				dFlags[Players[i]._px][Players[i]._py] |= BFLAG_DEAD_PLAYER;
 			}
 		}
 	}
@@ -2187,13 +2187,13 @@ void diablo_color_cyc_logic()
 }
 
 #ifdef HELLFIRE
-static PlayerStruct *get_plr_mem(PlayerStruct *p)
+static Player *get_plr_mem(Player *p)
 {
 	void *r;
-	PlayerStruct *pPlayer;
+	Player *pPlayer;
 
 	r = malloc(rand() & 0x7FFF);
-	pPlayer = (PlayerStruct *)malloc(sizeof(PlayerStruct) * MAX_PLRS);
+	pPlayer = (Player *)malloc(sizeof(Player) * MAX_PLRS);
 
 	if (r != NULL) {
 		free(r);
@@ -2202,7 +2202,7 @@ static PlayerStruct *get_plr_mem(PlayerStruct *p)
 		return p;
 	}
 	if (p != NULL) {
-		memcpy(pPlayer, p, sizeof(PlayerStruct) * MAX_PLRS);
+		memcpy(pPlayer, p, sizeof(Player) * MAX_PLRS);
 		free(p);
 	}
 
@@ -2211,12 +2211,12 @@ static PlayerStruct *get_plr_mem(PlayerStruct *p)
 
 void alloc_plr()
 {
-	plr = get_plr_mem(NULL);
+	Players = get_plr_mem(NULL);
 
-	if (plr == NULL) {
+	if (Players == NULL) {
 		app_fatal("Unable to initialize memory");
 	}
 
-	memset(plr, 0, sizeof(PlayerStruct) * MAX_PLRS);
+	memset(Players, 0, sizeof(Player) * MAX_PLRS);
 }
 #endif

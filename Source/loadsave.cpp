@@ -42,8 +42,8 @@ static BOOL OLoad()
 
 static void LoadPlayer(int i)
 {
-	memcpy(&plr[i], tbuff, sizeof(*plr) - (10 * sizeof(void *)));
-	tbuff += sizeof(*plr) - (10 * sizeof(void *)); // omit last 10 pointers
+	memcpy(&Players[i], tbuff, sizeof(*Players) - (10 * sizeof(void *)));
+	tbuff += sizeof(*Players) - (10 * sizeof(void *)); // omit last 10 pointers
 }
 
 static void LoadMonster(int i)
@@ -155,7 +155,7 @@ void LoadGame(BOOL firstflag)
 	LoadPlayer(myplr);
 
 #ifdef HELLFIRE
-	gnDifficulty = plr[myplr].pDifficulty;
+	gnDifficulty = Players[myplr].pDifficulty;
 	if (gnDifficulty < DIFF_NORMAL || gnDifficulty > DIFF_HELL)
 		gnDifficulty = DIFF_NORMAL;
 #endif
@@ -323,8 +323,8 @@ static void OSave(BOOL v)
 
 static void SavePlayer(int i)
 {
-	memcpy(tbuff, &plr[i], sizeof(*plr) - (10 * sizeof(void *)));
-	tbuff += sizeof(*plr) - (10 * sizeof(void *)); // omit last 10 pointers
+	memcpy(tbuff, &Players[i], sizeof(*Players) - (10 * sizeof(void *)));
+	tbuff += sizeof(*Players) - (10 * sizeof(void *)); // omit last 10 pointers
 }
 
 static void SaveMonster(int i)
@@ -421,7 +421,7 @@ void SaveGame()
 	}
 
 #ifdef HELLFIRE
-	plr[myplr].pDifficulty = gnDifficulty;
+	Players[myplr].pDifficulty = gnDifficulty;
 #endif
 	SavePlayer(myplr);
 
@@ -625,9 +625,9 @@ void SaveLevel()
 	mem_free_dbg(SaveBuff);
 
 	if (!setlevel)
-		plr[myplr]._pLvlVisited[currlevel] = TRUE;
+		Players[myplr]._pLvlVisited[currlevel] = TRUE;
 	else
-		plr[myplr]._pSLvlVisited[setlvlnum] = TRUE;
+		Players[myplr]._pSLvlVisited[setlvlnum] = TRUE;
 }
 
 void LoadLevel()
@@ -717,8 +717,8 @@ void LoadLevel()
 	dolighting = TRUE;
 
 	for (i = 0; i < MAX_PLRS; i++) {
-		if (plr[i].plractive && currlevel == plr[i].plrlevel)
-			LightList[plr[i]._plid]._lunflag = TRUE;
+		if (Players[i].plractive && currlevel == Players[i].plrlevel)
+			LightList[Players[i]._plid]._lunflag = TRUE;
 	}
 
 	mem_free_dbg(LoadBuff);

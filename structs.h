@@ -178,7 +178,7 @@ typedef struct ItemStruct {
 // player
 //////////////////////////////////////////////////
 
-typedef struct PlayerStruct {
+typedef struct Player {
 	int _pmode;
 	char walkpath[MAX_PATH_LENGTH];
 	BOOLEAN plractive;
@@ -364,7 +364,7 @@ typedef struct PlayerStruct {
 	unsigned char *_pDData;
 	unsigned char *_pBData;
 	void *pReserved;
-} PlayerStruct;
+} Player;
 
 //////////////////////////////////////////////////
 // textdat
@@ -582,7 +582,7 @@ typedef struct MonsterStruct { // note: missing field _mAFNum
 	int _mxvel;             // Pixel X-velocity while walking. Applied to _mxoff
 	int _myvel;             // Pixel Y-velocity while walking. Applied to _myoff
 	int _mdir;              // Direction faced by monster (direction enum)
-	int _menemy;            // The current target of the monster. An index into either the plr or monster array based on the _meflag value.
+	int _menemy;            // The current target of the monster. An index into either the Players or monster array based on the _meflag value.
 	unsigned char _menemyx; // X-coordinate of enemy (usually correspond's to the enemy's futx value)
 	unsigned char _menemyy; // Y-coordinate of enemy (usually correspond's to the enemy's futy value)
 	short falign_52;        // probably _mAFNum (unused)
@@ -1190,8 +1190,8 @@ typedef struct QuestTalkData {
 //////////////////////////////////////////////////
 
 typedef struct ScrollStruct {
-	int _sxoff; // X-offset of camera position. This usually corresponds to a negative version of plr[myplr]._pxoff
-	int _syoff; // Y-offset of camera position. This usually corresponds to a negative version of plr[myplr]._pyoff
+	int _sxoff; // X-offset of camera position. This usually corresponds to a negative version of Players[myplr]._pxoff
+	int _syoff; // Y-offset of camera position. This usually corresponds to a negative version of Players[myplr]._pyoff
 	int _sdx;
 	int _sdy;
 	int _sdir;

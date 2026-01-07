@@ -1073,18 +1073,18 @@ void InitObjects()
 			AddL2Objs(0, 0, MAXDUNX, MAXDUNY);
 			AddL2Torches();
 			if (QuestStatus(Q_BLIND)) {
-				if (plr[myplr]._pClass == PC_WARRIOR) {
+				if (Players[myplr]._pClass == PC_WARRIOR) {
 					sp_id = TEXT_BLINDING;
-				} else if (plr[myplr]._pClass == PC_ROGUE) {
+				} else if (Players[myplr]._pClass == PC_ROGUE) {
 					sp_id = TEXT_RBLINDING;
-				} else if (plr[myplr]._pClass == PC_SORCERER) {
+				} else if (Players[myplr]._pClass == PC_SORCERER) {
 					sp_id = TEXT_MBLINDING;
 #ifdef HELLFIRE
-				} else if (plr[myplr]._pClass == PC_MONK) {
+				} else if (Players[myplr]._pClass == PC_MONK) {
 					sp_id = TEXT_HBLINDING;
-				} else if (plr[myplr]._pClass == PC_BARD) {
+				} else if (Players[myplr]._pClass == PC_BARD) {
 					sp_id = TEXT_BBLINDING;
-				} else if (plr[myplr]._pClass == PC_BARBARIAN) {
+				} else if (Players[myplr]._pClass == PC_BARBARIAN) {
 					sp_id = TEXT_BLINDING;
 #endif
 				}
@@ -1096,18 +1096,18 @@ void InitObjects()
 				mem_free_dbg(mem);
 			}
 			if (QuestStatus(Q_BLOOD)) {
-				if (plr[myplr]._pClass == PC_WARRIOR) {
+				if (Players[myplr]._pClass == PC_WARRIOR) {
 					sp_id = TEXT_BLOODY;
-				} else if (plr[myplr]._pClass == PC_ROGUE) {
+				} else if (Players[myplr]._pClass == PC_ROGUE) {
 					sp_id = TEXT_RBLOODY;
-				} else if (plr[myplr]._pClass == PC_SORCERER) {
+				} else if (Players[myplr]._pClass == PC_SORCERER) {
 					sp_id = TEXT_MBLOODY;
 #ifdef HELLFIRE
-				} else if (plr[myplr]._pClass == PC_MONK) {
+				} else if (Players[myplr]._pClass == PC_MONK) {
 					sp_id = TEXT_HBLOODY;
-				} else if (plr[myplr]._pClass == PC_BARD) {
+				} else if (Players[myplr]._pClass == PC_BARD) {
 					sp_id = TEXT_BBLOODY;
-				} else if (plr[myplr]._pClass == PC_BARBARIAN) {
+				} else if (Players[myplr]._pClass == PC_BARBARIAN) {
 					sp_id = TEXT_BLOODY;
 #endif
 				}
@@ -1123,18 +1123,18 @@ void InitObjects()
 		}
 		if (leveltype == DTYPE_HELL) {
 			if (QuestStatus(Q_WARLORD)) {
-				if (plr[myplr]._pClass == PC_WARRIOR) {
+				if (Players[myplr]._pClass == PC_WARRIOR) {
 					sp_id = TEXT_BLOODWAR;
-				} else if (plr[myplr]._pClass == PC_ROGUE) {
+				} else if (Players[myplr]._pClass == PC_ROGUE) {
 					sp_id = TEXT_RBLOODWAR;
-				} else if (plr[myplr]._pClass == PC_SORCERER) {
+				} else if (Players[myplr]._pClass == PC_SORCERER) {
 					sp_id = TEXT_MBLOODWAR;
 #ifdef HELLFIRE
-				} else if (plr[myplr]._pClass == PC_MONK) {
+				} else if (Players[myplr]._pClass == PC_MONK) {
 					sp_id = TEXT_HBLOODWAR;
-				} else if (plr[myplr]._pClass == PC_BARD) {
+				} else if (Players[myplr]._pClass == PC_BARD) {
 					sp_id = TEXT_BBLOODWAR;
-				} else if (plr[myplr]._pClass == PC_BARBARIAN) {
+				} else if (Players[myplr]._pClass == PC_BARBARIAN) {
 					sp_id = TEXT_BLOODWAR;
 #endif
 				}
@@ -1684,47 +1684,47 @@ void AddCryptObject(int i, int a2)
 		object[i]._oVar8 = a2;
 		switch (a2) {
 		case 6:
-			if (plr[myplr]._pClass == PC_WARRIOR) {
+			if (Players[myplr]._pClass == PC_WARRIOR) {
 				object[i]._oVar2 = 323;
-			} else if (plr[myplr]._pClass == PC_ROGUE) {
+			} else if (Players[myplr]._pClass == PC_ROGUE) {
 				object[i]._oVar2 = 332;
-			} else if (plr[myplr]._pClass == PC_SORCERER) {
+			} else if (Players[myplr]._pClass == PC_SORCERER) {
 				object[i]._oVar2 = 329;
-			} else if (plr[myplr]._pClass == PC_MONK) {
+			} else if (Players[myplr]._pClass == PC_MONK) {
 				object[i]._oVar2 = 326;
-			} else if (plr[myplr]._pClass == PC_BARD) {
+			} else if (Players[myplr]._pClass == PC_BARD) {
 				object[i]._oVar2 = 335;
-			} else if (plr[myplr]._pClass == PC_BARBARIAN) {
+			} else if (Players[myplr]._pClass == PC_BARBARIAN) {
 				object[i]._oVar2 = 323;
 			}
 			break;
 		case 7:
-			if (plr[myplr]._pClass == PC_WARRIOR) {
+			if (Players[myplr]._pClass == PC_WARRIOR) {
 				object[i]._oVar2 = 324;
-			} else if (plr[myplr]._pClass == PC_ROGUE) {
+			} else if (Players[myplr]._pClass == PC_ROGUE) {
 				object[i]._oVar2 = 333;
-			} else if (plr[myplr]._pClass == PC_SORCERER) {
+			} else if (Players[myplr]._pClass == PC_SORCERER) {
 				object[i]._oVar2 = 330;
-			} else if (plr[myplr]._pClass == PC_MONK) {
+			} else if (Players[myplr]._pClass == PC_MONK) {
 				object[i]._oVar2 = 327;
-			} else if (plr[myplr]._pClass == PC_BARD) {
+			} else if (Players[myplr]._pClass == PC_BARD) {
 				object[i]._oVar2 = 336;
-			} else if (plr[myplr]._pClass == PC_BARBARIAN) {
+			} else if (Players[myplr]._pClass == PC_BARBARIAN) {
 				object[i]._oVar2 = 324;
 			}
 			break;
 		case 8:
-			if (plr[myplr]._pClass == PC_WARRIOR) {
+			if (Players[myplr]._pClass == PC_WARRIOR) {
 				object[i]._oVar2 = 325;
-			} else if (plr[myplr]._pClass == PC_ROGUE) {
+			} else if (Players[myplr]._pClass == PC_ROGUE) {
 				object[i]._oVar2 = 334;
-			} else if (plr[myplr]._pClass == PC_SORCERER) {
+			} else if (Players[myplr]._pClass == PC_SORCERER) {
 				object[i]._oVar2 = 331;
-			} else if (plr[myplr]._pClass == PC_MONK) {
+			} else if (Players[myplr]._pClass == PC_MONK) {
 				object[i]._oVar2 = 328;
-			} else if (plr[myplr]._pClass == PC_BARD) {
+			} else if (Players[myplr]._pClass == PC_BARD) {
 				object[i]._oVar2 = 337;
-			} else if (plr[myplr]._pClass == PC_BARBARIAN) {
+			} else if (Players[myplr]._pClass == PC_BARBARIAN) {
 				object[i]._oVar2 = 325;
 			}
 			break;
@@ -1903,10 +1903,10 @@ void Obj_Light(int i, int lr)
 #endif
 		if (!lightflag) {
 			for (p = 0; p < MAX_PLRS && !turnon; p++) {
-				if (plr[p].plractive) {
-					if (currlevel == plr[p].plrlevel) {
-						dx = abs(plr[p]._px - ox);
-						dy = abs(plr[p]._py - oy);
+				if (Players[p].plractive) {
+					if (currlevel == Players[p].plrlevel) {
+						dx = abs(Players[p]._px - ox);
+						dy = abs(Players[p]._py - oy);
 						if (dx < tr && dy < tr)
 							turnon = TRUE;
 					}
@@ -1931,8 +1931,8 @@ void Obj_Circle(int i)
 
 	ox = object[i]._ox;
 	oy = object[i]._oy;
-	wx = plr[myplr]._px;
-	wy = plr[myplr]._py;
+	wx = Players[myplr]._px;
+	wy = Players[myplr]._py;
 	if (wx == ox && wy == oy) {
 		if (object[i]._otype == OBJ_MCIRCLE1)
 			object[i]._oAnimFrame = 2;
@@ -1950,7 +1950,7 @@ void Obj_Circle(int i)
 			ObjChangeMapResync(object[i]._oVar1, object[i]._oVar2, object[i]._oVar3, object[i]._oVar4);
 			if (quests[Q_BETRAYER]._qactive == QUEST_ACTIVE) // BUGFIX stepping on the circle again will break the quest state
 				quests[Q_BETRAYER]._qvar1 = 4;
-			AddMissile(plr[myplr]._px, plr[myplr]._py, 35, 46, plr[myplr]._pdir, MIS_RNDTELEPORT, TARGET_MONSTERS, myplr, 0, 0);
+			AddMissile(Players[myplr]._px, Players[myplr]._py, 35, 46, Players[myplr]._pdir, MIS_RNDTELEPORT, TARGET_MONSTERS, myplr, 0, 0);
 			track_repeat_walk(FALSE);
 			sgbMouseDown = CLICK_NONE;
 			ReleaseCapture();
@@ -2117,35 +2117,35 @@ void Obj_BCrossDamage(int i)
 	int fire_resist;
 	int damage[4] = { 6, 8, 10, 12 };
 
-	if (plr[myplr]._pmode == PM_DEATH)
+	if (Players[myplr]._pmode == PM_DEATH)
 		return;
 
-	fire_resist = plr[myplr]._pFireResist;
+	fire_resist = Players[myplr]._pFireResist;
 	if (fire_resist > 0)
 		damage[leveltype - 1] -= fire_resist * damage[leveltype - 1] / 100;
 
-	if (plr[myplr]._px != object[i]._ox || plr[myplr]._py != object[i]._oy - 1)
+	if (Players[myplr]._px != object[i]._ox || Players[myplr]._py != object[i]._oy - 1)
 		return;
 
-	plr[myplr]._pHitPoints -= damage[leveltype - 1];
-	plr[myplr]._pHPBase -= damage[leveltype - 1];
-	if (plr[myplr]._pHitPoints >> 6 <= 0) {
+	Players[myplr]._pHitPoints -= damage[leveltype - 1];
+	Players[myplr]._pHPBase -= damage[leveltype - 1];
+	if (Players[myplr]._pHitPoints >> 6 <= 0) {
 		SyncPlrKill(myplr, 0);
 	} else {
-		if (plr[myplr]._pClass == PC_WARRIOR) {
-			PlaySfxLoc(PS_WARR68, plr[myplr]._px, plr[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
+		if (Players[myplr]._pClass == PC_WARRIOR) {
+			PlaySfxLoc(PS_WARR68, Players[myplr]._px, Players[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
 #ifndef SPAWN
-		} else if (plr[myplr]._pClass == PC_ROGUE) {
-			PlaySfxLoc(PS_ROGUE68, plr[myplr]._px, plr[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
-		} else if (plr[myplr]._pClass == PC_SORCERER) {
-			PlaySfxLoc(PS_MAGE68, plr[myplr]._px, plr[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
+		} else if (Players[myplr]._pClass == PC_ROGUE) {
+			PlaySfxLoc(PS_ROGUE68, Players[myplr]._px, Players[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
+		} else if (Players[myplr]._pClass == PC_SORCERER) {
+			PlaySfxLoc(PS_MAGE68, Players[myplr]._px, Players[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
 #ifdef HELLFIRE
-		} else if (plr[myplr]._pClass == PC_MONK) {
-			PlaySfxLoc(PS_MONK68, plr[myplr]._px, plr[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
-		} else if (plr[myplr]._pClass == PC_BARD) {
-			PlaySfxLoc(PS_ROGUE68, plr[myplr]._px, plr[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
-		} else if (plr[myplr]._pClass == PC_BARBARIAN) {
-			PlaySfxLoc(PS_WARR68, plr[myplr]._px, plr[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
+		} else if (Players[myplr]._pClass == PC_MONK) {
+			PlaySfxLoc(PS_MONK68, Players[myplr]._px, Players[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
+		} else if (Players[myplr]._pClass == PC_BARD) {
+			PlaySfxLoc(PS_ROGUE68, Players[myplr]._px, Players[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
+		} else if (Players[myplr]._pClass == PC_BARBARIAN) {
+			PlaySfxLoc(PS_WARR68, Players[myplr]._px, Players[myplr]._py); // CODEFIX: isn't using PlaySfxLoc on myplr equal to just using PlaySFX?
 #endif
 #endif
 		}
@@ -2493,8 +2493,8 @@ void RedoPlayerVision()
 	int p;
 
 	for (p = 0; p < MAX_PLRS; p++) {
-		if (plr[p].plractive && currlevel == plr[p].plrlevel) {
-			ChangeVisionXY(plr[p]._pvid, plr[p]._px, plr[p]._py);
+		if (Players[p].plractive && currlevel == Players[p].plrlevel) {
+			ChangeVisionXY(Players[p]._pvid, Players[p]._px, Players[p]._py);
 		}
 	}
 }
@@ -2986,8 +2986,8 @@ void OperateL1Door(int pnum, int i, DIABOOL sendflag)
 {
 	int dpx, dpy;
 
-	dpx = abs(object[i]._ox - plr[pnum]._px);
-	dpy = abs(object[i]._oy - plr[pnum]._py);
+	dpx = abs(object[i]._ox - Players[pnum]._px);
+	dpy = abs(object[i]._oy - Players[pnum]._py);
 	if (dpx == 1 && dpy <= 1 && object[i]._otype == OBJ_L1LDOOR)
 		OperateL1LDoor(pnum, i, sendflag);
 	if (dpx <= 1 && dpy == 1 && object[i]._otype == OBJ_L1RDOOR)
@@ -3059,7 +3059,7 @@ void OperateBook(int pnum, int i)
 			}
 			if (do_add_missile) {
 				object[dObject[35][36] - 1]._oVar5++;
-				AddMissile(plr[pnum]._px, plr[pnum]._py, dx, dy, plr[pnum]._pdir, MIS_RNDTELEPORT, TARGET_MONSTERS, pnum, 0, 0);
+				AddMissile(Players[pnum]._px, Players[pnum]._py, dx, dy, Players[pnum]._pdir, MIS_RNDTELEPORT, TARGET_MONSTERS, pnum, 0, 0);
 				missile_added = TRUE;
 				do_add_missile = FALSE;
 			}
@@ -3073,19 +3073,19 @@ void OperateBook(int pnum, int i)
 		return;
 
 	if (setlvlnum == SL_BONECHAMB) {
-		plr[myplr]._pMemSpells |= SPELLBIT(SPL_GUARDIAN);
-		if (plr[pnum]._pSplLvl[SPL_GUARDIAN] < MAX_SPELL_LEVEL) // BUGFIX: should use plr[myplr] or plr[pnum] consistently, not mix and match. If another connected peer interacts with the Ancient Tome (then pnum!=myplr), and they have Guardian spell level < 15, while the local player has Guardian spell level = 15; then the sanity check is skipped, and the local player gets Guardian spell level 16.
-			plr[myplr]._pSplLvl[SPL_GUARDIAN]++;
+		Players[myplr]._pMemSpells |= SPELLBIT(SPL_GUARDIAN);
+		if (Players[pnum]._pSplLvl[SPL_GUARDIAN] < MAX_SPELL_LEVEL) // BUGFIX: should use Players[myplr] or Players[pnum] consistently, not mix and match. If another connected peer interacts with the Ancient Tome (then pnum!=myplr), and they have Guardian spell level < 15, while the local player has Guardian spell level = 15; then the sanity check is skipped, and the local player gets Guardian spell level 16.
+			Players[myplr]._pSplLvl[SPL_GUARDIAN]++;
 		quests[Q_SCHAMB]._qactive = QUEST_DONE;
 		if (!deltaload)
 			PlaySfxLoc(IS_QUESTDN, object[i]._ox, object[i]._oy);
 		InitDiabloMsg(EMSG_BONECHAMB);
 		AddMissile(
-		    plr[myplr]._px,
-		    plr[myplr]._py,
+		    Players[myplr]._px,
+		    Players[myplr]._py,
 		    object[i]._ox - 2,
 		    object[i]._oy - 4,
-		    plr[myplr]._pdir,
+		    Players[myplr]._pdir,
 		    MIS_GUARDIAN,
 		    TARGET_MONSTERS,
 		    myplr,
@@ -3162,18 +3162,18 @@ void OperateSChambBk(int pnum, int i)
 			quests[Q_SCHAMB]._qactive = QUEST_ACTIVE;
 			quests[Q_SCHAMB]._qlog = TRUE;
 		}
-		if (plr[myplr]._pClass == PC_WARRIOR) {
+		if (Players[myplr]._pClass == PC_WARRIOR) {
 			textdef = TEXT_BONER;
-		} else if (plr[myplr]._pClass == PC_ROGUE) {
+		} else if (Players[myplr]._pClass == PC_ROGUE) {
 			textdef = TEXT_RBONER;
-		} else if (plr[myplr]._pClass == PC_SORCERER) {
+		} else if (Players[myplr]._pClass == PC_SORCERER) {
 			textdef = TEXT_MBONER;
 #ifdef HELLFIRE
-		} else if (plr[myplr]._pClass == PC_MONK) {
+		} else if (Players[myplr]._pClass == PC_MONK) {
 			textdef = TEXT_HBONER;
-		} else if (plr[myplr]._pClass == PC_BARD) {
+		} else if (Players[myplr]._pClass == PC_BARD) {
 			textdef = TEXT_BBONER;
-		} else if (plr[myplr]._pClass == PC_BARBARIAN) {
+		} else if (Players[myplr]._pClass == PC_BARBARIAN) {
 			textdef = TEXT_BONER;
 #endif
 		}
@@ -3206,7 +3206,7 @@ void OperateChest(int pnum, int i, DIABOOL sendmsg)
 				}
 			}
 			if (object[i]._oTrapFlag && object[i]._otype >= OBJ_TCHEST1 && object[i]._otype <= OBJ_TCHEST3) {
-				mdir = GetDirection(object[i]._ox, object[i]._oy, plr[pnum]._px, plr[pnum]._py);
+				mdir = GetDirection(object[i]._ox, object[i]._oy, Players[pnum]._px, Players[pnum]._py);
 				switch (object[i]._oVar4) {
 				case 0:
 					mtype = MIS_ARROW;
@@ -3231,7 +3231,7 @@ void OperateChest(int pnum, int i, DIABOOL sendmsg)
 					mtype = MIS_ARROW;
 #endif
 				}
-				AddMissile(object[i]._ox, object[i]._oy, plr[pnum]._px, plr[pnum]._py, mdir, mtype, TARGET_PLAYERS, -1, 0, 0);
+				AddMissile(object[i]._ox, object[i]._oy, Players[pnum]._px, Players[pnum]._py, mdir, mtype, TARGET_PLAYERS, -1, 0, 0);
 				object[i]._oTrapFlag = FALSE;
 			}
 			if (pnum == myplr)
@@ -3247,19 +3247,19 @@ void OperateMushPatch(int pnum, int i)
 
 	if (quests[Q_MUSHROOM]._qactive != QUEST_ACTIVE || quests[Q_MUSHROOM]._qvar1 < QS_TOMEGIVEN) {
 		if (!deltaload && pnum == myplr) {
-			if (plr[myplr]._pClass == PC_WARRIOR) {
+			if (Players[myplr]._pClass == PC_WARRIOR) {
 				PlaySFX(PS_WARR13);
 #ifndef SPAWN
-			} else if (plr[myplr]._pClass == PC_ROGUE) {
+			} else if (Players[myplr]._pClass == PC_ROGUE) {
 				PlaySFX(PS_ROGUE13);
-			} else if (plr[myplr]._pClass == PC_SORCERER) {
+			} else if (Players[myplr]._pClass == PC_SORCERER) {
 				PlaySFX(PS_MAGE13);
 #ifdef HELLFIRE
-			} else if (plr[myplr]._pClass == PC_MONK) {
+			} else if (Players[myplr]._pClass == PC_MONK) {
 				PlaySFX(PS_MONK13);
-			} else if (plr[myplr]._pClass == PC_BARD) {
+			} else if (Players[myplr]._pClass == PC_BARD) {
 				PlaySFX(PS_ROGUE13);
-			} else if (plr[myplr]._pClass == PC_BARBARIAN) {
+			} else if (Players[myplr]._pClass == PC_BARBARIAN) {
 				PlaySFX(PS_WARR13);
 #endif
 #endif
@@ -3286,19 +3286,19 @@ void OperateInnSignChest(int pnum, int i)
 
 	if (quests[Q_LTBANNER]._qvar1 != 2) {
 		if (!deltaload && pnum == myplr) {
-			if (plr[myplr]._pClass == PC_WARRIOR) {
+			if (Players[myplr]._pClass == PC_WARRIOR) {
 				PlaySFX(PS_WARR24);
 #ifndef SPAWN
-			} else if (plr[myplr]._pClass == PC_ROGUE) {
+			} else if (Players[myplr]._pClass == PC_ROGUE) {
 				PlaySFX(PS_ROGUE24);
-			} else if (plr[myplr]._pClass == PC_SORCERER) {
+			} else if (Players[myplr]._pClass == PC_SORCERER) {
 				PlaySFX(PS_MAGE24);
 #ifdef HELLFIRE
-			} else if (plr[myplr]._pClass == PC_MONK) {
+			} else if (Players[myplr]._pClass == PC_MONK) {
 				PlaySFX(PS_MONK24);
-			} else if (plr[myplr]._pClass == PC_BARD) {
+			} else if (Players[myplr]._pClass == PC_BARD) {
 				PlaySFX(PS_ROGUE24);
-			} else if (plr[myplr]._pClass == PC_BARBARIAN) {
+			} else if (Players[myplr]._pClass == PC_BARBARIAN) {
 				PlaySFX(PS_WARR24);
 #endif
 #endif
@@ -3323,34 +3323,34 @@ void OperateSlainHero(int pnum, int i, DIABOOL sendmsg)
 	if (object[i]._oSelFlag != 0) {
 		object[i]._oSelFlag = 0;
 		if (!deltaload) {
-			if (plr[pnum]._pClass == PC_WARRIOR) {
+			if (Players[pnum]._pClass == PC_WARRIOR) {
 				CreateMagicArmor(object[i]._ox, object[i]._oy, ITYPE_HARMOR, ICURS_BREAST_PLATE, FALSE, TRUE);
 #ifndef SPAWN
-				PlaySfxLoc(PS_WARR9, plr[myplr]._px, plr[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
+				PlaySfxLoc(PS_WARR9, Players[myplr]._px, Players[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
 #endif
-			} else if (plr[pnum]._pClass == PC_ROGUE) {
+			} else if (Players[pnum]._pClass == PC_ROGUE) {
 				CreateMagicWeapon(object[i]._ox, object[i]._oy, ITYPE_BOW, ICURS_LONG_WAR_BOW, FALSE, TRUE);
 #ifndef SPAWN
-				PlaySfxLoc(PS_ROGUE9, plr[myplr]._px, plr[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
+				PlaySfxLoc(PS_ROGUE9, Players[myplr]._px, Players[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
 #endif
-			} else if (plr[pnum]._pClass == PC_SORCERER) {
+			} else if (Players[pnum]._pClass == PC_SORCERER) {
 				CreateSpellBook(object[i]._ox, object[i]._oy, SPL_LIGHTNING, FALSE, TRUE);
 #ifndef SPAWN
-				PlaySfxLoc(PS_MAGE9, plr[myplr]._px, plr[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
+				PlaySfxLoc(PS_MAGE9, Players[myplr]._px, Players[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
 #endif
 #ifdef HELLFIRE
-			} else if (plr[pnum]._pClass == PC_MONK) {
+			} else if (Players[pnum]._pClass == PC_MONK) {
 				CreateMagicWeapon(object[i]._ox, object[i]._oy, ITYPE_STAFF, ICURS_WAR_STAFF, FALSE, TRUE);
-				PlaySfxLoc(PS_MONK9, plr[myplr]._px, plr[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
+				PlaySfxLoc(PS_MONK9, Players[myplr]._px, Players[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
 #ifndef SPAWN
-			} else if (plr[pnum]._pClass == PC_BARD) {
+			} else if (Players[pnum]._pClass == PC_BARD) {
 				CreateMagicWeapon(object[i]._ox, object[i]._oy, ITYPE_SWORD, ICURS_BASTARD_SWORD, FALSE, TRUE);
-				PlaySfxLoc(PS_ROGUE9, plr[myplr]._px, plr[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
+				PlaySfxLoc(PS_ROGUE9, Players[myplr]._px, Players[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
 #endif
-			} else if (plr[pnum]._pClass == PC_BARBARIAN) {
+			} else if (Players[pnum]._pClass == PC_BARBARIAN) {
 				CreateMagicWeapon(object[i]._ox, object[i]._oy, ITYPE_AXE, ICURS_BATTLE_AXE, FALSE, TRUE);
 #ifndef SPAWN
-				PlaySfxLoc(PS_WARR9, plr[myplr]._px, plr[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
+				PlaySfxLoc(PS_WARR9, Players[myplr]._px, Players[myplr]._py); // CODEFIX: use pnum instead of myplr or use PlaySFX
 #endif
 #endif
 			}
@@ -3416,8 +3416,8 @@ void OperateL2Door(int pnum, int i, DIABOOL sendflag)
 {
 	int dpx, dpy;
 
-	dpx = abs(object[i]._ox - plr[pnum]._px);
-	dpy = abs(object[i]._oy - plr[pnum]._py);
+	dpx = abs(object[i]._ox - Players[pnum]._px);
+	dpy = abs(object[i]._oy - Players[pnum]._py);
 	if (dpx == 1 && dpy <= 1 && object[i]._otype == OBJ_L2LDOOR)
 		OperateL2LDoor(pnum, i, sendflag);
 	if (dpx <= 1 && dpy == 1 && object[i]._otype == OBJ_L2RDOOR)
@@ -3428,8 +3428,8 @@ void OperateL3Door(int pnum, int i, DIABOOL sendflag)
 {
 	int dpx, dpy;
 
-	dpx = abs(object[i]._ox - plr[pnum]._px);
-	dpy = abs(object[i]._oy - plr[pnum]._py);
+	dpx = abs(object[i]._ox - Players[pnum]._px);
+	dpy = abs(object[i]._oy - Players[pnum]._py);
 	if (dpx == 1 && dpy <= 1 && object[i]._otype == OBJ_L3RDOOR)
 		OperateL3RDoor(pnum, i, sendflag);
 	if (dpx <= 1 && dpy == 1 && object[i]._otype == OBJ_L3LDOOR)
@@ -3478,7 +3478,7 @@ void TryDisarm(int pnum, int i)
 	if (pnum == myplr)
 		SetCursor_(CURSOR_HAND);
 	if (object[i]._oTrapFlag) {
-		trapdisper = 2 * plr[pnum]._pDexterity - 5 * currlevel;
+		trapdisper = 2 * Players[pnum]._pDexterity - 5 * currlevel;
 		if (random_(154, 100) <= trapdisper) {
 			for (j = 0; j < nobjects; j++) {
 				checkflag = FALSE;
@@ -3578,42 +3578,42 @@ void OperateShrine(int pnum, int i, int sType)
 		if (pnum != myplr)
 			return;
 		for (j = 0; j < NUM_INVLOC; j++) {
-			if (plr[pnum].InvBody[j]._itype != ITYPE_NONE)
+			if (Players[pnum].InvBody[j]._itype != ITYPE_NONE)
 				cnt++;
 		}
 		if (cnt > 0) {
 			for (j = 0; j < NUM_INVLOC; j++) {
-				if (plr[pnum].InvBody[j]._itype != ITYPE_NONE
-				    && plr[pnum].InvBody[j]._iMaxDur != DUR_INDESTRUCTIBLE
-				    && plr[pnum].InvBody[j]._iMaxDur != 0) {
-					plr[pnum].InvBody[j]._iDurability += 10;
-					plr[pnum].InvBody[j]._iMaxDur += 10;
-					if (plr[pnum].InvBody[j]._iDurability > plr[pnum].InvBody[j]._iMaxDur)
-						plr[pnum].InvBody[j]._iDurability = plr[pnum].InvBody[j]._iMaxDur;
+				if (Players[pnum].InvBody[j]._itype != ITYPE_NONE
+				    && Players[pnum].InvBody[j]._iMaxDur != DUR_INDESTRUCTIBLE
+				    && Players[pnum].InvBody[j]._iMaxDur != 0) {
+					Players[pnum].InvBody[j]._iDurability += 10;
+					Players[pnum].InvBody[j]._iMaxDur += 10;
+					if (Players[pnum].InvBody[j]._iDurability > Players[pnum].InvBody[j]._iMaxDur)
+						Players[pnum].InvBody[j]._iDurability = Players[pnum].InvBody[j]._iMaxDur;
 				}
 			}
 			while (TRUE) {
 				cnt = 0;
 				for (j = 0; j < NUM_INVLOC; j++) {
-					if (plr[pnum].InvBody[j]._itype != ITYPE_NONE)
+					if (Players[pnum].InvBody[j]._itype != ITYPE_NONE)
 #ifndef HELLFIRE
-						if (plr[pnum].InvBody[j]._iMaxDur != DUR_INDESTRUCTIBLE
-						    && plr[pnum].InvBody[j]._iMaxDur != 0)
+						if (Players[pnum].InvBody[j]._iMaxDur != DUR_INDESTRUCTIBLE
+						    && Players[pnum].InvBody[j]._iMaxDur != 0)
 #endif
 							cnt++;
 				}
 				if (cnt == 0)
 					break;
 				r = random_(0, NUM_INVLOC);
-				if (plr[pnum].InvBody[r]._itype == ITYPE_NONE || plr[pnum].InvBody[r]._iMaxDur == DUR_INDESTRUCTIBLE || plr[pnum].InvBody[r]._iMaxDur == 0)
+				if (Players[pnum].InvBody[r]._itype == ITYPE_NONE || Players[pnum].InvBody[r]._iMaxDur == DUR_INDESTRUCTIBLE || Players[pnum].InvBody[r]._iMaxDur == 0)
 					continue;
 
-				plr[pnum].InvBody[r]._iDurability -= 20;
-				plr[pnum].InvBody[r]._iMaxDur -= 20;
-				if (plr[pnum].InvBody[r]._iDurability <= 0)
-					plr[pnum].InvBody[r]._iDurability = 1;
-				if (plr[pnum].InvBody[r]._iMaxDur <= 0)
-					plr[pnum].InvBody[r]._iMaxDur = 1;
+				Players[pnum].InvBody[r]._iDurability -= 20;
+				Players[pnum].InvBody[r]._iMaxDur -= 20;
+				if (Players[pnum].InvBody[r]._iDurability <= 0)
+					Players[pnum].InvBody[r]._iDurability = 1;
+				if (Players[pnum].InvBody[r]._iMaxDur <= 0)
+					Players[pnum].InvBody[r]._iMaxDur = 1;
 				break;
 			}
 		}
@@ -3624,45 +3624,45 @@ void OperateShrine(int pnum, int i, int sType)
 			return;
 		if (pnum != myplr)
 			break;
-		if (plr[pnum].InvBody[INVLOC_HEAD]._itype != ITYPE_NONE)
-			plr[pnum].InvBody[INVLOC_HEAD]._iAC += 2;
-		if (plr[pnum].InvBody[INVLOC_CHEST]._itype != ITYPE_NONE)
-			plr[pnum].InvBody[INVLOC_CHEST]._iAC += 2;
-		if (plr[pnum].InvBody[INVLOC_HAND_LEFT]._itype != ITYPE_NONE) {
-			if (plr[pnum].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_SHIELD) {
-				plr[pnum].InvBody[INVLOC_HAND_LEFT]._iAC += 2;
+		if (Players[pnum].InvBody[INVLOC_HEAD]._itype != ITYPE_NONE)
+			Players[pnum].InvBody[INVLOC_HEAD]._iAC += 2;
+		if (Players[pnum].InvBody[INVLOC_CHEST]._itype != ITYPE_NONE)
+			Players[pnum].InvBody[INVLOC_CHEST]._iAC += 2;
+		if (Players[pnum].InvBody[INVLOC_HAND_LEFT]._itype != ITYPE_NONE) {
+			if (Players[pnum].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_SHIELD) {
+				Players[pnum].InvBody[INVLOC_HAND_LEFT]._iAC += 2;
 			} else {
-				plr[pnum].InvBody[INVLOC_HAND_LEFT]._iMaxDam--;
-				if (plr[pnum].InvBody[INVLOC_HAND_LEFT]._iMaxDam < plr[pnum].InvBody[INVLOC_HAND_LEFT]._iMinDam)
-					plr[pnum].InvBody[INVLOC_HAND_LEFT]._iMaxDam = plr[pnum].InvBody[INVLOC_HAND_LEFT]._iMinDam;
+				Players[pnum].InvBody[INVLOC_HAND_LEFT]._iMaxDam--;
+				if (Players[pnum].InvBody[INVLOC_HAND_LEFT]._iMaxDam < Players[pnum].InvBody[INVLOC_HAND_LEFT]._iMinDam)
+					Players[pnum].InvBody[INVLOC_HAND_LEFT]._iMaxDam = Players[pnum].InvBody[INVLOC_HAND_LEFT]._iMinDam;
 			}
 		}
-		if (plr[pnum].InvBody[INVLOC_HAND_RIGHT]._itype != ITYPE_NONE) {
-			if (plr[pnum].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_SHIELD) {
-				plr[pnum].InvBody[INVLOC_HAND_RIGHT]._iAC += 2;
+		if (Players[pnum].InvBody[INVLOC_HAND_RIGHT]._itype != ITYPE_NONE) {
+			if (Players[pnum].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_SHIELD) {
+				Players[pnum].InvBody[INVLOC_HAND_RIGHT]._iAC += 2;
 			} else {
-				plr[pnum].InvBody[INVLOC_HAND_RIGHT]._iMaxDam--;
-				if (plr[pnum].InvBody[INVLOC_HAND_RIGHT]._iMaxDam < plr[pnum].InvBody[INVLOC_HAND_RIGHT]._iMinDam)
-					plr[pnum].InvBody[INVLOC_HAND_RIGHT]._iMaxDam = plr[pnum].InvBody[INVLOC_HAND_RIGHT]._iMinDam;
+				Players[pnum].InvBody[INVLOC_HAND_RIGHT]._iMaxDam--;
+				if (Players[pnum].InvBody[INVLOC_HAND_RIGHT]._iMaxDam < Players[pnum].InvBody[INVLOC_HAND_RIGHT]._iMinDam)
+					Players[pnum].InvBody[INVLOC_HAND_RIGHT]._iMaxDam = Players[pnum].InvBody[INVLOC_HAND_RIGHT]._iMinDam;
 			}
 		}
-		for (j = 0; j < plr[pnum]._pNumInv; j++) {
-			switch (plr[pnum].InvList[j]._itype) {
+		for (j = 0; j < Players[pnum]._pNumInv; j++) {
+			switch (Players[pnum].InvList[j]._itype) {
 			case ITYPE_SWORD:
 			case ITYPE_AXE:
 			case ITYPE_BOW:
 			case ITYPE_MACE:
 			case ITYPE_STAFF:
-				plr[pnum].InvList[j]._iMaxDam--;
-				if (plr[pnum].InvList[j]._iMaxDam < plr[pnum].InvList[j]._iMinDam)
-					plr[pnum].InvList[j]._iMaxDam = plr[pnum].InvList[j]._iMinDam;
+				Players[pnum].InvList[j]._iMaxDam--;
+				if (Players[pnum].InvList[j]._iMaxDam < Players[pnum].InvList[j]._iMinDam)
+					Players[pnum].InvList[j]._iMaxDam = Players[pnum].InvList[j]._iMinDam;
 				break;
 			case ITYPE_SHIELD:
 			case ITYPE_HELM:
 			case ITYPE_LARMOR:
 			case ITYPE_MARMOR:
 			case ITYPE_HARMOR:
-				plr[pnum].InvList[j]._iAC += 2;
+				Players[pnum].InvList[j]._iAC += 2;
 				break;
 			}
 		}
@@ -3674,18 +3674,18 @@ void OperateShrine(int pnum, int i, int sType)
 		if (pnum != myplr)
 			break;
 
-		if (plr[pnum].InvBody[INVLOC_HAND_LEFT]._itype != ITYPE_NONE && plr[pnum].InvBody[INVLOC_HAND_LEFT]._itype != ITYPE_SHIELD)
-			plr[pnum].InvBody[INVLOC_HAND_LEFT]._iMaxDam++;
-		if (plr[pnum].InvBody[INVLOC_HAND_RIGHT]._itype != ITYPE_NONE && plr[pnum].InvBody[INVLOC_HAND_RIGHT]._itype != ITYPE_SHIELD)
-			plr[pnum].InvBody[INVLOC_HAND_RIGHT]._iMaxDam++;
-		for (j = 0; j < plr[pnum]._pNumInv; j++) {
-			switch (plr[pnum].InvList[j]._itype) {
+		if (Players[pnum].InvBody[INVLOC_HAND_LEFT]._itype != ITYPE_NONE && Players[pnum].InvBody[INVLOC_HAND_LEFT]._itype != ITYPE_SHIELD)
+			Players[pnum].InvBody[INVLOC_HAND_LEFT]._iMaxDam++;
+		if (Players[pnum].InvBody[INVLOC_HAND_RIGHT]._itype != ITYPE_NONE && Players[pnum].InvBody[INVLOC_HAND_RIGHT]._itype != ITYPE_SHIELD)
+			Players[pnum].InvBody[INVLOC_HAND_RIGHT]._iMaxDam++;
+		for (j = 0; j < Players[pnum]._pNumInv; j++) {
+			switch (Players[pnum].InvList[j]._itype) {
 			case ITYPE_SWORD:
 			case ITYPE_AXE:
 			case ITYPE_BOW:
 			case ITYPE_MACE:
 			case ITYPE_STAFF:
-				plr[pnum].InvList[j]._iMaxDam++;
+				Players[pnum].InvList[j]._iMaxDam++;
 				break;
 			}
 		}
@@ -3697,11 +3697,11 @@ void OperateShrine(int pnum, int i, int sType)
 		if (deltaload)
 			return;
 		AddMissile(
-		    plr[pnum]._px,
-		    plr[pnum]._py,
-		    plr[pnum]._px,
-		    plr[pnum]._py,
-		    plr[pnum]._pdir,
+		    Players[pnum]._px,
+		    Players[pnum]._py,
+		    Players[pnum]._px,
+		    Players[pnum]._py,
+		    Players[pnum]._pdir,
 		    MIS_MANASHIELD,
 		    -1,
 		    pnum,
@@ -3718,16 +3718,16 @@ void OperateShrine(int pnum, int i, int sType)
 			break;
 
 		for (j = 0; j < NUM_INVLOC; j++) {
-			if (plr[pnum].InvBody[j]._itype == ITYPE_STAFF)
-				plr[pnum].InvBody[j]._iCharges = plr[pnum].InvBody[j]._iMaxCharges;
+			if (Players[pnum].InvBody[j]._itype == ITYPE_STAFF)
+				Players[pnum].InvBody[j]._iCharges = Players[pnum].InvBody[j]._iMaxCharges;
 		}
-		for (j = 0; j < plr[pnum]._pNumInv; j++) {
-			if (plr[pnum].InvList[j]._itype == ITYPE_STAFF)
-				plr[pnum].InvList[j]._iCharges = plr[pnum].InvList[j]._iMaxCharges;
+		for (j = 0; j < Players[pnum]._pNumInv; j++) {
+			if (Players[pnum].InvList[j]._itype == ITYPE_STAFF)
+				Players[pnum].InvList[j]._iCharges = Players[pnum].InvList[j]._iMaxCharges;
 		}
 		for (j = 0; j < MAXBELTITEMS; j++) {
-			if (plr[pnum].SpdList[j]._itype == ITYPE_STAFF)
-				plr[pnum].SpdList[j]._iCharges = plr[pnum].SpdList[j]._iMaxCharges; // belt items don't have charges?
+			if (Players[pnum].SpdList[j]._itype == ITYPE_STAFF)
+				Players[pnum].SpdList[j]._iCharges = Players[pnum].SpdList[j]._iMaxCharges; // belt items don't have charges?
 		}
 		InitDiabloMsg(EMSG_SHRINE_STONE);
 		break;
@@ -3738,11 +3738,11 @@ void OperateShrine(int pnum, int i, int sType)
 			break;
 
 		for (j = 0; j < NUM_INVLOC; j++)
-			plr[pnum].InvBody[j]._iDurability = plr[pnum].InvBody[j]._iMaxDur;
-		for (j = 0; j < plr[pnum]._pNumInv; j++)
-			plr[pnum].InvList[j]._iDurability = plr[pnum].InvList[j]._iMaxDur;
+			Players[pnum].InvBody[j]._iDurability = Players[pnum].InvBody[j]._iMaxDur;
+		for (j = 0; j < Players[pnum]._pNumInv; j++)
+			Players[pnum].InvList[j]._iDurability = Players[pnum].InvList[j]._iMaxDur;
 		for (j = 0; j < MAXBELTITEMS; j++)
-			plr[pnum].SpdList[j]._iDurability = plr[pnum].SpdList[j]._iMaxDur; // belt items don't have durability?
+			Players[pnum].SpdList[j]._iDurability = Players[pnum].SpdList[j]._iMaxDur; // belt items don't have durability?
 		InitDiabloMsg(EMSG_SHRINE_RELIGIOUS);
 		break;
 	case SHRINE_ENCHANTED:
@@ -3752,10 +3752,10 @@ void OperateShrine(int pnum, int i, int sType)
 			return;
 		cnt = 0;
 		spell = 1;
-		spells = plr[pnum]._pMemSpells;
+		spells = Players[pnum]._pMemSpells;
 		for (j = 0; j < MAX_SPELLS; j++) {
 #ifdef HELLFIRE
-			if (spell & plr[pnum]._pMemSpells)
+			if (spell & Players[pnum]._pMemSpells)
 #else
 			if (spell & spells)
 #endif
@@ -3765,19 +3765,19 @@ void OperateShrine(int pnum, int i, int sType)
 		if (cnt > 1) {
 			spell = 1;
 			for (j = SPL_FIREBOLT; j <= MAX_SPELLS; j++) { // BUGFIX: < MAX_SPELLS, there is no spell with MAX_SPELLS index
-				if (plr[pnum]._pMemSpells & spell) {
-					if (plr[pnum]._pSplLvl[j] < MAX_SPELL_LEVEL)
-						plr[pnum]._pSplLvl[j]++;
+				if (Players[pnum]._pMemSpells & spell) {
+					if (Players[pnum]._pSplLvl[j] < MAX_SPELL_LEVEL)
+						Players[pnum]._pSplLvl[j]++;
 				}
 				spell <<= 1;
 			}
 			do {
 				r = random_(0, MAX_SPELLS);
-			} while (!(plr[pnum]._pMemSpells & SPELLBIT(r + 1)));
-			if (plr[pnum]._pSplLvl[r + 1] >= 2)
-				plr[pnum]._pSplLvl[r + 1] -= 2;
+			} while (!(Players[pnum]._pMemSpells & SPELLBIT(r + 1)));
+			if (Players[pnum]._pSplLvl[r + 1] >= 2)
+				Players[pnum]._pSplLvl[r + 1] -= 2;
 			else
-				plr[pnum]._pSplLvl[r + 1] = 0;
+				Players[pnum]._pSplLvl[r + 1] = 0;
 		}
 		InitDiabloMsg(EMSG_SHRINE_ENCHANTED);
 		break;
@@ -3804,26 +3804,26 @@ void OperateShrine(int pnum, int i, int sType)
 			return;
 		if (pnum != myplr)
 			return;
-		plr[pnum]._pMemSpells |= SPELLBIT(SPL_FIREBOLT);
-		if (plr[pnum]._pSplLvl[SPL_FIREBOLT] < MAX_SPELL_LEVEL)
-			plr[pnum]._pSplLvl[SPL_FIREBOLT]++;
-		if (plr[pnum]._pSplLvl[SPL_FIREBOLT] < MAX_SPELL_LEVEL)
-			plr[pnum]._pSplLvl[SPL_FIREBOLT]++;
-		t = plr[pnum]._pMaxManaBase / 10;
-		v1 = plr[pnum]._pMana - plr[pnum]._pManaBase;
-		v2 = plr[pnum]._pMaxMana - plr[pnum]._pMaxManaBase;
+		Players[pnum]._pMemSpells |= SPELLBIT(SPL_FIREBOLT);
+		if (Players[pnum]._pSplLvl[SPL_FIREBOLT] < MAX_SPELL_LEVEL)
+			Players[pnum]._pSplLvl[SPL_FIREBOLT]++;
+		if (Players[pnum]._pSplLvl[SPL_FIREBOLT] < MAX_SPELL_LEVEL)
+			Players[pnum]._pSplLvl[SPL_FIREBOLT]++;
+		t = Players[pnum]._pMaxManaBase / 10;
+		v1 = Players[pnum]._pMana - Players[pnum]._pManaBase;
+		v2 = Players[pnum]._pMaxMana - Players[pnum]._pMaxManaBase;
 
-		plr[pnum]._pManaBase -= t;
-		plr[pnum]._pMana -= t;
-		plr[pnum]._pMaxMana -= t;
-		plr[pnum]._pMaxManaBase -= t;
-		if (plr[pnum]._pMana >> 6 <= 0) {
-			plr[pnum]._pMana = v1;
-			plr[pnum]._pManaBase = 0;
+		Players[pnum]._pManaBase -= t;
+		Players[pnum]._pMana -= t;
+		Players[pnum]._pMaxMana -= t;
+		Players[pnum]._pMaxManaBase -= t;
+		if (Players[pnum]._pMana >> 6 <= 0) {
+			Players[pnum]._pMana = v1;
+			Players[pnum]._pManaBase = 0;
 		}
-		if (plr[pnum]._pMaxMana >> 6 <= 0) {
-			plr[pnum]._pMaxMana = v2;
-			plr[pnum]._pMaxManaBase = 0;
+		if (Players[pnum]._pMaxMana >> 6 <= 0) {
+			Players[pnum]._pMaxMana = v2;
+			Players[pnum]._pMaxManaBase = 0;
 		}
 		InitDiabloMsg(EMSG_SHRINE_FASCINATING);
 		break;
@@ -3831,11 +3831,11 @@ void OperateShrine(int pnum, int i, int sType)
 		if (deltaload)
 			return;
 		AddMissile(
-		    plr[pnum]._px,
-		    plr[pnum]._py,
-		    plr[pnum]._px,
-		    plr[pnum]._py,
-		    plr[pnum]._pdir,
+		    Players[pnum]._px,
+		    Players[pnum]._py,
+		    Players[pnum]._px,
+		    Players[pnum]._py,
+		    Players[pnum]._pdir,
 		    MIS_NOVA,
 		    -1,
 		    pnum,
@@ -3843,8 +3843,8 @@ void OperateShrine(int pnum, int i, int sType)
 		    2 * leveltype);
 		if (pnum != myplr)
 			return;
-		plr[pnum]._pMana = plr[pnum]._pMaxMana;
-		plr[pnum]._pManaBase = plr[pnum]._pMaxManaBase;
+		Players[pnum]._pMana = Players[pnum]._pMaxMana;
+		Players[pnum]._pManaBase = Players[pnum]._pMaxManaBase;
 		InitDiabloMsg(EMSG_SHRINE_CRYPTIC);
 		break;
 	case SHRINE_ELDRITCH: /// BUGFIX: change `plr[pnum].HoldItem` to use a temporary buffer to prevent deleting item in hand
@@ -3852,39 +3852,39 @@ void OperateShrine(int pnum, int i, int sType)
 			return;
 		if (pnum != myplr)
 			break;
-		for (j = 0; j < plr[pnum]._pNumInv; j++) {
-			if (plr[pnum].InvList[j]._itype == ITYPE_MISC) {
-				if (plr[pnum].InvList[j]._iMiscId == IMISC_HEAL
-				    || plr[pnum].InvList[j]._iMiscId == IMISC_MANA) {
-					SetPlrHandItem(&plr[pnum].HoldItem, ItemMiscIdIdx(IMISC_REJUV));
-					GetPlrHandSeed(&plr[pnum].HoldItem);
-					plr[pnum].HoldItem._iStatFlag = TRUE;
-					plr[pnum].InvList[j] = plr[pnum].HoldItem;
+		for (j = 0; j < Players[pnum]._pNumInv; j++) {
+			if (Players[pnum].InvList[j]._itype == ITYPE_MISC) {
+				if (Players[pnum].InvList[j]._iMiscId == IMISC_HEAL
+				    || Players[pnum].InvList[j]._iMiscId == IMISC_MANA) {
+					SetPlrHandItem(&Players[pnum].HoldItem, ItemMiscIdIdx(IMISC_REJUV));
+					GetPlrHandSeed(&Players[pnum].HoldItem);
+					Players[pnum].HoldItem._iStatFlag = TRUE;
+					Players[pnum].InvList[j] = Players[pnum].HoldItem;
 				}
-				if (plr[pnum].InvList[j]._iMiscId == IMISC_FULLHEAL
-				    || plr[pnum].InvList[j]._iMiscId == IMISC_FULLMANA) {
-					SetPlrHandItem(&plr[pnum].HoldItem, ItemMiscIdIdx(IMISC_FULLREJUV));
-					GetPlrHandSeed(&plr[pnum].HoldItem);
-					plr[pnum].HoldItem._iStatFlag = TRUE;
-					plr[pnum].InvList[j] = plr[pnum].HoldItem;
+				if (Players[pnum].InvList[j]._iMiscId == IMISC_FULLHEAL
+				    || Players[pnum].InvList[j]._iMiscId == IMISC_FULLMANA) {
+					SetPlrHandItem(&Players[pnum].HoldItem, ItemMiscIdIdx(IMISC_FULLREJUV));
+					GetPlrHandSeed(&Players[pnum].HoldItem);
+					Players[pnum].HoldItem._iStatFlag = TRUE;
+					Players[pnum].InvList[j] = Players[pnum].HoldItem;
 				}
 			}
 		}
 		for (j = 0; j < MAXBELTITEMS; j++) {
-			if (plr[pnum].SpdList[j]._itype == ITYPE_MISC) {
-				if (plr[pnum].SpdList[j]._iMiscId == IMISC_HEAL
-				    || plr[pnum].SpdList[j]._iMiscId == IMISC_MANA) {
-					SetPlrHandItem(&plr[pnum].HoldItem, ItemMiscIdIdx(IMISC_REJUV));
-					GetPlrHandSeed(&plr[pnum].HoldItem);
-					plr[pnum].HoldItem._iStatFlag = TRUE;
-					plr[pnum].SpdList[j] = plr[pnum].HoldItem;
+			if (Players[pnum].SpdList[j]._itype == ITYPE_MISC) {
+				if (Players[pnum].SpdList[j]._iMiscId == IMISC_HEAL
+				    || Players[pnum].SpdList[j]._iMiscId == IMISC_MANA) {
+					SetPlrHandItem(&Players[pnum].HoldItem, ItemMiscIdIdx(IMISC_REJUV));
+					GetPlrHandSeed(&Players[pnum].HoldItem);
+					Players[pnum].HoldItem._iStatFlag = TRUE;
+					Players[pnum].SpdList[j] = Players[pnum].HoldItem;
 				}
-				if (plr[pnum].SpdList[j]._iMiscId == IMISC_FULLHEAL
-				    || plr[pnum].SpdList[j]._iMiscId == IMISC_FULLMANA) {
-					SetPlrHandItem(&plr[pnum].HoldItem, ItemMiscIdIdx(IMISC_FULLREJUV));
-					GetPlrHandSeed(&plr[pnum].HoldItem);
-					plr[pnum].HoldItem._iStatFlag = TRUE;
-					plr[pnum].SpdList[j] = plr[pnum].HoldItem;
+				if (Players[pnum].SpdList[j]._iMiscId == IMISC_FULLHEAL
+				    || Players[pnum].SpdList[j]._iMiscId == IMISC_FULLMANA) {
+					SetPlrHandItem(&Players[pnum].HoldItem, ItemMiscIdIdx(IMISC_FULLREJUV));
+					GetPlrHandSeed(&Players[pnum].HoldItem);
+					Players[pnum].HoldItem._iStatFlag = TRUE;
+					Players[pnum].SpdList[j] = Players[pnum].HoldItem;
 				}
 			}
 		}
@@ -3911,10 +3911,10 @@ void OperateShrine(int pnum, int i, int sType)
 			CreateTypeItem(object[i]._ox, object[i]._oy, FALSE, ITYPE_MISC, IMISC_FULLREJUV, FALSE, TRUE);
 			CreateTypeItem(object[i]._ox, object[i]._oy, FALSE, ITYPE_MISC, IMISC_FULLREJUV, FALSE, TRUE);
 		}
-		plr[pnum]._pMana = plr[pnum]._pMaxMana;
-		plr[pnum]._pManaBase = plr[pnum]._pMaxManaBase;
-		plr[pnum]._pHitPoints = plr[pnum]._pMaxHP;
-		plr[pnum]._pHPBase = plr[pnum]._pMaxHPBase;
+		Players[pnum]._pMana = Players[pnum]._pMaxMana;
+		Players[pnum]._pManaBase = Players[pnum]._pMaxManaBase;
+		Players[pnum]._pHitPoints = Players[pnum]._pMaxHP;
+		Players[pnum]._pHPBase = Players[pnum]._pMaxHPBase;
 		InitDiabloMsg(EMSG_SHRINE_DIVINE);
 		break;
 	case SHRINE_HOLY:
@@ -3930,7 +3930,7 @@ void OperateShrine(int pnum, int i, int sType)
 			if (j > MAXDUNX * MAXDUNY)
 				break;
 		} while (nSolidTable[lv] || dObject[xx][yy] != 0 || dMonster[xx][yy] != 0);
-		AddMissile(plr[pnum]._px, plr[pnum]._py, xx, yy, plr[pnum]._pdir, MIS_RNDTELEPORT, -1, pnum, 0, 2 * leveltype);
+		AddMissile(Players[pnum]._px, Players[pnum]._py, xx, yy, Players[pnum]._pdir, MIS_RNDTELEPORT, -1, pnum, 0, 2 * leveltype);
 		if (pnum != myplr)
 			return;
 		InitDiabloMsg(EMSG_SHRINE_HOLY);
@@ -3938,25 +3938,25 @@ void OperateShrine(int pnum, int i, int sType)
 	case SHRINE_SACRED:
 		if (deltaload || pnum != myplr)
 			return;
-		plr[pnum]._pMemSpells |= SPELLBIT(SPL_CBOLT);
-		if (plr[pnum]._pSplLvl[SPL_CBOLT] < MAX_SPELL_LEVEL)
-			plr[pnum]._pSplLvl[SPL_CBOLT]++;
-		if (plr[pnum]._pSplLvl[SPL_CBOLT] < MAX_SPELL_LEVEL)
-			plr[pnum]._pSplLvl[SPL_CBOLT]++;
-		t = plr[pnum]._pMaxManaBase / 10;
-		v1 = plr[pnum]._pMana - plr[pnum]._pManaBase;
-		v2 = plr[pnum]._pMaxMana - plr[pnum]._pMaxManaBase;
-		plr[pnum]._pManaBase -= t;
-		plr[pnum]._pMana -= t;
-		plr[pnum]._pMaxMana -= t;
-		plr[pnum]._pMaxManaBase -= t;
-		if (plr[pnum]._pMana >> 6 <= 0) {
-			plr[pnum]._pMana = v1;
-			plr[pnum]._pManaBase = 0;
+		Players[pnum]._pMemSpells |= SPELLBIT(SPL_CBOLT);
+		if (Players[pnum]._pSplLvl[SPL_CBOLT] < MAX_SPELL_LEVEL)
+			Players[pnum]._pSplLvl[SPL_CBOLT]++;
+		if (Players[pnum]._pSplLvl[SPL_CBOLT] < MAX_SPELL_LEVEL)
+			Players[pnum]._pSplLvl[SPL_CBOLT]++;
+		t = Players[pnum]._pMaxManaBase / 10;
+		v1 = Players[pnum]._pMana - Players[pnum]._pManaBase;
+		v2 = Players[pnum]._pMaxMana - Players[pnum]._pMaxManaBase;
+		Players[pnum]._pManaBase -= t;
+		Players[pnum]._pMana -= t;
+		Players[pnum]._pMaxMana -= t;
+		Players[pnum]._pMaxManaBase -= t;
+		if (Players[pnum]._pMana >> 6 <= 0) {
+			Players[pnum]._pMana = v1;
+			Players[pnum]._pManaBase = 0;
 		}
-		if (plr[pnum]._pMaxMana >> 6 <= 0) {
-			plr[pnum]._pMaxMana = v2;
-			plr[pnum]._pMaxManaBase = 0;
+		if (Players[pnum]._pMaxMana >> 6 <= 0) {
+			Players[pnum]._pMaxMana = v2;
+			Players[pnum]._pMaxManaBase = 0;
 		}
 		InitDiabloMsg(EMSG_SHRINE_SACRED);
 		break;
@@ -3966,15 +3966,15 @@ void OperateShrine(int pnum, int i, int sType)
 		if (pnum != myplr)
 			return;
 		for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-			if (plr[pnum].InvGrid[j] == 0) {
+			if (Players[pnum].InvGrid[j] == 0) {
 				r = 5 * leveltype + random_(160, 10 * leveltype);
-				t = plr[pnum]._pNumInv; // check
-				plr[pnum].InvList[t] = golditem;
-				plr[pnum].InvList[t]._iSeed = GetRndSeed();
-				plr[pnum]._pNumInv++;
-				plr[pnum].InvGrid[j] = plr[pnum]._pNumInv;
-				plr[pnum].InvList[t]._ivalue = r;
-				plr[pnum]._pGold += r;
+				t = Players[pnum]._pNumInv; // check
+				Players[pnum].InvList[t] = golditem;
+				Players[pnum].InvList[t]._iSeed = GetRndSeed();
+				Players[pnum]._pNumInv++;
+				Players[pnum].InvGrid[j] = Players[pnum]._pNumInv;
+				Players[pnum].InvList[t]._ivalue = r;
+				Players[pnum]._pGold += r;
 				SetGoldCurs(pnum, t);
 			}
 		}
@@ -3987,10 +3987,10 @@ void OperateShrine(int pnum, int i, int sType)
 			InitDiabloMsg(EMSG_SHRINE_SPOOKY1);
 		} else {
 			InitDiabloMsg(EMSG_SHRINE_SPOOKY2);
-			plr[myplr]._pHitPoints = plr[myplr]._pMaxHP;
-			plr[myplr]._pHPBase = plr[myplr]._pMaxHPBase;
-			plr[myplr]._pMana = plr[myplr]._pMaxMana;
-			plr[myplr]._pManaBase = plr[myplr]._pMaxManaBase;
+			Players[myplr]._pHitPoints = Players[myplr]._pMaxHP;
+			Players[myplr]._pHPBase = Players[myplr]._pMaxHPBase;
+			Players[myplr]._pMana = Players[myplr]._pMaxMana;
+			Players[myplr]._pManaBase = Players[myplr]._pMaxManaBase;
 		}
 		break;
 	case SHRINE_ABANDONED:
@@ -4041,25 +4041,25 @@ void OperateShrine(int pnum, int i, int sType)
 			return;
 		if (pnum != myplr)
 			return;
-		plr[pnum]._pMemSpells |= SPELLBIT(SPL_HBOLT);
-		if (plr[pnum]._pSplLvl[SPL_HBOLT] < MAX_SPELL_LEVEL)
-			plr[pnum]._pSplLvl[SPL_HBOLT]++;
-		if (plr[pnum]._pSplLvl[SPL_HBOLT] < MAX_SPELL_LEVEL)
-			plr[pnum]._pSplLvl[SPL_HBOLT]++;
-		t = plr[pnum]._pMaxManaBase / 10;
-		v1 = plr[pnum]._pMana - plr[pnum]._pManaBase;
-		v2 = plr[pnum]._pMaxMana - plr[pnum]._pMaxManaBase;
-		plr[pnum]._pManaBase -= t;
-		plr[pnum]._pMana -= t;
-		plr[pnum]._pMaxMana -= t;
-		plr[pnum]._pMaxManaBase -= t;
-		if (plr[pnum]._pMana >> 6 <= 0) {
-			plr[pnum]._pMana = v1;
-			plr[pnum]._pManaBase = 0;
+		Players[pnum]._pMemSpells |= SPELLBIT(SPL_HBOLT);
+		if (Players[pnum]._pSplLvl[SPL_HBOLT] < MAX_SPELL_LEVEL)
+			Players[pnum]._pSplLvl[SPL_HBOLT]++;
+		if (Players[pnum]._pSplLvl[SPL_HBOLT] < MAX_SPELL_LEVEL)
+			Players[pnum]._pSplLvl[SPL_HBOLT]++;
+		t = Players[pnum]._pMaxManaBase / 10;
+		v1 = Players[pnum]._pMana - Players[pnum]._pManaBase;
+		v2 = Players[pnum]._pMaxMana - Players[pnum]._pMaxManaBase;
+		Players[pnum]._pManaBase -= t;
+		Players[pnum]._pMana -= t;
+		Players[pnum]._pMaxMana -= t;
+		Players[pnum]._pMaxManaBase -= t;
+		if (Players[pnum]._pMana >> 6 <= 0) {
+			Players[pnum]._pMana = v1;
+			Players[pnum]._pManaBase = 0;
 		}
-		if (plr[pnum]._pMaxMana >> 6 <= 0) {
-			plr[pnum]._pMaxMana = v2;
-			plr[pnum]._pMaxManaBase = 0;
+		if (Players[pnum]._pMaxMana >> 6 <= 0) {
+			Players[pnum]._pMaxMana = v2;
+			Players[pnum]._pMaxManaBase = 0;
 		}
 		InitDiabloMsg(EMSG_SHRINE_ORNATE);
 		break;
@@ -4069,16 +4069,16 @@ void OperateShrine(int pnum, int i, int sType)
 		if (pnum != myplr)
 			return;
 		for (j = 0; j < NUM_INVLOC; j++) {
-			if (plr[pnum].InvBody[j]._iMagical && !plr[pnum].InvBody[j]._iIdentified)
-				plr[pnum].InvBody[j]._iIdentified = TRUE;
+			if (Players[pnum].InvBody[j]._iMagical && !Players[pnum].InvBody[j]._iIdentified)
+				Players[pnum].InvBody[j]._iIdentified = TRUE;
 		}
-		for (j = 0; j < plr[pnum]._pNumInv; j++) {
-			if (plr[pnum].InvList[j]._iMagical && !plr[pnum].InvList[j]._iIdentified)
-				plr[pnum].InvList[j]._iIdentified = TRUE;
+		for (j = 0; j < Players[pnum]._pNumInv; j++) {
+			if (Players[pnum].InvList[j]._iMagical && !Players[pnum].InvList[j]._iIdentified)
+				Players[pnum].InvList[j]._iIdentified = TRUE;
 		}
 		for (j = 0; j < MAXBELTITEMS; j++) {
-			if (plr[pnum].SpdList[j]._iMagical && !plr[pnum].SpdList[j]._iIdentified)
-				plr[pnum].SpdList[j]._iIdentified = TRUE; // belt items can't be magical?
+			if (Players[pnum].SpdList[j]._iMagical && !Players[pnum].SpdList[j]._iIdentified)
+				Players[pnum].SpdList[j]._iIdentified = TRUE; // belt items can't be magical?
 		}
 		InitDiabloMsg(EMSG_SHRINE_GLIMMERING);
 		break;
@@ -4124,7 +4124,7 @@ void OperateShrine(int pnum, int i, int sType)
 			return;
 		InitDiabloMsg(EMSG_SHRINE_OILY);
 
-		switch (plr[myplr]._pClass) {
+		switch (Players[myplr]._pClass) {
 		case PC_WARRIOR:
 			ModifyPlrStr(myplr, 2);
 			break;
@@ -4150,9 +4150,9 @@ void OperateShrine(int pnum, int i, int sType)
 		AddMissile(
 		    object[i]._ox,
 		    object[i]._oy,
-		    plr[myplr]._px,
-		    plr[myplr]._py,
-		    plr[myplr]._pdir,
+		    Players[myplr]._px,
+		    Players[myplr]._py,
+		    Players[myplr]._pdir,
 		    MIS_FIREWALL,
 		    TARGET_PLAYERS,
 		    0,
@@ -4166,7 +4166,7 @@ void OperateShrine(int pnum, int i, int sType)
 		if (pnum != myplr)
 			return;
 		InitDiabloMsg(EMSG_SHRINE_GLOWING);
-		int playerXP = plr[myplr]._pExperience;
+		int playerXP = Players[myplr]._pExperience;
 		int xpLoss, magicGain;
 		if (playerXP > 5000) {
 			magicGain = 5;
@@ -4176,7 +4176,7 @@ void OperateShrine(int pnum, int i, int sType)
 			xpLoss = 0;
 		}
 		ModifyPlrMag(myplr, magicGain);
-		plr[myplr]._pExperience = xpLoss;
+		Players[myplr]._pExperience = xpLoss;
 		CheckStats(pnum);
 	} break;
 
@@ -4186,8 +4186,8 @@ void OperateShrine(int pnum, int i, int sType)
 		if (pnum != myplr)
 			return;
 		InitDiabloMsg(EMSG_SHRINE_MENDICANT);
-		int gold = plr[myplr]._pGold / 2;
-		AddPlrExperience(myplr, plr[myplr]._pLevel, gold);
+		int gold = Players[myplr]._pGold / 2;
+		AddPlrExperience(myplr, Players[myplr]._pLevel, gold);
 		TakePlrsMoney(gold);
 		CheckStats(pnum);
 	} break;
@@ -4197,13 +4197,13 @@ void OperateShrine(int pnum, int i, int sType)
 		if (pnum != myplr)
 			return;
 		InitDiabloMsg(EMSG_SHRINE_SPARKLING);
-		AddPlrExperience(myplr, plr[myplr]._pLevel, 1000 * currlevel);
+		AddPlrExperience(myplr, Players[myplr]._pLevel, 1000 * currlevel);
 		AddMissile(
 		    object[i]._ox,
 		    object[i]._oy,
-		    plr[myplr]._px,
-		    plr[myplr]._py,
-		    plr[myplr]._pdir,
+		    Players[myplr]._px,
+		    Players[myplr]._py,
+		    Players[myplr]._pdir,
 		    MIS_FLASH,
 		    TARGET_PLAYERS,
 		    0,
@@ -4220,9 +4220,9 @@ void OperateShrine(int pnum, int i, int sType)
 		AddMissile(
 		    object[i]._ox,
 		    object[i]._oy,
-		    plr[myplr]._px,
-		    plr[myplr]._py,
-		    plr[myplr]._pdir,
+		    Players[myplr]._px,
+		    Players[myplr]._py,
+		    Players[myplr]._pdir,
 		    MIS_TOWN,
 		    TARGET_PLAYERS,
 		    0,
@@ -4235,8 +4235,8 @@ void OperateShrine(int pnum, int i, int sType)
 		if (pnum != myplr)
 			return;
 		InitDiabloMsg(EMSG_SHRINE_SHIMMERING);
-		plr[pnum]._pMana = plr[pnum]._pMaxMana;
-		plr[pnum]._pManaBase = plr[pnum]._pMaxManaBase;
+		Players[pnum]._pMana = Players[pnum]._pMaxMana;
+		Players[pnum]._pManaBase = Players[pnum]._pMaxManaBase;
 		break;
 
 	case SHRINE_SOLAR: {
@@ -4270,7 +4270,7 @@ void OperateShrine(int pnum, int i, int sType)
 		InitDiabloMsg(EMSG_SHRINE_MURPHYS);
 		BOOL broke = FALSE;
 		for (int j = 0; j < NUM_INVLOC; j++) {
-			ItemStruct *item = &plr[myplr].InvBody[j];
+			ItemStruct *item = &Players[myplr].InvBody[j];
 			if (item->_itype != ITYPE_NONE && random_(0, 3) == 0) {
 				if (item->_iDurability != DUR_INDESTRUCTIBLE) {
 					if (item->_iDurability) {
@@ -4282,7 +4282,7 @@ void OperateShrine(int pnum, int i, int sType)
 			}
 		}
 		if (!broke) {
-			TakePlrsMoney(plr[myplr]._pGold / 3);
+			TakePlrsMoney(Players[myplr]._pGold / 3);
 		}
 		break;
 #endif
@@ -4446,13 +4446,13 @@ DIABOOL OperateFountains(int pnum, int i)
 		if (pnum != myplr)
 			return FALSE;
 
-		if (plr[pnum]._pHitPoints < plr[pnum]._pMaxHP) {
+		if (Players[pnum]._pHitPoints < Players[pnum]._pMaxHP) {
 			PlaySfxLoc(LS_FOUNTAIN, object[i]._ox, object[i]._oy);
-			plr[pnum]._pHitPoints += 64;
-			plr[pnum]._pHPBase += 64;
-			if (plr[pnum]._pHitPoints > plr[pnum]._pMaxHP) {
-				plr[pnum]._pHitPoints = plr[pnum]._pMaxHP;
-				plr[pnum]._pHPBase = plr[pnum]._pMaxHPBase;
+			Players[pnum]._pHitPoints += 64;
+			Players[pnum]._pHPBase += 64;
+			if (Players[pnum]._pHitPoints > Players[pnum]._pMaxHP) {
+				Players[pnum]._pHitPoints = Players[pnum]._pMaxHP;
+				Players[pnum]._pHPBase = Players[pnum]._pMaxHPBase;
 			}
 			applied = TRUE;
 		} else
@@ -4464,14 +4464,14 @@ DIABOOL OperateFountains(int pnum, int i)
 		if (pnum != myplr)
 			return FALSE;
 
-		if (plr[pnum]._pMana < plr[pnum]._pMaxMana) {
+		if (Players[pnum]._pMana < Players[pnum]._pMaxMana) {
 			PlaySfxLoc(LS_FOUNTAIN, object[i]._ox, object[i]._oy);
 
-			plr[pnum]._pMana += 64;
-			plr[pnum]._pManaBase += 64;
-			if (plr[pnum]._pMana > plr[pnum]._pMaxMana) {
-				plr[pnum]._pMana = plr[pnum]._pMaxMana;
-				plr[pnum]._pManaBase = plr[pnum]._pMaxManaBase;
+			Players[pnum]._pMana += 64;
+			Players[pnum]._pManaBase += 64;
+			if (Players[pnum]._pMana > Players[pnum]._pMaxMana) {
+				Players[pnum]._pMana = Players[pnum]._pMaxMana;
+				Players[pnum]._pManaBase = Players[pnum]._pMaxManaBase;
 			}
 
 			applied = TRUE;
@@ -4487,11 +4487,11 @@ DIABOOL OperateFountains(int pnum, int i)
 		if (deltaload)
 			return FALSE;
 		AddMissile(
-		    plr[pnum]._px,
-		    plr[pnum]._py,
-		    plr[pnum]._px,
-		    plr[pnum]._py,
-		    plr[pnum]._pdir,
+		    Players[pnum]._px,
+		    Players[pnum]._py,
+		    Players[pnum]._px,
+		    Players[pnum]._py,
+		    Players[pnum]._pdir,
 		    MIS_INFRA,
 		    -1,
 		    pnum,
@@ -5019,10 +5019,10 @@ void BreakObject(int pnum, int oi)
 	int objdam, mind, maxd;
 
 	if (pnum != -1) {
-		mind = plr[pnum]._pIMinDam;
-		maxd = plr[pnum]._pIMaxDam;
+		mind = Players[pnum]._pIMinDam;
+		maxd = Players[pnum]._pIMaxDam;
 		objdam = random_(163, maxd - mind + 1) + mind;
-		objdam += plr[pnum]._pDamageMod + plr[pnum]._pIBonusDamMod + objdam * plr[pnum]._pIBonusDam / 100;
+		objdam += Players[pnum]._pDamageMod + Players[pnum]._pIBonusDamMod + objdam * Players[pnum]._pIBonusDam / 100;
 	} else {
 		objdam = 10;
 	}
@@ -5384,7 +5384,7 @@ void GetObjectStr(int i)
 		strcpy(infostr, "Slain Hero");
 		break;
 	}
-	if (plr[myplr]._pClass == PC_ROGUE) {
+	if (Players[myplr]._pClass == PC_ROGUE) {
 		if (object[i]._oTrapFlag) {
 			sprintf(tempstr, "Trapped %s", infostr);
 			strcpy(infostr, tempstr);

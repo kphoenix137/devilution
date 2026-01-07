@@ -17,7 +17,7 @@ static void sync_one_monster()
 
 	for (i = 0; i < nummonsters; i++) {
 		m = monstactive[i];
-		sync_word_6AA708[m] = abs(plr[myplr]._px - monster[m]._mx) + abs(plr[myplr]._py - monster[m]._my);
+		sync_word_6AA708[m] = abs(Players[myplr]._px - monster[m]._mx) + abs(Players[myplr]._py - monster[m]._my);
 		if (monster[m]._msquelch == 0) {
 			sync_word_6AA708[m] += 0x1000;
 		} else if (sgwLRU[m] != 0) {
@@ -131,7 +131,7 @@ static void SyncPlrInv(TSyncHeader *pHdr)
 	}
 
 	assert((DWORD)sgnSyncPInv < NUM_INVLOC);
-	pItem = &plr[myplr].InvBody[sgnSyncPInv];
+	pItem = &Players[myplr].InvBody[sgnSyncPInv];
 	if (pItem->_itype != ITYPE_NONE) {
 		pHdr->bPInvLoc = sgnSyncPInv;
 		pHdr->wPInvIndx = pItem->IDidx;
@@ -212,7 +212,7 @@ static void sync_monster(int pnum, const TSyncMonster *p)
 		}
 	}
 
-	delta = abs(plr[myplr]._px - monster[ndx]._mx) + abs(plr[myplr]._py - monster[ndx]._my);
+	delta = abs(Players[myplr]._px - monster[ndx]._mx) + abs(Players[myplr]._py - monster[ndx]._my);
 	if (delta > 255) {
 		delta = 255;
 	}

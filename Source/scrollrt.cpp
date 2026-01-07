@@ -197,10 +197,10 @@ static void scrollrt_draw_cursor_item()
 
 	if (pcurs >= CURSOR_FIRSTITEM) {
 		col = PAL16_YELLOW + 5;
-		if (plr[myplr].HoldItem._iMagical != 0) {
+		if (Players[myplr].HoldItem._iMagical != 0) {
 			col = PAL16_BLUE + 5;
 		}
-		if (!plr[myplr].HoldItem._iStatFlag) {
+		if (!Players[myplr].HoldItem._iStatFlag) {
 			col = PAL16_RED + 5;
 		}
 #ifdef HELLFIRE
@@ -438,7 +438,7 @@ static void DrawMonster(int x, int y, int mx, int my, int m, int CelSkip, int Ce
 			trans = monster[m]._uniqtrans + 4;
 		if (monster[m]._mmode == MM_STONE)
 			trans = 2;
-		if (plr[myplr]._pInfraFlag && light_table_index > 8)
+		if (Players[myplr]._pInfraFlag && light_table_index > 8)
 			trans = 1;
 		if (trans)
 			Cl2DrawLightTbl(mx, my, monster[m]._mAnimData, monster[m]._mAnimFrame, monster[m].MType->width, CelSkip, CelCap, trans);
@@ -500,7 +500,7 @@ static void DrawClippedMonster(int x, int y, int mx, int my, int m, int CelSkip,
 			trans = monster[m]._uniqtrans + 4;
 		if (monster[m]._mmode == MM_STONE)
 			trans = 2;
-		if (plr[myplr]._pInfraFlag && light_table_index > 8)
+		if (Players[myplr]._pInfraFlag && light_table_index > 8)
 			trans = 1;
 		if (trans)
 			Cl2DrawLightTblSafe(mx, my, monster[m]._mAnimData, monster[m]._mAnimFrame, monster[m].MType->width, CelSkip, CelCap, trans);
@@ -527,23 +527,23 @@ static void DrawPlayer(int pnum, int x, int y, int px, int py, BYTE *pCelBuff, i
 	int l;
 	DWORD *pFrameTable;
 
-	if (dFlags[x][y] & BFLAG_LIT || plr[myplr]._pInfraFlag || !setlevel && currlevel == 0) {
+	if (dFlags[x][y] & BFLAG_LIT || Players[myplr]._pInfraFlag || !setlevel && currlevel == 0) {
 		if (!pCelBuff) {
-			// app_fatal("Drawing player %d \"%s\": NULL Cel Buffer", pnum, plr[pnum]._pName);
+			// app_fatal("Drawing player %d \"%s\": NULL Cel Buffer", pnum, Players[pnum]._pName);
 			return;
 		}
 		pFrameTable = (DWORD *)pCelBuff;
 		if (nCel < 1 || pFrameTable[0] > 50 || nCel > (int)pFrameTable[0]) {
 			/*
 			const char *szMode = "unknown action";
-			if(plr[pnum]._pmode <= PM_QUIT)
-				szMode = szPlrModeAssert[plr[pnum]._pmode];
+			if(Players[pnum]._pmode <= PM_QUIT)
+				szMode = szPlrModeAssert[Players[pnum]._pmode];
 			app_fatal(
 				"Drawing player %d \"%s\" %s: facing %d, frame %d of %d",
 				pnum,
-				plr[pnum]._pName,
+				Players[pnum]._pName,
 				szMode,
-				plr[pnum]._pdir,
+				Players[pnum]._pdir,
 				nCel,
 				pFrameTable[0]);
 			*/
@@ -554,9 +554,9 @@ static void DrawPlayer(int pnum, int x, int y, int px, int py, BYTE *pCelBuff, i
 		if (pnum == myplr) {
 			Cl2Draw(px, py, pCelBuff, nCel, nWidth, CelSkip, CelCap);
 #ifndef HELLFIRE
-			if (plr[pnum].pManaShield)
+			if (Players[pnum].pManaShield)
 				Cl2Draw(
-				    px + plr[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
+				    px + Players[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
 				    py,
 				    misfiledata[MFILE_MANASHLD].mAnimData[0],
 				    1,
@@ -564,12 +564,12 @@ static void DrawPlayer(int pnum, int x, int y, int px, int py, BYTE *pCelBuff, i
 				    CelSkip,
 				    CelCap);
 #endif
-		} else if (!(dFlags[x][y] & BFLAG_LIT) || plr[myplr]._pInfraFlag && light_table_index > 8) {
+		} else if (!(dFlags[x][y] & BFLAG_LIT) || Players[myplr]._pInfraFlag && light_table_index > 8) {
 			Cl2DrawLightTbl(px, py, pCelBuff, nCel, nWidth, CelSkip, CelCap, 1);
 #ifndef HELLFIRE
-			if (plr[pnum].pManaShield)
+			if (Players[pnum].pManaShield)
 				Cl2DrawLightTbl(
-				    px + plr[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
+				    px + Players[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
 				    py,
 				    misfiledata[MFILE_MANASHLD].mAnimData[0],
 				    1,
@@ -586,9 +586,9 @@ static void DrawPlayer(int pnum, int x, int y, int px, int py, BYTE *pCelBuff, i
 				light_table_index -= 5;
 			Cl2DrawLight(px, py, pCelBuff, nCel, nWidth, CelSkip, CelCap);
 #ifndef HELLFIRE
-			if (plr[pnum].pManaShield)
+			if (Players[pnum].pManaShield)
 				Cl2DrawLight(
-				    px + plr[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
+				    px + Players[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
 				    py,
 				    misfiledata[MFILE_MANASHLD].mAnimData[0],
 				    1,
@@ -619,23 +619,23 @@ static void DrawClippedPlayer(int pnum, int x, int y, int px, int py, BYTE *pCel
 	int l;
 	DWORD *pFrameTable;
 
-	if (dFlags[x][y] & BFLAG_LIT || plr[myplr]._pInfraFlag) {
+	if (dFlags[x][y] & BFLAG_LIT || Players[myplr]._pInfraFlag) {
 		if (!pCelBuff) {
-			// app_fatal("Drawing player %d \"%s\" clipped: NULL Cel Buffer", pnum, plr[pnum]._pName);
+			// app_fatal("Drawing player %d \"%s\" clipped: NULL Cel Buffer", pnum, Players[pnum]._pName);
 			return;
 		}
 		pFrameTable = (DWORD *)pCelBuff;
 		if (nCel < 1 || pFrameTable[0] > 50 || nCel > (int)pFrameTable[0]) {
 			/*
 			const char *szMode = "unknown action";
-			if(plr[pnum]._pmode <= PM_QUIT)
-				szMode = szPlrModeAssert[plr[pnum]._pmode];
+			if(Players[pnum]._pmode <= PM_QUIT)
+				szMode = szPlrModeAssert[Players[pnum]._pmode];
 			app_fatal(
 				"Drawing player %d \"%s\" %s clipped: facing %d, frame %d of %d",
 				pnum,
-				plr[pnum]._pName,
+				Players[pnum]._pName,
 				szMode,
-				plr[pnum]._pdir,
+				Players[pnum]._pdir,
 				nCel,
 				pFrameTable[0]);
 			*/
@@ -646,9 +646,9 @@ static void DrawClippedPlayer(int pnum, int x, int y, int px, int py, BYTE *pCel
 		if (pnum == myplr) {
 			Cl2DrawSafe(px, py, pCelBuff, nCel, nWidth, CelSkip, CelCap);
 #ifndef HELLFIRE
-			if (plr[pnum].pManaShield)
+			if (Players[pnum].pManaShield)
 				Cl2DrawSafe(
-				    px + plr[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
+				    px + Players[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
 				    py,
 				    misfiledata[MFILE_MANASHLD].mAnimData[0],
 				    1,
@@ -656,12 +656,12 @@ static void DrawClippedPlayer(int pnum, int x, int y, int px, int py, BYTE *pCel
 				    CelSkip,
 				    CelCap);
 #endif
-		} else if (!(dFlags[x][y] & BFLAG_LIT) || plr[myplr]._pInfraFlag && light_table_index > 8) {
+		} else if (!(dFlags[x][y] & BFLAG_LIT) || Players[myplr]._pInfraFlag && light_table_index > 8) {
 			Cl2DrawLightTblSafe(px, py, pCelBuff, nCel, nWidth, CelSkip, CelCap, 1);
 #ifndef HELLFIRE
-			if (plr[pnum].pManaShield)
+			if (Players[pnum].pManaShield)
 				Cl2DrawLightTblSafe(
-				    px + plr[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
+				    px + Players[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
 				    py,
 				    misfiledata[MFILE_MANASHLD].mAnimData[0],
 				    1,
@@ -678,9 +678,9 @@ static void DrawClippedPlayer(int pnum, int x, int y, int px, int py, BYTE *pCel
 				light_table_index -= 5;
 			Cl2DrawLightSafe(px, py, pCelBuff, nCel, nWidth, CelSkip, CelCap);
 #ifndef HELLFIRE
-			if (plr[pnum].pManaShield)
+			if (Players[pnum].pManaShield)
 				Cl2DrawLightSafe(
-				    px + plr[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
+				    px + Players[pnum]._pAnimWidth2 - misfiledata[MFILE_MANASHLD].mAnimWidth2[0],
 				    py,
 				    misfiledata[MFILE_MANASHLD].mAnimData[0],
 				    1,
@@ -706,7 +706,7 @@ static void DrawClippedPlayer(int pnum, int x, int y, int px, int py, BYTE *pCel
 void DrawDeadPlayer(int x, int y, int sx, int sy, int CelSkip, int CelCap, BOOL clipped)
 {
 	int i, px, py, nCel;
-	PlayerStruct *p;
+	Player *p;
 	BYTE *pCelBuff;
 	DWORD *pFrameTable;
 
@@ -718,7 +718,7 @@ void DrawDeadPlayer(int x, int y, int sx, int sy, int CelSkip, int CelCap, BOOL 
 	dFlags[x][y] &= ~BFLAG_DEAD_PLAYER;
 
 	for (i = 0; i < MAX_PLRS; i++) {
-		p = &plr[i];
+		p = &Players[i];
 		if (p->plractive && p->_pHitPoints == 0 && p->plrlevel == (BYTE)currlevel && p->_px == x && p->_py == y) {
 			pCelBuff = p->_pAnimData;
 			if (!pCelBuff) {
@@ -948,7 +948,7 @@ static void scrollrt_draw_clipped_dungeon(BYTE *pBuff, int sx, int sy, int dx, i
 	char bFlag, bDead, bObj, bItem, bPlr, bArch, bMap, negPlr, dd;
 	DeadStruct *pDeadGuy;
 	ItemStruct *pItem;
-	PlayerStruct *pPlayer;
+	Player *pPlayer;
 	MonsterStruct *pMonster;
 	BYTE *pCelBuff;
 	DWORD *pFrameTable;
@@ -1049,7 +1049,7 @@ static void scrollrt_draw_clipped_dungeon(BYTE *pBuff, int sx, int sy, int dx, i
 				// app_fatal("draw player clipped: tried to draw illegal player %d", p);
 				break;
 			}
-			pPlayer = &plr[p];
+			pPlayer = &Players[p];
 			px = dx + pPlayer->_pxoff - pPlayer->_pAnimWidth2;
 			py = dy + pPlayer->_pyoff;
 			DrawClippedPlayer(p, sx, sy - 1, px, py, pPlayer->_pAnimData, pPlayer->_pAnimFrame, pPlayer->_pAnimWidth, 0, 8);
@@ -1061,7 +1061,7 @@ static void scrollrt_draw_clipped_dungeon(BYTE *pBuff, int sx, int sy, int dx, i
 			}
 		} while (0);
 	}
-	if (bFlag & BFLAG_MONSTLR && (bFlag & BFLAG_LIT || plr[myplr]._pInfraFlag) && negMon < 0) {
+	if (bFlag & BFLAG_MONSTLR && (bFlag & BFLAG_LIT || Players[myplr]._pInfraFlag) && negMon < 0) {
 		do {
 			draw_monster_num = -(negMon + 1);
 			if ((DWORD)draw_monster_num >= MAXMONSTERS) {
@@ -1096,7 +1096,7 @@ static void scrollrt_draw_clipped_dungeon(BYTE *pBuff, int sx, int sy, int dx, i
 				// app_fatal("draw player clipped: tried to draw illegal player %d", p);
 				break;
 			}
-			pPlayer = &plr[p];
+			pPlayer = &Players[p];
 			px = dx + pPlayer->_pxoff - pPlayer->_pAnimWidth2;
 			py = dy + pPlayer->_pyoff;
 			DrawClippedPlayer(bPlr - 1, sx, sy, px, py, pPlayer->_pAnimData, pPlayer->_pAnimFrame, pPlayer->_pAnimWidth, 0, 8);
@@ -1108,7 +1108,7 @@ static void scrollrt_draw_clipped_dungeon(BYTE *pBuff, int sx, int sy, int dx, i
 			}
 		} while (0);
 	}
-	if (nMon > 0 && (bFlag & BFLAG_LIT || plr[myplr]._pInfraFlag)) {
+	if (nMon > 0 && (bFlag & BFLAG_LIT || Players[myplr]._pInfraFlag)) {
 		do {
 			draw_monster_num = nMon - 1;
 			if ((DWORD)draw_monster_num >= MAXMONSTERS) {
@@ -1443,7 +1443,7 @@ static void scrollrt_draw_clipped_dungeon_2(BYTE *pBuff, int sx, int sy, int row
 	char bFlag, bDead, bObj, bItem, bPlr, bArch, bMap, negPlr, dd;
 	DeadStruct *pDeadGuy;
 	ItemStruct *pItem;
-	PlayerStruct *pPlayer;
+	Player *pPlayer;
 	MonsterStruct *pMonster;
 	BYTE *pCelBuff;
 	DWORD *pFrameTable;
@@ -1548,7 +1548,7 @@ static void scrollrt_draw_clipped_dungeon_2(BYTE *pBuff, int sx, int sy, int row
 				// app_fatal("draw player clipped: tried to draw illegal player %d", p);
 				break;
 			}
-			pPlayer = &plr[p];
+			pPlayer = &Players[p];
 			px = dx + pPlayer->_pxoff - pPlayer->_pAnimWidth2;
 			py = dy + pPlayer->_pyoff;
 			DrawClippedPlayer(p, sx, sy - 1, px, py, pPlayer->_pAnimData, pPlayer->_pAnimFrame, pPlayer->_pAnimWidth, CelSkip, 8);
@@ -1560,7 +1560,7 @@ static void scrollrt_draw_clipped_dungeon_2(BYTE *pBuff, int sx, int sy, int row
 			}
 		} while (0);
 	}
-	if (bFlag & BFLAG_MONSTLR && (bFlag & BFLAG_LIT || plr[myplr]._pInfraFlag) && negMon < 0) {
+	if (bFlag & BFLAG_MONSTLR && (bFlag & BFLAG_LIT || Players[myplr]._pInfraFlag) && negMon < 0) {
 		do {
 			draw_monster_num = -(negMon + 1);
 #ifdef HELLFIRE
@@ -1599,7 +1599,7 @@ static void scrollrt_draw_clipped_dungeon_2(BYTE *pBuff, int sx, int sy, int row
 				// app_fatal("draw player clipped: tried to draw illegal player %d", p);
 				break;
 			}
-			pPlayer = &plr[p];
+			pPlayer = &Players[p];
 			px = dx + pPlayer->_pxoff - pPlayer->_pAnimWidth2;
 			py = dy + pPlayer->_pyoff;
 			DrawClippedPlayer(p, sx, sy, px, py, pPlayer->_pAnimData, pPlayer->_pAnimFrame, pPlayer->_pAnimWidth, CelSkip, 8);
@@ -1611,7 +1611,7 @@ static void scrollrt_draw_clipped_dungeon_2(BYTE *pBuff, int sx, int sy, int row
 			}
 		} while (0);
 	}
-	if (nMon > 0 && (bFlag & BFLAG_LIT || plr[myplr]._pInfraFlag)) {
+	if (nMon > 0 && (bFlag & BFLAG_LIT || Players[myplr]._pInfraFlag)) {
 		do {
 			draw_monster_num = nMon - 1;
 			if ((DWORD)draw_monster_num >= MAXMONSTERS) {
@@ -1879,7 +1879,7 @@ static void scrollrt_draw_dungeon(BYTE *pBuff, int sx, int sy, int row, int CelC
 	char bFlag, bDead, bObj, bItem, bPlr, bArch, bMap, negPlr, dd;
 	DeadStruct *pDeadGuy;
 	ItemStruct *pItem;
-	PlayerStruct *pPlayer;
+	Player *pPlayer;
 	MonsterStruct *pMonster;
 	BYTE *pCelBuff;
 	DWORD *pFrameTable;
@@ -1978,7 +1978,7 @@ static void scrollrt_draw_dungeon(BYTE *pBuff, int sx, int sy, int row, int CelC
 				// app_fatal("draw player: tried to draw illegal player %d", p);
 				break;
 			}
-			pPlayer = &plr[p];
+			pPlayer = &Players[p];
 			px = dx + pPlayer->_pxoff - pPlayer->_pAnimWidth2;
 			py = dy + pPlayer->_pyoff;
 			DrawPlayer(p, sx, sy - 1, px, py, pPlayer->_pAnimData, pPlayer->_pAnimFrame, pPlayer->_pAnimWidth, 0, CelCap);
@@ -1990,7 +1990,7 @@ static void scrollrt_draw_dungeon(BYTE *pBuff, int sx, int sy, int row, int CelC
 			}
 		} while (0);
 	}
-	if (bFlag & BFLAG_MONSTLR && (bFlag & BFLAG_LIT || plr[myplr]._pInfraFlag) && negMon < 0) {
+	if (bFlag & BFLAG_MONSTLR && (bFlag & BFLAG_LIT || Players[myplr]._pInfraFlag) && negMon < 0) {
 		do {
 			draw_monster_num = -(negMon + 1);
 #ifdef HELLFIRE
@@ -2033,7 +2033,7 @@ static void scrollrt_draw_dungeon(BYTE *pBuff, int sx, int sy, int row, int CelC
 				// app_fatal("draw player: tried to draw illegal player %d", p);
 				break;
 			}
-			pPlayer = &plr[p];
+			pPlayer = &Players[p];
 			px = dx + pPlayer->_pxoff - pPlayer->_pAnimWidth2;
 			py = dy + pPlayer->_pyoff;
 			DrawPlayer(p, sx, sy, px, py, pPlayer->_pAnimData, pPlayer->_pAnimFrame, pPlayer->_pAnimWidth, 0, CelCap);
@@ -2045,7 +2045,7 @@ static void scrollrt_draw_dungeon(BYTE *pBuff, int sx, int sy, int row, int CelC
 			}
 		} while (0);
 	}
-	if (nMon > 0 && (bFlag & BFLAG_LIT || plr[myplr]._pInfraFlag)) {
+	if (nMon > 0 && (bFlag & BFLAG_LIT || Players[myplr]._pInfraFlag)) {
 		do {
 			draw_monster_num = nMon - 1;
 			if ((DWORD)draw_monster_num >= MAXMONSTERS) {
@@ -2568,7 +2568,7 @@ void DrawView(int StartX, int StartY)
 		DrawChr();
 	} else if (questlog) {
 		DrawQuestLog();
-	} else if (plr[myplr]._pStatPts != 0 && !spselflag) {
+	} else if (Players[myplr]._pStatPts != 0 && !spselflag) {
 		DrawLevelUpIcon();
 	}
 	if (uitemflag) {

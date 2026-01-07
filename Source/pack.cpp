@@ -46,13 +46,13 @@ void PackPlayer(PkPlayerStruct *pPack, int pnum)
 void PackPlayer(PkPlayerStruct *pPack, int pnum, BOOL manashield)
 #endif
 {
-	PlayerStruct *pPlayer;
+	Player *pPlayer;
 	int i;
 	ItemStruct *pi;
 	PkItemStruct *pki;
 
 	memset(pPack, 0, sizeof(*pPack));
-	pPlayer = &plr[pnum];
+	pPlayer = &Players[pnum];
 	pPack->destAction = pPlayer->destAction;
 	pPack->destParam1 = pPlayer->destParam1;
 	pPack->destParam2 = pPlayer->destParam2;
@@ -176,7 +176,7 @@ static
 	}
 }
 
-void VerifyGoldSeeds(PlayerStruct *pPlayer)
+void VerifyGoldSeeds(Player *pPlayer)
 {
 	int i, j;
 
@@ -196,12 +196,12 @@ void VerifyGoldSeeds(PlayerStruct *pPlayer)
 
 void UnPackPlayer(PkPlayerStruct *pPack, int pnum, BOOL killok)
 {
-	PlayerStruct *pPlayer;
+	Player *pPlayer;
 	int i;
 	ItemStruct *pi;
 	PkItemStruct *pki;
 
-	pPlayer = &plr[pnum];
+	pPlayer = &Players[pnum];
 	ClearPlrRVars(pPlayer);
 	pPlayer->_px = pPack->px;
 	pPlayer->_py = pPack->py;

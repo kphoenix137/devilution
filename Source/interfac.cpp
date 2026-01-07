@@ -192,7 +192,7 @@ static void InitCutscene(unsigned int uMsg)
 		break;
 	case WM_DIABTOWNWARP:
 	case WM_DIABTWARPUP:
-		switch (gnLevelTypeTbl[plr[myplr].plrlevel]) {
+		switch (gnLevelTypeTbl[Players[myplr].plrlevel]) {
 		case DTYPE_TOWN:
 			sgpBackCel = LoadFileInMem("Gendata\\Cuttt.CEL", NULL);
 			LoadPalette("Gendata\\Cuttt.pal");
@@ -200,7 +200,7 @@ static void InitCutscene(unsigned int uMsg)
 			break;
 #ifdef HELLFIRE
 		case DTYPE_CATHEDRAL:
-			if (plr[myplr].plrlevel < 17) {
+			if (Players[myplr].plrlevel < 17) {
 				sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", NULL);
 				LoadPalette("Gendata\\Cutl1d.pal");
 				progress_id = 0;
@@ -218,7 +218,7 @@ static void InitCutscene(unsigned int uMsg)
 			break;
 		case DTYPE_CAVES:
 #ifdef HELLFIRE
-			if (plr[myplr].plrlevel < 17) {
+			if (Players[myplr].plrlevel < 17) {
 #endif
 				sgpBackCel = LoadFileInMem("Gendata\\Cut3.CEL", NULL);
 				LoadPalette("Gendata\\Cut3.pal");
@@ -350,7 +350,7 @@ void ShowProgress(unsigned int uMsg)
 		FreeGameMem();
 		currlevel++;
 		leveltype = gnLevelTypeTbl[currlevel];
-		assert(plr[myplr].plrlevel == currlevel);
+		assert(Players[myplr].plrlevel == currlevel);
 		IncProgress();
 		LoadGameLevel(FALSE, ENTRY_MAIN);
 		IncProgress();
@@ -366,7 +366,7 @@ void ShowProgress(unsigned int uMsg)
 		FreeGameMem();
 		currlevel--;
 		leveltype = gnLevelTypeTbl[currlevel];
-		assert(plr[myplr].plrlevel == currlevel);
+		assert(Players[myplr].plrlevel == currlevel);
 		IncProgress();
 		LoadGameLevel(FALSE, ENTRY_PREV);
 		IncProgress();
@@ -419,9 +419,9 @@ void ShowProgress(unsigned int uMsg)
 			DeltaSaveLevel();
 		}
 		FreeGameMem();
-		currlevel = plr[myplr].plrlevel;
+		currlevel = Players[myplr].plrlevel;
 		leveltype = gnLevelTypeTbl[currlevel];
-		assert(plr[myplr].plrlevel == currlevel);
+		assert(Players[myplr].plrlevel == currlevel);
 		IncProgress();
 		LoadGameLevel(FALSE, ENTRY_TWARPDN);
 		IncProgress();
@@ -434,9 +434,9 @@ void ShowProgress(unsigned int uMsg)
 			DeltaSaveLevel();
 		}
 		FreeGameMem();
-		currlevel = plr[myplr].plrlevel;
+		currlevel = Players[myplr].plrlevel;
 		leveltype = gnLevelTypeTbl[currlevel];
-		assert(plr[myplr].plrlevel == currlevel);
+		assert(Players[myplr].plrlevel == currlevel);
 		IncProgress();
 		LoadGameLevel(FALSE, ENTRY_TWARPUP);
 		IncProgress();
@@ -449,9 +449,9 @@ void ShowProgress(unsigned int uMsg)
 			DeltaSaveLevel();
 		}
 		FreeGameMem();
-		currlevel = plr[myplr].plrlevel;
+		currlevel = Players[myplr].plrlevel;
 		leveltype = gnLevelTypeTbl[currlevel];
-		assert(plr[myplr].plrlevel == currlevel);
+		assert(Players[myplr].plrlevel == currlevel);
 		IncProgress();
 		LoadGameLevel(FALSE, ENTRY_MAIN);
 		IncProgress();
@@ -466,11 +466,11 @@ void ShowProgress(unsigned int uMsg)
 	saveProc = SetWindowProc(saveProc);
 	assert(saveProc == DisableInputWndProc);
 
-	NetSendCmdLocParam1(TRUE, CMD_PLAYER_JOINLEVEL, plr[myplr]._px, plr[myplr]._py, plr[myplr].plrlevel);
+	NetSendCmdLocParam1(TRUE, CMD_PLAYER_JOINLEVEL, Players[myplr]._px, Players[myplr]._py, Players[myplr].plrlevel);
 	plrmsg_delay(FALSE);
 	ResetPal();
 
-	if (gbSomebodyWonGameKludge && plr[myplr].plrlevel == 16) {
+	if (gbSomebodyWonGameKludge && Players[myplr].plrlevel == 16) {
 		PrepDoEnding();
 	}
 

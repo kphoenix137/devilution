@@ -424,16 +424,16 @@ void SearchAutomapItem()
 	int px, py;
 	int i, j;
 
-	if (plr[myplr]._pmode == PM_WALK3) {
-		x = plr[myplr]._pfutx;
-		y = plr[myplr]._pfuty;
-		if (plr[myplr]._pdir == DIR_W)
+	if (Players[myplr]._pmode == PM_WALK3) {
+		x = Players[myplr]._pfutx;
+		y = Players[myplr]._pfuty;
+		if (Players[myplr]._pdir == DIR_W)
 			x++;
 		else
 			y++;
 	} else {
-		x = plr[myplr]._px;
-		y = plr[myplr]._py;
+		x = Players[myplr]._px;
+		y = Players[myplr]._py;
 	}
 
 	x1 = x - 8;
@@ -489,22 +489,22 @@ static void DrawAutomapPlr()
 	int px, py;
 	int x, y;
 
-	if (plr[myplr]._pmode == PM_WALK3) {
-		x = plr[myplr]._pfutx;
-		y = plr[myplr]._pfuty;
-		if (plr[myplr]._pdir == DIR_W)
+	if (Players[myplr]._pmode == PM_WALK3) {
+		x = Players[myplr]._pfutx;
+		y = Players[myplr]._pfuty;
+		if (Players[myplr]._pdir == DIR_W)
 			x++;
 		else
 			y++;
 	} else {
-		x = plr[myplr]._px;
-		y = plr[myplr]._py;
+		x = Players[myplr]._px;
+		y = Players[myplr]._py;
 	}
 	px = x - 2 * AutoMapXOfs - ViewX;
 	py = y - 2 * AutoMapYOfs - ViewY;
 
-	x = (plr[myplr]._pxoff * AutoMapScale / 100 >> 1) + (ScrollInfo._sxoff * AutoMapScale / 100 >> 1) + (px - py) * AmLine16 + SCREEN_WIDTH / 2 + SCREEN_X;
-	y = (plr[myplr]._pyoff * AutoMapScale / 100 >> 1) + (ScrollInfo._syoff * AutoMapScale / 100 >> 1) + (px + py) * AmLine8 + (SCREEN_HEIGHT - PANEL_HEIGHT) / 2 + SCREEN_Y;
+	x = (Players[myplr]._pxoff * AutoMapScale / 100 >> 1) + (ScrollInfo._sxoff * AutoMapScale / 100 >> 1) + (px - py) * AmLine16 + SCREEN_WIDTH / 2 + SCREEN_X;
+	y = (Players[myplr]._pyoff * AutoMapScale / 100 >> 1) + (ScrollInfo._syoff * AutoMapScale / 100 >> 1) + (px + py) * AmLine8 + (SCREEN_HEIGHT - PANEL_HEIGHT) / 2 + SCREEN_Y;
 
 	if (invflag || sbookflag)
 		x -= SCREEN_WIDTH / 4;
@@ -512,7 +512,7 @@ static void DrawAutomapPlr()
 		x += SCREEN_WIDTH / 4;
 	y -= AmLine8;
 
-	switch (plr[myplr]._pdir) {
+	switch (Players[myplr]._pdir) {
 	case DIR_N:
 		DrawLine(x, y, x, y - AmLine16, COLOR_PLAYER);
 		DrawLine(x, y - AmLine16, x - AmLine4, y - AmLine8, COLOR_PLAYER);

@@ -1229,8 +1229,8 @@ static BOOL calc_snd_position(int x, int y, int *plVolume, int *plPan)
 {
 	int pan, volume;
 
-	x -= plr[myplr]._px;
-	y -= plr[myplr]._py;
+	x -= Players[myplr]._px;
+	y -= Players[myplr]._py;
 
 	pan = (x - y) * 256;
 	*plPan = pan;
@@ -1254,7 +1254,7 @@ static void PlaySFX_priv(TSFX *pSFX, BOOL loc, int x, int y)
 {
 	int lPan, lVolume;
 
-	if (plr[myplr].pLvlLoad && gbMaxPlayers != 1) {
+	if (Players[myplr].pLvlLoad && gbMaxPlayers != 1) {
 		return;
 	}
 	if (!gbSndInited || !gbSoundOn || gbBufferMsgs) {
@@ -1288,7 +1288,7 @@ void PlayEffect(int i, int mode)
 	int sndIdx, mi, lVolume, lPan;
 	TSnd *snd;
 
-	if (plr[myplr].pLvlLoad) {
+	if (Players[myplr].pLvlLoad) {
 		return;
 	}
 
@@ -1450,18 +1450,18 @@ void sound_init()
 	BYTE mask = 0;
 	if (gbMaxPlayers > 1) {
 		mask = PLRSFXS;
-	} else if (plr[myplr]._pClass == PC_WARRIOR) {
+	} else if (Players[myplr]._pClass == PC_WARRIOR) {
 		mask = sfx_WARRIOR;
-	} else if (plr[myplr]._pClass == PC_ROGUE) {
+	} else if (Players[myplr]._pClass == PC_ROGUE) {
 		mask = sfx_ROGUE;
-	} else if (plr[myplr]._pClass == PC_SORCERER) {
+	} else if (Players[myplr]._pClass == PC_SORCERER) {
 		mask = sfx_SORCEROR;
 #ifdef HELLFIRE
-	} else if (plr[myplr]._pClass == PC_MONK) {
+	} else if (Players[myplr]._pClass == PC_MONK) {
 		mask = sfx_MONK;
-	} else if (plr[myplr]._pClass == PC_BARD) {
+	} else if (Players[myplr]._pClass == PC_BARD) {
 		mask = sfx_ROGUE;
-	} else if (plr[myplr]._pClass == PC_BARBARIAN) {
+	} else if (Players[myplr]._pClass == PC_BARBARIAN) {
 		mask = sfx_WARRIOR;
 #endif
 	} else {

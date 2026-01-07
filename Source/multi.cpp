@@ -71,13 +71,13 @@ void __cdecl dumphist(const char *pszFmt, ...)
 	fprintf(
 	    sgpHistFile,
 	    "\r\n          (%d,%d)(%d,%d)(%d,%d)(%d,%d)\r\n",
-	    plr[0].plractive,
+	    Players[0].plractive,
 	    player_state[0],
-	    plr[1].plractive,
+	    Players[1].plractive,
 	    player_state[1],
-	    plr[2].plractive,
+	    Players[2].plractive,
 	    player_state[2],
-	    plr[3].plractive,
+	    Players[3].plractive,
 	    player_state[3]);
 	fflush(sgpHistFile);
 }
@@ -140,15 +140,15 @@ static BYTE *multi_recv_packet(TBuffer *pBuf, BYTE *body, int *size)
 static void NetRecvPlrData(TPkt *pkt)
 {
 	pkt->hdr.wCheck = 'ip';
-	pkt->hdr.px = plr[myplr]._px;
-	pkt->hdr.py = plr[myplr]._py;
-	pkt->hdr.targx = plr[myplr]._ptargx;
-	pkt->hdr.targy = plr[myplr]._ptargy;
-	pkt->hdr.php = plr[myplr]._pHitPoints;
-	pkt->hdr.pmhp = plr[myplr]._pMaxHP;
-	pkt->hdr.bstr = plr[myplr]._pBaseStr;
-	pkt->hdr.bmag = plr[myplr]._pBaseMag;
-	pkt->hdr.bdex = plr[myplr]._pBaseDex;
+	pkt->hdr.px = Players[myplr]._px;
+	pkt->hdr.py = Players[myplr]._py;
+	pkt->hdr.targx = Players[myplr]._ptargx;
+	pkt->hdr.targy = Players[myplr]._ptargy;
+	pkt->hdr.php = Players[myplr]._pHitPoints;
+	pkt->hdr.pmhp = Players[myplr]._pMaxHP;
+	pkt->hdr.bstr = Players[myplr]._pBaseStr;
+	pkt->hdr.bmag = Players[myplr]._pBaseMag;
+	pkt->hdr.bdex = Players[myplr]._pBaseDex;
 }
 
 void multi_msg_add(BYTE *pbMsg, BYTE bLen)
@@ -281,7 +281,7 @@ static void multi_player_left_msg(int pnum, int left)
 {
 	const char *pszFmt;
 
-	if (plr[pnum].plractive) {
+	if (Players[pnum].plractive) {
 		RemovePlrFromMap(pnum);
 		RemovePortalMissile(pnum);
 		DeactivatePortal(pnum);
@@ -298,10 +298,10 @@ static void multi_player_left_msg(int pnum, int left)
 				pszFmt = "Player '%s' dropped due to timeout";
 				break;
 			}
-			EventPlrMsg(pszFmt, plr[pnum]._pName);
+			EventPlrMsg(pszFmt, Players[pnum]._pName);
 		}
-		plr[pnum].plractive = FALSE;
-		plr[pnum]._pName[0] = '\0';
+		Players[pnum].plractive = FALSE;
+		Players[pnum]._pName[0] = '\0';
 		gbActivePlayers--;
 	}
 }
@@ -507,45 +507,45 @@ void multi_process_network_packets()
 			continue;
 		if (pkt->wLen != dwMsgSize)
 			continue;
-		plr[dwID]._pownerx = pkt->px;
-		plr[dwID]._pownery = pkt->py;
+		Players[dwID]._pownerx = pkt->px;
+		Players[dwID]._pownery = pkt->py;
 		if (dwID != myplr) {
 			// ASSERT: gbBufferMsgs != BUFFER_PROCESS (2)
-			plr[dwID]._pHitPoints = pkt->php;
-			plr[dwID]._pMaxHP = pkt->pmhp;
+			Players[dwID]._pHitPoints = pkt->php;
+			Players[dwID]._pMaxHP = pkt->pmhp;
 			cond = gbBufferMsgs == 1;
-			plr[dwID]._pBaseStr = pkt->bstr;
-			plr[dwID]._pBaseMag = pkt->bmag;
-			plr[dwID]._pBaseDex = pkt->bdex;
-			if (!cond && plr[dwID].plractive && plr[dwID]._pHitPoints != 0) {
-				if (currlevel == plr[dwID].plrlevel && !plr[dwID]._pLvlChanging) {
-					dx = abs(plr[dwID]._px - pkt->px);
-					dy = abs(plr[dwID]._py - pkt->py);
+			Players[dwID]._pBaseStr = pkt->bstr;
+			Players[dwID]._pBaseMag = pkt->bmag;
+			Players[dwID]._pBaseDex = pkt->bdex;
+			if (!cond && Players[dwID].plractive && Players[dwID]._pHitPoints != 0) {
+				if (currlevel == Players[dwID].plrlevel && !Players[dwID]._pLvlChanging) {
+					dx = abs(Players[dwID]._px - pkt->px);
+					dy = abs(Players[dwID]._py - pkt->py);
 					if ((dx > 3 || dy > 3) && dPlayer[pkt->px][pkt->py] == 0) {
 						FixPlrWalkTags(dwID);
-						plr[dwID]._poldx = plr[dwID]._px;
-						plr[dwID]._poldy = plr[dwID]._py;
+						Players[dwID]._poldx = Players[dwID]._px;
+						Players[dwID]._poldy = Players[dwID]._py;
 						FixPlrWalkTags(dwID);
-						plr[dwID]._px = pkt->px;
-						plr[dwID]._py = pkt->py;
-						plr[dwID]._pfutx = pkt->px;
-						plr[dwID]._pfuty = pkt->py;
-						dPlayer[plr[dwID]._px][plr[dwID]._py] = dwID + 1;
+						Players[dwID]._px = pkt->px;
+						Players[dwID]._py = pkt->py;
+						Players[dwID]._pfutx = pkt->px;
+						Players[dwID]._pfuty = pkt->py;
+						dPlayer[Players[dwID]._px][Players[dwID]._py] = dwID + 1;
 					}
-					dx = abs(plr[dwID]._pfutx - plr[dwID]._px);
-					dy = abs(plr[dwID]._pfuty - plr[dwID]._py);
+					dx = abs(Players[dwID]._pfutx - Players[dwID]._px);
+					dy = abs(Players[dwID]._pfuty - Players[dwID]._py);
 					if (dx > 1 || dy > 1) {
-						plr[dwID]._pfutx = plr[dwID]._px;
-						plr[dwID]._pfuty = plr[dwID]._py;
+						Players[dwID]._pfutx = Players[dwID]._px;
+						Players[dwID]._pfuty = Players[dwID]._py;
 					}
 					MakePlrPath(dwID, pkt->targx, pkt->targy, TRUE);
 				} else {
-					plr[dwID]._px = pkt->px;
-					plr[dwID]._py = pkt->py;
-					plr[dwID]._pfutx = pkt->px;
-					plr[dwID]._pfuty = pkt->py;
-					plr[dwID]._ptargx = pkt->targx;
-					plr[dwID]._ptargy = pkt->targy;
+					Players[dwID]._px = pkt->px;
+					Players[dwID]._py = pkt->py;
+					Players[dwID]._pfutx = pkt->px;
+					Players[dwID]._pfuty = pkt->py;
+					Players[dwID]._ptargx = pkt->targx;
+					Players[dwID]._ptargy = pkt->targy;
 				}
 			}
 		}
@@ -676,17 +676,17 @@ static void SetupLocalCoords()
 #endif
 	x += plrxoff[myplr];
 	y += plryoff[myplr];
-	plr[myplr]._px = x;
-	plr[myplr]._py = y;
-	plr[myplr]._pfutx = x;
-	plr[myplr]._pfuty = y;
-	plr[myplr]._ptargx = x;
-	plr[myplr]._ptargy = y;
-	plr[myplr].plrlevel = currlevel;
-	plr[myplr]._pLvlChanging = TRUE;
-	plr[myplr].pLvlLoad = 0;
-	plr[myplr]._pmode = PM_NEWLVL;
-	plr[myplr].destAction = ACTION_NONE;
+	Players[myplr]._px = x;
+	Players[myplr]._py = y;
+	Players[myplr]._pfutx = x;
+	Players[myplr]._pfuty = y;
+	Players[myplr]._ptargx = x;
+	Players[myplr]._ptargy = y;
+	Players[myplr].plrlevel = currlevel;
+	Players[myplr]._pLvlChanging = TRUE;
+	Players[myplr].pLvlLoad = 0;
+	Players[myplr]._pmode = PM_NEWLVL;
+	Players[myplr].destAction = ACTION_NONE;
 }
 
 static BOOL multi_upgrade(BOOL *pfExitProgram)
@@ -839,7 +839,7 @@ BOOL NetInit(BOOL bSinglePlayer, BOOL *pfExitProgram)
 		memset(sgbPlayerLeftGameTbl, 0, sizeof(sgbPlayerLeftGameTbl));
 		memset(sgdwPlayerLeftReasonTbl, 0, sizeof(sgdwPlayerLeftReasonTbl));
 		memset(sgbSendDeltaTbl, 0, sizeof(sgbSendDeltaTbl));
-		memset(plr, 0, sizeof(plr));
+		memset(Players, 0, sizeof(Players));
 		memset(sgwPackPlrOffsetTbl, 0, sizeof(sgwPackPlrOffsetTbl));
 		SNetSetBasePlayer(0);
 		if (bSinglePlayer) {
@@ -871,7 +871,7 @@ BOOL NetInit(BOOL bSinglePlayer, BOOL *pfExitProgram)
 		nthread_send_and_recv_turn(0, 0);
 		SetupLocalCoords();
 		multi_send_pinfo(-2, CMD_SEND_PLRINFO);
-		plr[myplr].plractive = TRUE;
+		Players[myplr].plractive = TRUE;
 		gbActivePlayers = 1;
 		if (sgbPlayerTurnBitTbl[myplr] == FALSE || msg_wait_resync())
 			break;
@@ -928,7 +928,7 @@ BOOL multi_init_multi(_SNETPROGRAMDATA *client_info, _SNETPLAYERDATA *user_info,
 			}
 #ifndef HELLFIRE
 			if (type == 'BNET')
-				plr[0].pBattleNet = 1;
+				Players[0].pBattleNet = 1;
 #endif
 		}
 
@@ -949,7 +949,7 @@ BOOL multi_init_multi(_SNETPROGRAMDATA *client_info, _SNETPLAYERDATA *user_info,
 
 #ifndef HELLFIRE
 		if (type == 'BNET')
-			plr[myplr].pBattleNet = 1;
+			Players[myplr].pBattleNet = 1;
 #endif
 
 		return TRUE;
@@ -983,7 +983,7 @@ void recv_plrinfo(int pnum, TCmdPlrInfoHdr *p, BOOL recv)
 
 	sgwPackPlrOffsetTbl[pnum] = 0;
 	multi_player_left_msg(pnum, 0);
-	plr[pnum]._pGFXLoad = 0;
+	Players[pnum]._pGFXLoad = 0;
 	UnPackPlayer(&netplr[pnum], pnum, TRUE);
 
 	if (!recv) {
@@ -993,7 +993,7 @@ void recv_plrinfo(int pnum, TCmdPlrInfoHdr *p, BOOL recv)
 		return;
 	}
 
-	plr[pnum].plractive = TRUE;
+	Players[pnum].plractive = TRUE;
 	gbActivePlayers++;
 
 	if (sgbPlayerTurnBitTbl[pnum] != FALSE) {
@@ -1001,22 +1001,22 @@ void recv_plrinfo(int pnum, TCmdPlrInfoHdr *p, BOOL recv)
 	} else {
 		szEvent = "Player '%s' (level %d) is already in the game";
 	}
-	EventPlrMsg(szEvent, plr[pnum]._pName, plr[pnum]._pLevel);
+	EventPlrMsg(szEvent, Players[pnum]._pName, Players[pnum]._pLevel);
 
 	LoadPlrGFX(pnum, PFILE_STAND);
 	SyncInitPlr(pnum);
 
-	if (plr[pnum].plrlevel == currlevel) {
-		if (plr[pnum]._pHitPoints >> 6 > 0) {
+	if (Players[pnum].plrlevel == currlevel) {
+		if (Players[pnum]._pHitPoints >> 6 > 0) {
 			StartStand(pnum, 0);
 		} else {
-			plr[pnum]._pgfxnum = 0;
+			Players[pnum]._pgfxnum = 0;
 			LoadPlrGFX(pnum, PFILE_DEATH);
-			plr[pnum]._pmode = PM_DEATH;
-			NewPlrAnim(pnum, plr[pnum]._pDAnim[DIR_S], plr[pnum]._pDFrames, 1, plr[pnum]._pDWidth);
-			plr[pnum]._pAnimFrame = plr[pnum]._pAnimLen - 1;
-			plr[pnum]._pVar8 = 2 * plr[pnum]._pAnimLen;
-			dFlags[plr[pnum]._px][plr[pnum]._py] |= BFLAG_DEAD_PLAYER;
+			Players[pnum]._pmode = PM_DEATH;
+			NewPlrAnim(pnum, Players[pnum]._pDAnim[DIR_S], Players[pnum]._pDFrames, 1, Players[pnum]._pDWidth);
+			Players[pnum]._pAnimFrame = Players[pnum]._pAnimLen - 1;
+			Players[pnum]._pVar8 = 2 * Players[pnum]._pAnimLen;
+			dFlags[Players[pnum]._px][Players[pnum]._py] |= BFLAG_DEAD_PLAYER;
 		}
 	}
 #ifdef _DEBUG

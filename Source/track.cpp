@@ -18,10 +18,10 @@ void track_process()
 	if (cursmx < 0 || cursmx >= MAXDUNX - 1 || cursmy < 0 || cursmy >= MAXDUNY - 1)
 		return;
 
-	if (plr[myplr]._pVar8 <= 6 && plr[myplr]._pmode != PM_STAND)
+	if (Players[myplr]._pVar8 <= 6 && Players[myplr]._pmode != PM_STAND)
 		return;
 
-	if (cursmx != plr[myplr]._ptargx || cursmy != plr[myplr]._ptargy) {
+	if (cursmx != Players[myplr]._ptargx || cursmy != Players[myplr]._ptargy) {
 		DWORD tick = GetTickCount();
 		if ((int)(tick - sgdwLastWalk) >= 300) {
 			sgdwLastWalk = tick;

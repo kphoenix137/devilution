@@ -465,13 +465,13 @@ void town_draw_clipped_town(BYTE *pBuff, int sx, int sy, int dx, int dy, int efl
 	}
 	if (dFlags[sx][sy] & BFLAG_PLAYERLR) {
 		bv = -(dPlayer[sx][sy - 1] + 1);
-		px = dx + plr[bv]._pxoff - plr[bv]._pAnimWidth2;
-		py = dy + plr[bv]._pyoff;
+		px = dx + Players[bv]._pxoff - Players[bv]._pAnimWidth2;
+		py = dy + Players[bv]._pyoff;
 		if (bv == pcursplr) {
-			Cl2DrawOutlineSafe(165, px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, 0, 8);
+			Cl2DrawOutlineSafe(165, px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, 0, 8);
 		}
-		Cl2DrawSafe(px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, 0, 8);
-		if (eflag && plr[bv]._peflag) {
+		Cl2DrawSafe(px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, 0, 8);
+		if (eflag && Players[bv]._peflag) {
 			town_draw_clipped_e_flag(pBuff - TILE_WIDTH, sx - 1, sy + 1, dx - TILE_WIDTH, dy);
 		}
 	}
@@ -480,13 +480,13 @@ void town_draw_clipped_town(BYTE *pBuff, int sx, int sy, int dx, int dy, int efl
 	}
 	if (dPlayer[sx][sy] > 0) {
 		bv = dPlayer[sx][sy] - 1;
-		px = dx + plr[bv]._pxoff - plr[bv]._pAnimWidth2;
-		py = dy + plr[bv]._pyoff;
+		px = dx + Players[bv]._pxoff - Players[bv]._pAnimWidth2;
+		py = dy + Players[bv]._pyoff;
 		if (bv == pcursplr) {
-			Cl2DrawOutlineSafe(165, px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, 0, 8);
+			Cl2DrawOutlineSafe(165, px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, 0, 8);
 		}
-		Cl2DrawSafe(px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, 0, 8);
-		if (eflag && plr[bv]._peflag) {
+		Cl2DrawSafe(px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, 0, 8);
+		if (eflag && Players[bv]._peflag) {
 			town_draw_clipped_e_flag(pBuff - TILE_WIDTH, sx - 1, sy + 1, dx - TILE_WIDTH, dy);
 		}
 	}
@@ -679,13 +679,13 @@ void town_draw_clipped_town_2(BYTE *pBuff, int sx, int sy, int row, int CelSkip,
 	}
 	if (dFlags[sx][sy] & BFLAG_PLAYERLR) {
 		bv = -(dPlayer[sx][sy - 1] + 1);
-		px = dx + plr[bv]._pxoff - plr[bv]._pAnimWidth2;
-		py = dy + plr[bv]._pyoff;
+		px = dx + Players[bv]._pxoff - Players[bv]._pAnimWidth2;
+		py = dy + Players[bv]._pyoff;
 		if (bv == pcursplr) {
-			Cl2DrawOutlineSafe(165, px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, CelSkip, 8);
+			Cl2DrawOutlineSafe(165, px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, CelSkip, 8);
 		}
-		Cl2DrawSafe(px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, CelSkip, 8);
-		if (eflag && plr[bv]._peflag) {
+		Cl2DrawSafe(px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, CelSkip, 8);
+		if (eflag && Players[bv]._peflag) {
 			town_draw_clipped_e_flag_2(pBuff - TILE_WIDTH, sx - 1, sy + 1, row, CelSkip, dx - TILE_WIDTH, dy);
 		}
 	}
@@ -694,13 +694,13 @@ void town_draw_clipped_town_2(BYTE *pBuff, int sx, int sy, int row, int CelSkip,
 	}
 	if (dPlayer[sx][sy] > 0) {
 		bv = dPlayer[sx][sy] - 1;
-		px = dx + plr[bv]._pxoff - plr[bv]._pAnimWidth2;
-		py = dy + plr[bv]._pyoff;
+		px = dx + Players[bv]._pxoff - Players[bv]._pAnimWidth2;
+		py = dy + Players[bv]._pyoff;
 		if (bv == pcursplr) {
-			Cl2DrawOutlineSafe(165, px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, CelSkip, 8);
+			Cl2DrawOutlineSafe(165, px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, CelSkip, 8);
 		}
-		Cl2DrawSafe(px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, CelSkip, 8);
-		if (eflag && plr[bv]._peflag) {
+		Cl2DrawSafe(px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, CelSkip, 8);
+		if (eflag && Players[bv]._peflag) {
 			town_draw_clipped_e_flag_2(pBuff - TILE_WIDTH, sx - 1, sy + 1, row, CelSkip, dx - TILE_WIDTH, dy);
 		}
 	}
@@ -904,14 +904,14 @@ void town_draw_town_all(BYTE *pBuff, int x, int y, int row, int CelCap, int sx, 
 	}
 	if (dFlags[x][y] & BFLAG_PLAYERLR) {
 		bv = -(dPlayer[x][y - 1] + 1);
-		px = sx + plr[bv]._pxoff - plr[bv]._pAnimWidth2;
-		py = sy + plr[bv]._pyoff;
+		px = sx + Players[bv]._pxoff - Players[bv]._pAnimWidth2;
+		py = sy + Players[bv]._pyoff;
 		if (bv == pcursplr) {
-			Cl2DrawOutline(165, px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, 0, CelCap);
+			Cl2DrawOutline(165, px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, 0, CelCap);
 		}
-		/// ASSERT: assert(plr[bv]._pAnimData);
-		Cl2Draw(px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, 0, CelCap);
-		if (eflag && plr[bv]._peflag) {
+		/// ASSERT: assert(Players[bv]._pAnimData);
+		Cl2Draw(px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, 0, CelCap);
+		if (eflag && Players[bv]._peflag) {
 			town_draw_e_flag(pBuff - TILE_WIDTH, x - 1, y + 1, row, CelCap, sx - TILE_WIDTH, sy);
 		}
 	}
@@ -920,14 +920,14 @@ void town_draw_town_all(BYTE *pBuff, int x, int y, int row, int CelCap, int sx, 
 	}
 	if (dPlayer[x][y] > 0) {
 		bv = dPlayer[x][y] - 1;
-		px = sx + plr[bv]._pxoff - plr[bv]._pAnimWidth2;
-		py = sy + plr[bv]._pyoff;
+		px = sx + Players[bv]._pxoff - Players[bv]._pAnimWidth2;
+		py = sy + Players[bv]._pyoff;
 		if (bv == pcursplr) {
-			Cl2DrawOutline(165, px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, 0, CelCap);
+			Cl2DrawOutline(165, px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, 0, CelCap);
 		}
-		/// ASSERT: assert(plr[bv]._pAnimData);
-		Cl2Draw(px, py, plr[bv]._pAnimData, plr[bv]._pAnimFrame, plr[bv]._pAnimWidth, 0, CelCap);
-		if (eflag && plr[bv]._peflag) {
+		/// ASSERT: assert(Players[bv]._pAnimData);
+		Cl2Draw(px, py, Players[bv]._pAnimData, Players[bv]._pAnimFrame, Players[bv]._pAnimWidth, 0, CelCap);
+		if (eflag && Players[bv]._peflag) {
 			town_draw_e_flag(pBuff - TILE_WIDTH, x - 1, y + 1, row, CelCap, sx - TILE_WIDTH, sy);
 		}
 	}
@@ -1368,7 +1368,7 @@ void T_DrawView(int StartX, int StartY)
 		DrawChr();
 	} else if (questlog) {
 		DrawQuestLog();
-	} else if (plr[myplr]._pStatPts != 0 && !spselflag) {
+	} else if (Players[myplr]._pStatPts != 0 && !spselflag) {
 		DrawLevelUpIcon();
 	}
 	if (uitemflag) {
@@ -1749,16 +1749,16 @@ void T_Pass3()
 		} else {
 			TownCloseHive();
 		}
-		if (quests[Q_GRAVE]._qactive == QUEST_DONE || plr[myplr]._pLvlVisited[21])
+		if (quests[Q_GRAVE]._qactive == QUEST_DONE || Players[myplr]._pLvlVisited[21])
 			TownOpenGrave();
 		else
 			TownCloseGrave();
 #endif
 #ifndef SPAWN
 #ifdef HELLFIRE
-		if (!(plr[myplr].pTownWarps & 1) && plr[myplr]._pLevel < 10)
+		if (!(Players[myplr].pTownWarps & 1) && Players[myplr]._pLevel < 10)
 #else
-		if (!(plr[myplr].pTownWarps & 1))
+		if (!(Players[myplr].pTownWarps & 1))
 #endif
 #endif
 		{
@@ -1766,9 +1766,9 @@ void T_Pass3()
 		}
 #ifndef SPAWN
 #ifdef HELLFIRE
-		if (!(plr[myplr].pTownWarps & 2) && plr[myplr]._pLevel < 15)
+		if (!(Players[myplr].pTownWarps & 2) && Players[myplr]._pLevel < 15)
 #else
-		if (!(plr[myplr].pTownWarps & 2))
+		if (!(Players[myplr].pTownWarps & 2))
 #endif
 #endif
 		{
@@ -1777,9 +1777,9 @@ void T_Pass3()
 		}
 #ifndef SPAWN
 #ifdef HELLFIRE
-		if (!(plr[myplr].pTownWarps & 4) && plr[myplr]._pLevel < 20) {
+		if (!(Players[myplr].pTownWarps & 4) && Players[myplr]._pLevel < 20) {
 #else
-		if (!(plr[myplr].pTownWarps & 4)) {
+		if (!(Players[myplr].pTownWarps & 4)) {
 #endif
 #endif
 			for (x = 36; x < 46; x++) {
@@ -1796,7 +1796,7 @@ void T_Pass3()
 		} else {
 			TownCloseHive();
 		}
-		if (quests[Q_GRAVE]._qactive == QUEST_DONE || plr[myplr]._pLvlVisited[21])
+		if (quests[Q_GRAVE]._qactive == QUEST_DONE || Players[myplr]._pLvlVisited[21])
 			TownOpenGrave();
 		else
 			TownCloseGrave();
