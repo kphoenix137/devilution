@@ -1819,7 +1819,6 @@ void CheckQuestItem(int pnum)
 	if (Players[pnum].HoldItem.IDidx == IDI_OPTAMULET)
 		quests[Q_BLIND]._qactive = QUEST_DONE;
 	if (Players[pnum].HoldItem.IDidx == IDI_MUSHROOM && quests[Q_MUSHROOM]._qactive == QUEST_ACTIVE && quests[Q_MUSHROOM]._qvar1 == QS_MUSHSPAWNED) {
-#ifndef SPAWN
 		sfxdelay = 10;
 		if (Players[pnum]._pClass == PC_WARRIOR) { // BUGFIX: Voice for this quest might be wrong in MP
 			sfxdnum = PS_WARR95;
@@ -1828,16 +1827,6 @@ void CheckQuestItem(int pnum)
 		} else if (Players[pnum]._pClass == PC_SORCERER) {
 			sfxdnum = PS_MAGE95;
 		}
-#ifdef HELLFIRE
-		else if (Players[pnum]._pClass == PC_MONK) {
-			sfxdnum = PS_MONK95;
-		} else if (Players[pnum]._pClass == PC_BARD) {
-			sfxdnum = PS_ROGUE95;
-		} else if (Players[pnum]._pClass == PC_BARBARIAN) {
-			sfxdnum = PS_WARR95;
-		}
-#endif
-#endif
 		quests[Q_MUSHROOM]._qvar1 = QS_MUSHPICKED;
 	}
 	if (Players[pnum].HoldItem.IDidx == IDI_ANVIL) {
@@ -1845,7 +1834,6 @@ void CheckQuestItem(int pnum)
 			quests[Q_ANVIL]._qactive = QUEST_ACTIVE;
 			quests[Q_ANVIL]._qvar1 = 1;
 		}
-#ifndef SPAWN
 		if (quests[Q_ANVIL]._qlog == TRUE) {
 			sfxdelay = 10;
 			if (Players[myplr]._pClass == PC_WARRIOR) {
@@ -1855,19 +1843,8 @@ void CheckQuestItem(int pnum)
 			} else if (Players[myplr]._pClass == PC_SORCERER) {
 				sfxdnum = PS_MAGE89;
 			}
-#ifdef HELLFIRE
-			else if (Players[myplr]._pClass == PC_MONK) {
-				sfxdnum = PS_MONK89;
-			} else if (Players[myplr]._pClass == PC_BARD) {
-				sfxdnum = PS_ROGUE89;
-			} else if (Players[myplr]._pClass == PC_BARBARIAN) {
-				sfxdnum = PS_WARR89;
-			}
-#endif
 		}
-#endif
 	}
-#ifndef SPAWN
 	if (Players[pnum].HoldItem.IDidx == IDI_GLDNELIX) {
 		sfxdelay = 30;
 		if (Players[myplr]._pClass == PC_WARRIOR) {
@@ -1877,23 +1854,12 @@ void CheckQuestItem(int pnum)
 		} else if (Players[myplr]._pClass == PC_SORCERER) {
 			sfxdnum = PS_MAGE88;
 		}
-#ifdef HELLFIRE
-		else if (Players[myplr]._pClass == PC_MONK) {
-			sfxdnum = PS_MONK88;
-		} else if (Players[myplr]._pClass == PC_BARD) {
-			sfxdnum = PS_ROGUE88;
-		} else if (Players[myplr]._pClass == PC_BARBARIAN) {
-			sfxdnum = PS_WARR88;
-		}
-#endif
 	}
-#endif
 	if (Players[pnum].HoldItem.IDidx == IDI_ROCK) {
 		if (quests[Q_ROCK]._qactive == QUEST_INIT) {
 			quests[Q_ROCK]._qactive = QUEST_ACTIVE;
 			quests[Q_ROCK]._qvar1 = 1;
 		}
-#ifndef SPAWN
 		if (quests[Q_ROCK]._qlog == TRUE) {
 			sfxdelay = 10;
 			if (Players[myplr]._pClass == PC_WARRIOR) {
@@ -1903,21 +1869,10 @@ void CheckQuestItem(int pnum)
 			} else if (Players[myplr]._pClass == PC_SORCERER) {
 				sfxdnum = PS_MAGE87;
 			}
-#ifdef HELLFIRE
-			else if (Players[myplr]._pClass == PC_MONK) {
-				sfxdnum = PS_MONK87;
-			} else if (Players[myplr]._pClass == PC_BARD) {
-				sfxdnum = PS_ROGUE87;
-			} else if (Players[myplr]._pClass == PC_BARBARIAN) {
-				sfxdnum = PS_WARR87;
-			}
-#endif
 		}
-#endif
 	}
 	if (Players[pnum].HoldItem.IDidx == IDI_ARMOFVAL) {
 		quests[Q_BLOOD]._qactive = QUEST_DONE;
-#ifndef SPAWN
 		sfxdelay = 20;
 		if (Players[myplr]._pClass == PC_WARRIOR) {
 			sfxdnum = PS_WARR91;
@@ -1925,109 +1880,13 @@ void CheckQuestItem(int pnum)
 			sfxdnum = PS_ROGUE91;
 		} else if (Players[myplr]._pClass == PC_SORCERER) {
 			sfxdnum = PS_MAGE91;
-#ifdef HELLFIRE
-		} else if (Players[myplr]._pClass == PC_MONK) {
-			sfxdnum = PS_MONK91;
-		} else if (Players[myplr]._pClass == PC_BARD) {
-			sfxdnum = PS_ROGUE91;
-		} else if (Players[myplr]._pClass == PC_BARBARIAN) {
-			sfxdnum = PS_WARR91;
-#endif
-		}
-#endif
-	}
-#ifdef HELLFIRE
-	if (Players[pnum].HoldItem.IDidx == IDI_MAPOFDOOM) {
-		quests[Q_GRAVE]._qlog = FALSE;
-		quests[Q_GRAVE]._qactive = QUEST_ACTIVE;
-		quests[Q_GRAVE]._qvar1 = 1;
-		sfxdelay = 10;
-		if (Players[myplr]._pClass == PC_WARRIOR) {
-			sfxdnum = PS_WARR79;
-#ifndef SPAWN
-		} else if (Players[myplr]._pClass == PC_ROGUE) {
-			sfxdnum = PS_ROGUE79;
-		} else if (Players[myplr]._pClass == PC_SORCERER) {
-			sfxdnum = PS_MAGE79;
-#endif
-		} else if (Players[myplr]._pClass == PC_MONK) {
-			sfxdnum = PS_MONK79;
-#ifndef SPAWN
-		} else if (Players[myplr]._pClass == PC_BARD) {
-			sfxdnum = PS_ROGUE79;
-#endif
-		} else if (Players[myplr]._pClass == PC_BARBARIAN) {
-			sfxdnum = PS_WARR79;
 		}
 	}
-	if (Players[pnum].HoldItem.IDidx == IDI_NOTE1 || Players[pnum].HoldItem.IDidx == IDI_NOTE2 || Players[pnum].HoldItem.IDidx == IDI_NOTE3) {
-		int mask, idx, item_num;
-		int n1, n2, n3;
-		Item tmp;
-		mask = 0;
-		idx = Players[pnum].HoldItem.IDidx;
-		if (PlrHasItem(pnum, IDI_NOTE1, n1) || idx == IDI_NOTE1)
-			mask = 1;
-		if (PlrHasItem(pnum, IDI_NOTE2, n2) || idx == IDI_NOTE2)
-			mask |= 2;
-		if (PlrHasItem(pnum, IDI_NOTE3, n3) || idx == IDI_NOTE3)
-			mask |= 4;
-		if (mask == 7) {
-			sfxdelay = 10;
-			if (Players[myplr]._pClass == PC_WARRIOR) {
-				sfxdnum = PS_WARR46;
-#ifndef SPAWN
-			} else if (Players[myplr]._pClass == PC_ROGUE) {
-				sfxdnum = PS_ROGUE46;
-			} else if (Players[myplr]._pClass == PC_SORCERER) {
-				sfxdnum = PS_MAGE46;
-#endif
-			} else if (Players[myplr]._pClass == PC_MONK) {
-				sfxdnum = PS_MONK46;
-#ifndef SPAWN
-			} else if (Players[myplr]._pClass == PC_BARD) {
-				sfxdnum = PS_ROGUE46;
-#endif
-			} else if (Players[myplr]._pClass == PC_BARBARIAN) {
-				sfxdnum = PS_WARR46;
-			}
-			switch (idx) {
-			case IDI_NOTE1:
-				PlrHasItem(pnum, IDI_NOTE2, n2);
-				RemoveInvItem(pnum, n2);
-				PlrHasItem(pnum, IDI_NOTE3, n3);
-				RemoveInvItem(pnum, n3);
-				break;
-			case IDI_NOTE2:
-				PlrHasItem(pnum, IDI_NOTE1, n1);
-				RemoveInvItem(pnum, n1);
-				PlrHasItem(pnum, IDI_NOTE3, n3);
-				RemoveInvItem(pnum, n3);
-				break;
-			case IDI_NOTE3:
-				PlrHasItem(pnum, IDI_NOTE1, n1);
-				RemoveInvItem(pnum, n1);
-				PlrHasItem(pnum, IDI_NOTE2, n2);
-				RemoveInvItem(pnum, n2);
-				break;
-			}
-			item_num = itemactive[0];
-			tmp = item[item_num];
-			GetItemAttrs(item_num, IDI_FULLNOTE, 16);
-			SetupItem(item_num);
-			Players[pnum].HoldItem = item[item_num];
-			item[item_num] = tmp;
-		}
-	}
-#endif
 }
 
 void InvGetItem(int pnum, int ii)
 {
 	int i;
-#ifdef HELLFIRE
-	BOOL cursor_updated;
-#endif
 
 	if (dropGoldFlag) {
 		dropGoldFlag = FALSE;
@@ -2037,32 +1896,12 @@ void InvGetItem(int pnum, int ii)
 	if (dItem[GroundItems[ii]._ix][GroundItems[ii]._iy] != 0) {
 		if (myplr == pnum && pcurs >= CURSOR_FIRSTITEM)
 			NetSendCmdPItem(TRUE, CMD_SYNCPUTITEM, Players[myplr]._px, Players[myplr]._py);
-#ifdef HELLFIRE
-		if (item[ii]._iUid != 0)
-#endif
-			GroundItems[ii]._iCreateInfo &= ~CF_PREGEN;
+		GroundItems[ii]._iCreateInfo &= ~CF_PREGEN;
 		Players[pnum].HoldItem = GroundItems[ii];
 		CheckQuestItem(pnum);
 		CheckBookLevel(pnum);
 		CheckItemStats(pnum);
-#ifdef HELLFIRE
-		cursor_updated = FALSE;
-		if (Players[pnum].HoldItem._itype == ITYPE_GOLD && GoldAutoPlace(pnum))
-			cursor_updated = TRUE;
-#endif
 		dItem[GroundItems[ii]._ix][GroundItems[ii]._iy] = 0;
-#ifdef HELLFIRE
-		if (currlevel == 21 && item[ii]._ix == CornerStone.x && item[ii]._iy == CornerStone.y) {
-			CornerStone.item.IDidx = -1;
-			CornerStone.item._itype = ITYPE_MISC; // BUGFIX should be ITYPE_NONE
-			CornerStone.item._iSelFlag = FALSE;
-			CornerStone.item._ix = 0;
-			CornerStone.item._iy = 0;
-			CornerStone.item._iAnimFlag = FALSE;
-			CornerStone.item._iIdentified = FALSE;
-			CornerStone.item._iPostDraw = FALSE;
-		}
-#endif
 		i = 0;
 		while (i < numitems) {
 			if (itemactive[i] == ii) {
@@ -2073,10 +1912,7 @@ void InvGetItem(int pnum, int ii)
 			}
 		}
 		pcursitem = -1;
-#ifdef HELLFIRE
-		if (!cursor_updated)
-#endif
-			SetCursor_(Players[pnum].HoldItem._iCurs + CURSOR_FIRSTITEM);
+		SetCursor_(Players[pnum].HoldItem._iCurs + CURSOR_FIRSTITEM);
 	}
 }
 
@@ -2470,7 +2306,7 @@ int InvPutItem(int pnum, int x, int y)
 		}
 	}
 #endif
-	CanPut(x, y); //if (!CanPut(x, y)) {
+	CanPut(x, y); // if (!CanPut(x, y)) {
 	//	assertion_failed(1524, "C:\\Diablo\\Direct\\inv.cpp", "CanPut(x,y)");
 	//}
 

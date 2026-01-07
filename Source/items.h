@@ -11,27 +11,9 @@ extern BOOL uitemflag;
 extern int itemavail[MAXITEMS];
 extern ItemGetRecordStruct itemrecord[MAXITEMS];
 extern Item GroundItems[MAXITEMS + 1];
-#ifdef HELLFIRE
-extern CornerStoneStruct CornerStone;
-#endif
 extern BOOL UniqueItemFlag[128];
-#ifdef HELLFIRE
-extern int auricGold;
-#endif
 extern int numitems;
 
-#ifdef HELLFIRE
-int get_ring_max_value(int i);
-int get_bow_max_value(int i);
-int get_staff_max_value(int i);
-int get_sword_max_value(int i);
-int get_helm_max_value(int i);
-int get_shield_max_value(int i);
-int get_armor_max_value(int i);
-int get_mace_max_value(int i);
-int get_amulet_max_value(int i);
-int get_axe_max_value(int i);
-#endif
 void InitItemGFX();
 void InitItems();
 void CalcPlrItemVals(int p, BOOL Loadgfx);

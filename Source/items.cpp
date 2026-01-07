@@ -20,39 +20,8 @@ int gnNumGetRecords;
 
 /* data */
 
-#ifdef HELLFIRE
-int OilLevels[] = { 1, 10, 1, 10, 4, 1, 5, 17, 1, 10 };
-int OilValues[] = { 500, 2500, 500, 2500, 1500, 100, 2500, 15000, 500, 2500 };
-int OilMagic[] = {
-	IMISC_OILACC,
-	IMISC_OILMAST,
-	IMISC_OILSHARP,
-	IMISC_OILDEATH,
-	IMISC_OILSKILL,
-	IMISC_OILBSMTH,
-	IMISC_OILFORT,
-	IMISC_OILPERM,
-	IMISC_OILHARD,
-	IMISC_OILIMP,
-};
-char OilNames[10][25] = {
-	"Oil of Accuracy",
-	"Oil of Mastery",
-	"Oil of Sharpness",
-	"Oil of Death",
-	"Oil of Skill",
-	"Blacksmith Oil",
-	"Oil of Fortitude",
-	"Oil of Permanence",
-	"Oil of Hardening",
-	"Oil of Imperviousness"
-};
-int MaxGold = GOLD_MAX_LIMIT;
-#endif
-
 /** Maps from item_cursor_graphic to in-memory item type. */
 BYTE ItemCAnimTbl[] = {
-#ifndef HELLFIRE
 	20, 16, 16, 16, 4, 4, 4, 12, 12, 12,
 	12, 12, 12, 12, 12, 21, 21, 25, 12, 28,
 	28, 28, 0, 0, 0, 32, 0, 0, 0, 24,
@@ -70,31 +39,6 @@ BYTE ItemCAnimTbl[] = {
 	33, 1, 1, 1, 1, 1, 7, 7, 7, 14,
 	14, 17, 17, 17, 0, 34, 1, 0, 3, 17,
 	8, 8, 6, 1, 3, 3, 11, 3, 4
-#else
-	20, 16, 16, 16, 4, 4, 4, 12, 12, 12,
-	12, 12, 12, 12, 12, 21, 21, 25, 12, 28,
-	28, 28, 38, 38, 38, 32, 38, 38, 38, 24,
-	24, 26, 2, 25, 22, 23, 24, 25, 27, 27,
-	29, 0, 0, 0, 12, 12, 12, 12, 12, 0,
-	8, 8, 0, 8, 8, 8, 8, 8, 8, 6,
-	8, 8, 8, 6, 8, 8, 6, 8, 8, 6,
-	6, 6, 8, 8, 8, 5, 9, 13, 13, 13,
-	5, 5, 5, 15, 5, 5, 18, 18, 18, 30,
-	5, 5, 14, 5, 14, 13, 16, 18, 5, 5,
-	7, 1, 3, 17, 1, 15, 10, 14, 3, 11,
-	8, 0, 1, 7, 0, 7, 15, 7, 3, 3,
-	3, 6, 6, 11, 11, 11, 31, 14, 14, 14,
-	6, 6, 7, 3, 8, 14, 0, 14, 14, 0,
-	33, 1, 1, 1, 1, 1, 7, 7, 7, 14,
-	14, 17, 17, 17, 0, 34, 1, 0, 3, 17,
-	8, 8, 6, 1, 3, 3, 11, 3, 12, 12,
-	12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
-	12, 12, 12, 12, 12, 12, 12, 35, 39, 36,
-	36, 36, 37, 38, 38, 38, 38, 38, 41, 42,
-	8, 8, 8, 17, 0, 6, 8, 11, 11, 3,
-	3, 1, 6, 6, 6, 1, 8, 6, 11, 3,
-	6, 8, 1, 6, 6, 17, 40, 0, 0
-#endif
 };
 /** Map of item type .cel file names. */
 const char *const ItemDropNames[] = {
@@ -133,16 +77,6 @@ const char *const ItemDropNames[] = {
 	"Bldstn",
 	"Fanvil",
 	"FLazStaf",
-#ifdef HELLFIRE
-	"bombs1",
-	"halfps1",
-	"wholeps1",
-	"runes1",
-	"teddys1",
-	"cows1",
-	"donkys1",
-	"mooses1",
-#endif
 };
 /** Maps of item drop animation length. */
 BYTE ItemAnimLs[] = {
@@ -181,16 +115,6 @@ BYTE ItemAnimLs[] = {
 	13,
 	13,
 	8,
-#ifdef HELLFIRE
-	10,
-	16,
-	16,
-	10,
-	10,
-	15,
-	15,
-	15,
-#endif
 };
 /** Maps of drop sounds effect of dropping the item on ground. */
 int ItemDropSnds[] = {
@@ -229,16 +153,6 @@ int ItemDropSnds[] = {
 	IS_FBLST,
 	IS_FANVL,
 	IS_FSTAF,
-#ifdef HELLFIRE
-	IS_FROCK,
-	IS_FSCRL,
-	IS_FSCRL,
-	IS_FROCK,
-	IS_FMUSH,
-	IS_FHARM,
-	IS_FLARM,
-	IS_FLARM,
-#endif
 };
 /** Maps of drop sounds effect of placing the item in the inventory. */
 int ItemInvSnds[] = {
@@ -277,20 +191,7 @@ int ItemInvSnds[] = {
 	IS_IBLST,
 	IS_IANVL,
 	IS_ISTAF,
-#ifdef HELLFIRE
-	IS_IROCK,
-	IS_ISCROL,
-	IS_ISCROL,
-	IS_IROCK,
-	IS_IMUSH,
-	IS_IHARM,
-	IS_ILARM,
-	IS_ILARM,
-#endif
 };
-#ifdef HELLFIRE
-char *CornerStoneRegKey = "SItem";
-#endif
 /** Specifies the current Y-coordinate used for validation of items on ground. */
 int idoppely = 16;
 /** Maps from Griswold premium item number to a quality level delta as added to the base quality level. */
@@ -298,216 +199,12 @@ int premiumlvladd[SMITH_PREMIUM_ITEMS] = {
 	// clang-format off
 	-1,
 	-1,
-#ifdef HELLFIRE
-	-1,
-#endif
 	 0,
 	 0,
-#ifdef HELLFIRE
-	 0,
-	 0,
-	 1,
-	 1,
-	 1,
-#endif
 	 1,
 	 2,
-#ifdef HELLFIRE
-	 2,
-	 3,
-	 3,
-#endif
 	// clang-format on
 };
-
-#ifdef HELLFIRE
-int get_ring_max_value(int i)
-{
-	int j, res;
-
-	res = 0;
-	for (j = 0; j < NUM_INVLOC; j++) {
-		if (Players[i].InvBody[j]._iClass != ITYPE_NONE && Players[i].InvBody[j]._itype == ITYPE_RING && res < Players[i].InvBody[j]._iIvalue)
-			res = Players[i].InvBody[j]._iIvalue;
-	}
-	for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-		if (Players[i].InvList[j]._iClass != ITYPE_NONE && Players[i].InvList[j]._itype == ITYPE_RING && res < Players[i].InvList[j]._iIvalue)
-			res = Players[i].InvList[j]._iIvalue;
-	}
-
-	return res;
-}
-
-int get_bow_max_value(int i)
-{
-	int j, res;
-
-	res = 0;
-	for (j = 0; j < NUM_INVLOC; j++) {
-		if (Players[i].InvBody[j]._iClass != ITYPE_NONE && Players[i].InvBody[j]._itype == ITYPE_BOW && res < Players[i].InvBody[j]._iIvalue)
-			res = Players[i].InvBody[j]._iIvalue;
-	}
-	for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-		if (Players[i].InvList[j]._iClass != ITYPE_NONE && Players[i].InvList[j]._itype == ITYPE_BOW && res < Players[i].InvList[j]._iIvalue)
-			res = Players[i].InvList[j]._iIvalue;
-	}
-
-	return res;
-}
-
-int get_staff_max_value(int i)
-{
-	int j, res;
-
-	res = 0;
-	for (j = 0; j < NUM_INVLOC; j++) {
-		if (Players[i].InvBody[j]._iClass != ITYPE_NONE && Players[i].InvBody[j]._itype == ITYPE_STAFF && res < Players[i].InvBody[j]._iIvalue)
-			res = Players[i].InvBody[j]._iIvalue;
-	}
-	for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-		if (Players[i].InvList[j]._iClass != ITYPE_NONE && Players[i].InvList[j]._itype == ITYPE_STAFF && res < Players[i].InvList[j]._iIvalue)
-			res = Players[i].InvList[j]._iIvalue;
-	}
-
-	return res;
-}
-
-int get_sword_max_value(int i)
-{
-	int j, res;
-
-	res = 0;
-	for (j = 0; j < NUM_INVLOC; j++) {
-		if (Players[i].InvBody[j]._iClass != ITYPE_NONE && Players[i].InvBody[j]._itype == ITYPE_SWORD && res < Players[i].InvBody[j]._iIvalue)
-			res = Players[i].InvBody[j]._iIvalue;
-	}
-	for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-		if (Players[i].InvList[j]._iClass != ITYPE_NONE && Players[i].InvList[j]._itype == ITYPE_SWORD && res < Players[i].InvList[j]._iIvalue)
-			res = Players[i].InvList[j]._iIvalue;
-	}
-
-	return res;
-}
-
-int get_helm_max_value(int i)
-{
-	int j, res;
-
-	res = 0;
-	for (j = 0; j < NUM_INVLOC; j++) {
-		if (Players[i].InvBody[j]._iClass != ITYPE_NONE && Players[i].InvBody[j]._itype == ITYPE_HELM && res < Players[i].InvBody[j]._iIvalue)
-			res = Players[i].InvBody[j]._iIvalue;
-	}
-	for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-		if (Players[i].InvList[j]._iClass != ITYPE_NONE && Players[i].InvList[j]._itype == ITYPE_HELM && res < Players[i].InvList[j]._iIvalue)
-			res = Players[i].InvList[j]._iIvalue;
-	}
-
-	return res;
-}
-
-int get_shield_max_value(int i)
-{
-	int j, res;
-
-	res = 0;
-	for (j = 0; j < NUM_INVLOC; j++) {
-		if (Players[i].InvBody[j]._iClass != ITYPE_NONE && Players[i].InvBody[j]._itype == ITYPE_SHIELD && res < Players[i].InvBody[j]._iIvalue)
-			res = Players[i].InvBody[j]._iIvalue;
-	}
-	for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-		if (Players[i].InvList[j]._iClass != ITYPE_NONE && Players[i].InvList[j]._itype == ITYPE_SHIELD && res < Players[i].InvList[j]._iIvalue)
-			res = Players[i].InvList[j]._iIvalue;
-	}
-
-	return res;
-}
-
-int get_armor_max_value(int i)
-{
-	int j, res;
-
-	res = 0;
-	for (j = 0; j < NUM_INVLOC; j++) {
-		if (Players[i].InvBody[j]._iClass != ITYPE_NONE
-		    && (Players[i].InvBody[j]._itype == ITYPE_LARMOR || Players[i].InvBody[j]._itype == ITYPE_MARMOR || Players[i].InvBody[j]._itype == ITYPE_HARMOR)
-		    && res < Players[i].InvBody[j]._iIvalue)
-			res = Players[i].InvBody[j]._iIvalue;
-	}
-	for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-		if (Players[i].InvList[j]._iClass != ITYPE_NONE
-		    && (Players[i].InvList[j]._itype == ITYPE_LARMOR || Players[i].InvList[j]._itype == ITYPE_MARMOR || Players[i].InvList[j]._itype == ITYPE_HARMOR)
-		    && res < Players[i].InvList[j]._iIvalue)
-			res = Players[i].InvList[j]._iIvalue;
-	}
-
-	return res;
-}
-
-int get_mace_max_value(int i)
-{
-	int j, res;
-
-	res = 0;
-	for (j = 0; j < NUM_INVLOC; j++) {
-		if (Players[i].InvBody[j]._iClass != ITYPE_NONE && Players[i].InvBody[j]._itype == ITYPE_MACE && res < Players[i].InvBody[j]._iIvalue)
-			res = Players[i].InvBody[j]._iIvalue;
-	}
-	for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-		if (Players[i].InvList[j]._iClass != ITYPE_NONE && Players[i].InvList[j]._itype == ITYPE_MACE && res < Players[i].InvList[j]._iIvalue)
-			res = Players[i].InvList[j]._iIvalue;
-	}
-
-	return res;
-}
-
-int get_amulet_max_value(int i)
-{
-	int j, res;
-
-	res = 0;
-	for (j = 0; j < NUM_INVLOC; j++) {
-		if (Players[i].InvBody[j]._iClass != ITYPE_NONE && Players[i].InvBody[j]._itype == ITYPE_AMULET && res < Players[i].InvBody[j]._iIvalue)
-			res = Players[i].InvBody[j]._iIvalue;
-	}
-	for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-		if (Players[i].InvList[j]._iClass != ITYPE_NONE && Players[i].InvList[j]._itype == ITYPE_AMULET && res < Players[i].InvList[j]._iIvalue)
-			res = Players[i].InvList[j]._iIvalue;
-	}
-
-	return res;
-}
-
-int get_axe_max_value(int i)
-{
-	int j, res;
-
-	res = 0;
-	for (j = 0; j < NUM_INVLOC; j++) {
-		if (Players[i].InvBody[j]._iClass != ITYPE_NONE && Players[i].InvBody[j]._itype == ITYPE_AXE && res < Players[i].InvBody[j]._iIvalue)
-			res = Players[i].InvBody[j]._iIvalue;
-	}
-	for (j = 0; j < NUM_INV_GRID_ELEM; j++) {
-		if (Players[i].InvList[j]._iClass != ITYPE_NONE && Players[i].InvList[j]._itype == ITYPE_AXE && res < Players[i].InvList[j]._iIvalue)
-			res = Players[i].InvList[j]._iIvalue;
-	}
-
-	return res;
-}
-
-int items_get_currlevel()
-{
-	int lvl;
-
-	lvl = currlevel;
-	if (currlevel >= 17 && currlevel <= 20)
-		lvl = currlevel - 8;
-	if (currlevel >= 21 && currlevel <= 24)
-		lvl = currlevel - 7;
-
-	return lvl;
-}
-#endif
 
 void InitItemGFX()
 {
@@ -543,13 +240,10 @@ BOOL ItemPlace(int xp, int yp)
 	return TRUE;
 }
 
-void AddInitItems()
+static void AddInitItems()
 {
 	int x, y, i, j, rnd;
 
-#ifdef HELLFIRE
-	int curlv = items_get_currlevel();
-#endif
 	rnd = random_(11, 3) + 3;
 	for (j = 0; j < rnd; j++) {
 		i = itemavail[0];
@@ -566,19 +260,11 @@ void AddInitItems()
 		dItem[x][y] = i + 1;
 		GroundItems[i]._iSeed = GetRndSeed();
 		SetRndSeed(GroundItems[i]._iSeed);
-#ifdef HELLFIRE
-		if (random_(12, 2) != 0)
-			GetItemAttrs(i, IDI_HEAL, curlv);
-		else
-			GetItemAttrs(i, IDI_MANA, curlv);
-		item[i]._iCreateInfo = curlv + CF_PREGEN;
-#else
 		if (random_(12, 2) != 0)
 			GetItemAttrs(i, IDI_HEAL, currlevel);
 		else
 			GetItemAttrs(i, IDI_MANA, currlevel);
 		GroundItems[i]._iCreateInfo = currlevel + CF_PREGEN;
-#endif
 		SetupItem(i);
 		GroundItems[i]._iAnimFrame = GroundItems[i]._iAnimLen;
 		GroundItems[i]._iAnimFlag = FALSE;
@@ -587,32 +273,6 @@ void AddInitItems()
 		numitems++;
 	}
 }
-
-#ifdef HELLFIRE
-static void SpawnNote()
-{
-	int x, y, id;
-
-	x = random_(12, 80) + 16;
-	y = random_(12, 80) + 16;
-	while (!ItemPlace(x, y)) {
-		x = random_(12, 80) + 16;
-		y = random_(12, 80) + 16;
-	}
-	switch (currlevel) {
-	case 22:
-		id = IDI_NOTE2;
-		break;
-	case 23:
-		id = IDI_NOTE3;
-		break;
-	default:
-		id = IDI_NOTE1;
-		break;
-	}
-	SpawnQuestItem(id, x, y, 0, 1);
-}
-#endif
 
 void InitItems()
 {
@@ -645,18 +305,8 @@ void InitItems()
 			SpawnRock();
 		if (QuestStatus(Q_ANVIL))
 			SpawnQuestItem(IDI_ANVIL, 2 * setpc_x + 27, 2 * setpc_y + 27, 0, 1);
-#ifdef HELLFIRE
-		if (UseCowFarmer && currlevel == 20)
-			SpawnQuestItem(IDI_BROWNSUIT, 25, 25, 3, 1);
-		if (UseCowFarmer && currlevel == 19)
-			SpawnQuestItem(IDI_GREYSUIT, 25, 25, 3, 1);
-#endif
 		if (currlevel > 0 && currlevel < 16)
 			AddInitItems();
-#ifdef HELLFIRE
-		if (currlevel >= 21 && currlevel <= 23)
-			SpawnNote();
-#endif
 	}
 
 	uitemflag = FALSE;
@@ -737,9 +387,6 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 					bac += tmpac;
 				}
 				iflgs |= itm->_iFlags;
-#ifdef HELLFIRE
-				pDamAcFlags |= itm->_iDamAcFlags;
-#endif
 				sadd += itm->_iPLStr;
 				madd += itm->_iPLMag;
 				dadd += itm->_iPLDex;
@@ -773,27 +420,7 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 		if (Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_SHIELD && Players[p].InvBody[INVLOC_HAND_RIGHT]._iStatFlag) {
 			maxd = 3;
 		}
-
-#ifdef HELLFIRE
-		if (Players[p]._pClass == PC_MONK) {
-			mind = max(mind, Players[p]._pLevel >> 1);
-			maxd = max(maxd, Players[p]._pLevel);
-		}
-#endif
 	}
-
-#ifdef HELLFIRE
-	if ((Players[p]._pSpellFlags & 2) == 2) {
-		sadd += 2 * Players[p]._pLevel;
-		dadd += Players[p]._pLevel + Players[p]._pLevel / 2;
-		vadd += 2 * Players[p]._pLevel;
-	}
-	if ((Players[p]._pSpellFlags & 4) == 4) {
-		sadd -= 2 * Players[p]._pLevel;
-		dadd -= Players[p]._pLevel + Players[p]._pLevel / 2;
-		vadd -= 2 * Players[p]._pLevel;
-	}
-#endif
 
 	Players[p]._pIMinDam = mind;
 	Players[p]._pIMaxDam = maxd;
@@ -802,9 +429,6 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 	Players[p]._pIBonusToHit = btohit;
 	Players[p]._pIBonusAC = bac;
 	Players[p]._pIFlags = iflgs;
-#ifdef HELLFIRE
-	Players[p].pDamAcFlags = pDamAcFlags;
-#endif
 	Players[p]._pIBonusDamMod = dmod;
 	Players[p]._pIGetHit = ghit;
 
@@ -850,48 +474,6 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 	if (Players[p]._pClass == PC_ROGUE) {
 		Players[p]._pDamageMod = Players[p]._pLevel * (Players[p]._pStrength + Players[p]._pDexterity) / 200;
 	}
-#ifdef HELLFIRE
-	else if (Players[p]._pClass == PC_MONK) {
-		if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype != ITYPE_STAFF) {
-			if (Players[p].InvBody[INVLOC_HAND_RIGHT]._itype != ITYPE_STAFF && (Players[p].InvBody[INVLOC_HAND_LEFT]._itype != ITYPE_NONE || Players[p].InvBody[INVLOC_HAND_RIGHT]._itype != ITYPE_NONE)) {
-				Players[p]._pDamageMod = Players[p]._pLevel * (Players[p]._pStrength + Players[p]._pDexterity) / 300;
-			} else {
-				Players[p]._pDamageMod = Players[p]._pLevel * (Players[p]._pStrength + Players[p]._pDexterity) / 150;
-			}
-		} else {
-			Players[p]._pDamageMod = Players[p]._pLevel * (Players[p]._pStrength + Players[p]._pDexterity) / 150;
-		}
-	} else if (Players[p]._pClass == PC_BARD) {
-		if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_SWORD || Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_SWORD)
-			Players[p]._pDamageMod = Players[p]._pLevel * (Players[p]._pStrength + Players[p]._pDexterity) / 150;
-		else if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_BOW || Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_BOW) {
-			Players[p]._pDamageMod = Players[p]._pLevel * (Players[p]._pStrength + Players[p]._pDexterity) / 250;
-		} else {
-			Players[p]._pDamageMod = Players[p]._pLevel * Players[p]._pStrength / 100;
-		}
-	} else if (Players[p]._pClass == PC_BARBARIAN) {
-
-		if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_AXE || Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_AXE) {
-			Players[p]._pDamageMod = Players[p]._pLevel * Players[p]._pStrength / 75;
-		} else if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_MACE || Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_MACE) {
-			Players[p]._pDamageMod = Players[p]._pLevel * Players[p]._pStrength / 75;
-		} else if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_BOW || Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_BOW) {
-			Players[p]._pDamageMod = Players[p]._pLevel * Players[p]._pStrength / 300;
-		} else {
-			Players[p]._pDamageMod = Players[p]._pLevel * Players[p]._pStrength / 100;
-		}
-
-		if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_SHIELD || Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_SHIELD) {
-			if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_SHIELD)
-				Players[p]._pIAC -= Players[p].InvBody[INVLOC_HAND_LEFT]._iAC / 2;
-			else if (Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_SHIELD)
-				Players[p]._pIAC -= Players[p].InvBody[INVLOC_HAND_RIGHT]._iAC / 2;
-		} else if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype != ITYPE_STAFF && Players[p].InvBody[INVLOC_HAND_RIGHT]._itype != ITYPE_STAFF && Players[p].InvBody[INVLOC_HAND_LEFT]._itype != ITYPE_BOW && Players[p].InvBody[INVLOC_HAND_RIGHT]._itype != ITYPE_BOW) {
-			Players[p]._pDamageMod += Players[p]._pLevel * Players[p]._pVitality / 100;
-		}
-		Players[p]._pIAC += Players[p]._pLevel / 4;
-	}
-#endif
 	else {
 		Players[p]._pDamageMod = Players[p]._pLevel * Players[p]._pStrength / 100;
 	}
@@ -909,20 +491,6 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 	Players[p]._pISplLvlAdd = spllvladd;
 	Players[p]._pIEnAc = enac;
 
-#ifdef HELLFIRE
-	if (Players[p]._pClass == PC_BARBARIAN) {
-		mr += Players[p]._pLevel;
-		fr += Players[p]._pLevel;
-		lr += Players[p]._pLevel;
-	}
-
-	if ((Players[p]._pSpellFlags & 4) == 4) {
-		mr -= Players[p]._pLevel;
-		fr -= Players[p]._pLevel;
-		lr -= Players[p]._pLevel;
-	}
-#endif
-
 	if (iflgs & ISPL_ALLRESZERO) {
 		// reset resistances to zero if the respective special effect is active
 		mr = 0;
@@ -932,39 +500,20 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 
 	if (mr > MAXRESIST)
 		mr = MAXRESIST;
-#ifdef HELLFIRE
-	else if (mr < 0)
-		mr = 0;
-#endif
 	Players[p]._pMagResist = mr;
 
 	if (fr > MAXRESIST)
 		fr = MAXRESIST;
-#ifdef HELLFIRE
-	else if (fr < 0)
-		fr = 0;
-#endif
 	Players[p]._pFireResist = fr;
 
 	if (lr > MAXRESIST)
 		lr = MAXRESIST;
-#ifdef HELLFIRE
-	else if (lr < 0)
-		lr = 0;
-#endif
 	Players[p]._pLghtResist = lr;
 
 	if (Players[p]._pClass == PC_WARRIOR) {
 		vadd <<= 1;
 	}
-#ifdef HELLFIRE
-	else if (Players[p]._pClass == PC_BARBARIAN) {
-		vadd += vadd;
-		vadd += (vadd >> 2);
-	} else if (Players[p]._pClass == PC_ROGUE || Players[p]._pClass == PC_MONK || Players[p]._pClass == PC_BARD) {
-#else
 	if (Players[p]._pClass == PC_ROGUE) {
-#endif
 		vadd += vadd >> 1;
 	}
 	ihp += (vadd << 6);
@@ -972,26 +521,13 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 	if (Players[p]._pClass == PC_SORCERER) {
 		madd <<= 1;
 	}
-#ifdef HELLFIRE
-	if (Players[p]._pClass == PC_ROGUE || Players[p]._pClass == PC_MONK) {
-#else
 	if (Players[p]._pClass == PC_ROGUE) {
-#endif
 		madd += madd >> 1;
 	}
-#ifdef HELLFIRE
-	else if (Players[p]._pClass == PC_BARD) {
-		madd += (madd >> 2) + (madd >> 1);
-	}
-#endif
 	imana += (madd << 6);
 
 	Players[p]._pHitPoints = ihp + Players[p]._pHPBase;
 	Players[p]._pMaxHP = ihp + Players[p]._pMaxHPBase;
-#ifdef HELLFIRE
-	if (Players[p]._pHitPoints > Players[p]._pMaxHP)
-		Players[p]._pHitPoints = Players[p]._pMaxHP;
-#endif
 
 	if (p == myplr && (Players[p]._pHitPoints >> 6) <= 0) {
 		SetPlayerHitPoints(p, 0);
@@ -999,10 +535,6 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 
 	Players[p]._pMana = imana + Players[p]._pManaBase;
 	Players[p]._pMaxMana = imana + Players[p]._pMaxManaBase;
-#ifdef HELLFIRE
-	if (Players[p]._pMana > Players[p]._pMaxMana)
-		Players[p]._pMana = Players[p]._pMaxMana;
-#endif
 
 	Players[p]._pIFMinDam = fmin;
 	Players[p]._pIFMaxDam = fmax;
@@ -1016,24 +548,6 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 	}
 
 	Players[p]._pBlockFlag = FALSE;
-#ifdef HELLFIRE
-	if (Players[p]._pClass == PC_MONK) {
-		if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_STAFF && Players[p].InvBody[INVLOC_HAND_LEFT]._iStatFlag) {
-			Players[p]._pBlockFlag = TRUE;
-			Players[p]._pIFlags |= ISPL_FASTBLOCK;
-		}
-		if (Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_STAFF && Players[p].InvBody[INVLOC_HAND_RIGHT]._iStatFlag) {
-			Players[p]._pBlockFlag = TRUE;
-			Players[p]._pIFlags |= ISPL_FASTBLOCK;
-		}
-		if (Players[p].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_NONE && Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_NONE)
-			Players[p]._pBlockFlag = TRUE;
-		if (Players[p].InvBody[INVLOC_HAND_LEFT]._iClass == ICLASS_WEAPON && Players[p].InvBody[INVLOC_HAND_LEFT]._iLoc != ILOC_TWOHAND && Players[p].InvBody[INVLOC_HAND_RIGHT]._itype == ITYPE_NONE)
-			Players[p]._pBlockFlag = TRUE;
-		if (Players[p].InvBody[INVLOC_HAND_RIGHT]._iClass == ICLASS_WEAPON && Players[p].InvBody[INVLOC_HAND_RIGHT]._iLoc != ILOC_TWOHAND && Players[p].InvBody[INVLOC_HAND_LEFT]._itype == ITYPE_NONE)
-			Players[p]._pBlockFlag = TRUE;
-	}
-#endif
 	Players[p]._pwtype = WT_MELEE;
 
 	g = 0;
@@ -1078,32 +592,12 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 		g++;
 	}
 
-#ifndef SPAWN
-#ifdef HELLFIRE
-	if (Players[p].InvBody[INVLOC_CHEST]._itype == ITYPE_HARMOR && Players[p].InvBody[INVLOC_CHEST]._iStatFlag) {
-		if (Players[p]._pClass == PC_MONK && Players[p].InvBody[INVLOC_CHEST]._iMagical == ITEM_QUALITY_UNIQUE)
-			Players[p]._pIAC += Players[p]._pLevel >> 1;
-		g += ANIM_ID_HEAVY_ARMOR;
-	} else if (Players[p].InvBody[INVLOC_CHEST]._itype == ITYPE_MARMOR && Players[p].InvBody[INVLOC_CHEST]._iStatFlag) {
-		if (Players[p]._pClass == PC_MONK) {
-			if (Players[p].InvBody[INVLOC_CHEST]._iMagical == ITEM_QUALITY_UNIQUE)
-				Players[p]._pIAC += Players[p]._pLevel << 1;
-			else
-				Players[p]._pIAC += Players[p]._pLevel >> 1;
-		}
-		g += ANIM_ID_MEDIUM_ARMOR;
-	} else if (Players[p]._pClass == PC_MONK) {
-		Players[p]._pIAC += Players[p]._pLevel << 1;
-	}
-#else
 	if (Players[p].InvBody[INVLOC_CHEST]._itype == ITYPE_MARMOR && Players[p].InvBody[INVLOC_CHEST]._iStatFlag) {
 		g += ANIM_ID_MEDIUM_ARMOR;
 	}
 	if (Players[p].InvBody[INVLOC_CHEST]._itype == ITYPE_HARMOR && Players[p].InvBody[INVLOC_CHEST]._iStatFlag) {
 		g += ANIM_ID_HEAVY_ARMOR;
 	}
-#endif
-#endif
 
 	if (Players[p]._pgfxnum != g && Loadgfx) {
 		Players[p]._pgfxnum = g;
@@ -1131,22 +625,8 @@ void CalcPlrItemVals(int p, BOOL Loadgfx)
 		if (missile[mi]._mitype == MIS_MANASHIELD && missile[mi]._misource == p) {
 			missile[mi]._miVar1 = Players[p]._pHitPoints;
 			missile[mi]._miVar2 = Players[p]._pHPBase;
-#ifdef HELLFIRE
-			break;
-#endif
 		}
 	}
-#ifdef HELLFIRE
-	if (Players[p].InvBody[INVLOC_AMULET]._itype == ITYPE_NONE || Players[p].InvBody[INVLOC_AMULET].IDidx != IDI_AURIC) {
-		int half = MaxGold;
-		MaxGold = auricGold / 2;
-
-		if (half != MaxGold)
-			StripTopGold(p);
-	} else {
-		MaxGold = auricGold;
-	}
-#endif
 
 	drawmanaflag = TRUE;
 	drawhpflag = TRUE;
